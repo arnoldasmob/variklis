@@ -92,6 +92,7 @@ section{margin-top:30px}
 /* --- savaites juosta --- */
 .strip{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:none}
 .strip::-webkit-scrollbar{display:none}
+.chip.rest .tg,.chip.past .tg{color:var(--ink-3)}
 .chip{flex:none;min-width:70px;padding:10px 8px;border-radius:var(--r-s);text-align:center;cursor:pointer;
   background:var(--glass);border:1px solid var(--edge);color:var(--ink-2);font:inherit;
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:border-color .12s,background .12s}
@@ -100,6 +101,7 @@ section{margin-top:30px}
   font-size:11px;color:var(--ink-3);font-weight:600}
 .chip .dd{font-family:"Barlow Condensed",sans-serif;font-size:21px;font-weight:700;line-height:1.1;color:var(--ink)}
 .chip .tg{font-size:10.5px;color:var(--ink-3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip.past{opacity:.45}
 .chip[aria-selected="true"]{background:var(--glass-2);border-color:var(--c1)}
 .chip[aria-selected="true"] .wd{color:var(--c1)}
 .chip.done .dd::after{content:" ✓";color:var(--c1);font-size:14px}
@@ -220,7 +222,7 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--edge);font-si
 <div class="wrap">
 <header class="row" style="margin-bottom:18px">
   <div>
-    <p class="eyebrow" id="hdr-week">Sav. 0 · grįžimas po ligos</p>
+    <p class="eyebrow" id="hdr-week">Sav. 0 · 09-28 → 10-04 · grįžimas po ligos</p>
     <h1>Variklis ir štanga</h1>
   </div>
   <p class="eyebrow" id="hdr-upd">—</p>
@@ -325,7 +327,7 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--edge);font-si
 
 <script>
 window.DATA={"atnaujinta":"2026-09-29","dienos":[{"d":"2026-09-16","rhr":53,"hrv":42,"miegas":22260,"miego_balas":75,"stresas":34,"bb":16,"bb_max":64},{"d":"2026-09-17","rhr":49,"hrv":49,"miegas":22380,"miego_balas":71,"stresas":40,"bb":5,"bb_max":69},{"d":"2026-09-18","rhr":50,"hrv":54,"miegas":24180,"miego_balas":75,"stresas":34,"bb":7,"bb_max":65},{"d":"2026-09-19","rhr":51,"hrv":45,"miegas":25320,"miego_balas":78,"stresas":30,"bb":14,"bb_max":71},{"d":"2026-09-20","rhr":56,"hrv":39,"miegas":24540,"miego_balas":51,"stresas":35,"bb":10,"bb_max":50},{"d":"2026-09-21","rhr":49,"hrv":52,"miegas":24960,"miego_balas":77,"stresas":31,"bb":8,"bb_max":79},{"d":"2026-09-22","rhr":49,"hrv":48,"miegas":23040,"miego_balas":75,"stresas":44,"bb":5,"bb_max":63},{"d":"2026-09-23","rhr":55,"hrv":32,"miegas":22020,"miego_balas":32,"stresas":47,"bb":5,"bb_max":20},{"d":"2026-09-24","rhr":53,"hrv":48,"miegas":28440,"miego_balas":85,"stresas":29,"bb":14,"bb_max":65},{"d":"2026-09-25","rhr":52,"hrv":43,"miegas":22860,"miego_balas":61,"stresas":35,"bb":8,"bb_max":50},{"d":"2026-09-26","rhr":48,"hrv":63,"miegas":31980,"miego_balas":81,"stresas":31,"bb":19,"bb_max":100},{"d":"2026-09-27","rhr":50,"hrv":54,"miegas":19980,"miego_balas":64,"stresas":37,"bb":9,"bb_max":58},{"d":"2026-09-28","rhr":49,"hrv":49,"miegas":26100,"miego_balas":80,"stresas":29,"bb":19,"bb_max":81},{"d":"2026-09-29","rhr":49,"hrv":54,"miegas":18360,"miego_balas":60,"stresas":21,"bb":62,"bb_max":62}],"svoris":[{"d":"2026-09-29","kg":90.2,"rieb":25.7,"raum":35.4},{"d":"2026-09-27","kg":90.1,"rieb":25.3,"raum":35.4},{"d":"2026-09-26","kg":91.0,"rieb":25.2,"raum":35.6},{"d":"2026-09-23","kg":91.7,"rieb":25.2,"raum":35.8},{"d":"2026-09-21","kg":91.7,"rieb":22.0,"raum":35.8},{"d":"2026-09-19","kg":91.4,"rieb":25.7,"raum":35.7},{"d":"2026-09-01","kg":89.0,"rieb":null,"raum":null}],"vo2":51.6,"veiklos":[{"id":24477893925,"d":"2026-09-24 08:25","tipas":"strength_training","min":58,"km":0.0,"hr":134.0,"hr_max":169.0,"kcal":687.0},{"id":24477461627,"d":"2026-09-24 08:07","tipas":"indoor_cardio","min":17,"km":0.0,"hr":135.0,"hr_max":166.0,"kcal":225.0},{"id":24453455608,"d":"2026-09-22 11:56","tipas":"indoor_cardio","min":33,"km":0.0,"hr":157.0,"hr_max":177.0,"kcal":543.0},{"id":24453144335,"d":"2026-09-22 11:13","tipas":"strength_training","min":36,"km":0.0,"hr":133.0,"hr_max":166.0,"kcal":429.0},{"id":24452858509,"d":"2026-09-22 10:53","tipas":"indoor_cardio","min":19,"km":0.0,"hr":142.0,"hr_max":174.0,"kcal":274.0},{"id":24444177412,"d":"2026-09-21 17:19","tipas":"indoor_cardio","min":30,"km":0.0,"hr":157.0,"hr_max":179.0,"kcal":505.0},{"id":24443739870,"d":"2026-09-21 16:29","tipas":"indoor_cardio","min":38,"km":0.0,"hr":142.0,"hr_max":169.0,"kcal":551.0},{"id":24443298455,"d":"2026-09-21 16:08","tipas":"indoor_cardio","min":15,"km":0.0,"hr":126.0,"hr_max":156.0,"kcal":191.0},{"id":24404025304,"d":"2026-09-18 08:47","tipas":"strength_training","min":26,"km":0.0,"hr":127.0,"hr_max":154.0,"kcal":300.0},{"id":24403828584,"d":"2026-09-18 08:22","tipas":"indoor_cardio","min":25,"km":0.0,"hr":132.0,"hr_max":168.0,"kcal":295.0},{"id":24393954377,"d":"2026-09-17 12:13","tipas":"strength_training","min":74,"km":0.0,"hr":121.0,"hr_max":160.0,"kcal":663.0},{"id":24393271198,"d":"2026-09-17 11:29","tipas":"indoor_cardio","min":43,"km":0.0,"hr":144.0,"hr_max":176.0,"kcal":573.0}]};
-const WK_START="2026-09-29";
+const WK_START="2026-09-28";
 let DATA=null;
 const C=["var(--c1)","var(--c2)","var(--c3)","var(--c4)","var(--c5)"];
 const SAV=[["03-30",9.6,6],["04-06",8.0,4],["04-13",10.1,5],["04-20",8.1,4],["04-27",7.1,4],["05-04",14.1,5],["05-11",9.1,6],["05-18",5.5,3],["05-25",5.9,5],["06-01",4.8,4],["06-08",6.6,4],["06-15",6.3,4],["06-22",4.7,2],["06-29",7.9,4],["07-06",9.4,6],["07-13",7.7,5],["07-20",6.4,4],["07-27",9.8,5],["08-03",6.8,5],["08-10",5.7,5],["08-17",4.9,5],["08-24",7.0,4],["08-31",4.3,3],["09-07",6.2,4],["09-14",4.2,3],["09-21",4.1,3]];
@@ -335,7 +337,8 @@ const YEARS=[2022,2023,2024,2025,2026];
 const MOB=["T-spine extension ant volo · 10","Shoulder external rotation su guma · 15/side",
  "Cossack squat · 8/side","Ankle rocks prie sienos · 10/side","Bar hang · 2 × 30\""];
 const PLAN=[
- {d:"Pr",dt:"09-29",wd:"Pirmadienis",k:"core",t:"Lower body, lengvai",tg:"Lower",s:"RPE 5/10 · planas top 78 kg",
+ {d:"Pr",dt:"09-28",wd:"Pirmadienis",k:"past",t:"Praėjo",tg:"—",s:"savaitė prasidėjo antradienį",b:[],n:""},
+ {d:"An",dt:"09-29",wd:"Antradienis",k:"core",t:"Lower body, lengvai",tg:"Lower",s:"RPE 5/10 · planas top 78 kg",
   b:[{h:"Mobility · 10 min",i:MOB.map(x=>({t:x}))},
      {h:"A · technika",i:[
        {t:"<b>A1. Front Squat</b> — 3 serijos × 5 kart. · tempas 3 s žemyn, 1 s pauzė",log:"Front Squat",plan:70},
@@ -345,16 +348,12 @@ const PLAN=[
      {h:"C · priedai",i:[{t:"<b>C1. Romanian Deadlift</b> — 3 × 8, lengvai",log:"Romanian Deadlift"},
        {t:"<b>C2. Side Plank</b> — 3 × 30 s į pusę"}]}],
   n:"Baigti geriau jaučiantis, nei pradėjus. Jei sunkiau nei „lengvai“ — nuimk 10 kg. Front Squat ir Overhead Squat čia dėl pozicijos, ne dėl skaičiaus: abu yra tavo silpnosios vietos."},
- {d:"An",dt:"09-30",wd:"Antradienis",k:"core",t:"Bėgimas, 2 zona",tg:"Bėgimas 20'",s:"20 min · 135–145 bpm",
+ {d:"Tr",dt:"09-30",wd:"Trečiadienis",k:"core",t:"Bėgimas, 2 zona",tg:"Bėgimas 20'",s:"20 min · 135–145 bpm · vakare",
   b:[{h:"Pagrindinis",i:[{t:"<b>20 min tolygiai</b>, pulsas 135–145, lubos 150"},
-      {t:"Manieže: <b>matuojam laiką, ne kilometrus</b>"},{t:"Jei pulsui išlaikyti reikia eiti — eini. Pirmą savaitę tai normalu"}]}],
-  n:"Rytas laisvas: pirmadienis jau padarytas."},
- {d:"Tr",dt:"10-01",wd:"Trečiadienis",k:"extra",t:"Dviratis staklėse arba poilsis",tg:"Dviratis 40'",s:"40 min · 200–230 W",
-  b:[{h:"Pagrindinis",i:[{t:"<b>40 min 2 zonoje</b> · 200–230 W · pulsas 128–142 · kadencija 85–95"},
-      {t:"⚠ Laikrodyje rinkis <b>Indoor Cycling</b>, ne bendrą „Cardio“"},
-      {t:"Jei rytinis pulsas ramybėje 54 ar daugiau — praleidi"}]}],
-  n:"Priedas, ne branduolys. Praleisti galima be kaltės."},
- {d:"Kt",dt:"10-02",wd:"Ketvirtadienis",k:"core",t:"Upper body plius gimnastika",tg:"Upper",s:"RPE 5/10 · gimnastika šviežia galva",
+      {t:"Manieže: <b>matuojam laiką, ne kilometrus</b>"},
+      {t:"Jei pulsui išlaikyti reikia eiti — eini. Pirmą savaitę tai normalu"}]}],
+  n:"Bėgimo dieną rytas yra tik štanga, be intensyvaus metcon‘o. Šią savaitę rytas laisvas: antradienis jau padarytas."},
+ {d:"Kt",dt:"10-01",wd:"Ketvirtadienis",k:"core",t:"Upper body plius gimnastika",tg:"Upper",s:"RPE 5/10 · gimnastika šviežia galva",
   b:[{h:"Mobility · 10 min",i:MOB.map(x=>({t:x}))},
      {h:"A · pagrindinis",i:[{t:"<b>Strict Press</b> — 4 × 5 (60 % nuo darbinio max) · 4 kart. atsargoje · poilsis 2 min",log:"Strict Press",plan:50}]},
      {h:"B · pora",i:[{t:"<b>B1. Bench Press</b> — 3 × 6 · 4 kart. atsargoje",log:"Bench Press",plan:72},
@@ -364,13 +363,17 @@ const PLAN=[
        {t:"<b>C2. Handstand Push-up</b> — 4 × 3 · lengvinimas: Pike Push-up ant dėžės arba su guma",log:"HS Push-up",unit:"kart."},
        {t:"<b>C3. Ring Muscle-up</b>, progresija — 5 × 1–2",log:"Ring Muscle-up",unit:"kart."}]}],
   n:"Handstand Push-up ir Ring Muscle-up šią savaitę yra susipažinimas, ne testas. Testas bus 2 savaitę."},
- {d:"Pn",dt:"10-03",wd:"Penktadienis",k:"rest",t:"Poilsis",tg:"Poilsis",s:"pasivaikščiojimas 30–40 min, jei norisi",b:[],n:""},
- {d:"Št",dt:"10-04",wd:"Šeštadienis",k:"core",t:"Mišrus aerobinis",tg:"Aerobinis 30'",s:"RPE 6/10 · 30 min",
+ {d:"Pn",dt:"10-02",wd:"Penktadienis",k:"extra",t:"Dviratis staklėse arba poilsis",tg:"Dviratis 40'",s:"40 min · 200–230 W",
+  b:[{h:"Pagrindinis",i:[{t:"<b>40 min 2 zonoje</b> · 200–230 W · pulsas 128–142 · kadencija 85–95"},
+      {t:"⚠ Laikrodyje rinkis <b>Indoor Cycling</b>, ne bendrą „Cardio“"},
+      {t:"Jei rytinis pulsas ramybėje 54 ar daugiau — praleidi"}]}],
+  n:"Priedas, ne branduolys. Praleisti galima be kaltės."},
+ {d:"Št",dt:"10-03",wd:"Šeštadienis",k:"core",t:"Mišrus aerobinis",tg:"Aerobinis 30'",s:"RPE 6/10 · 30 min",
   b:[{h:"Pagrindinis",i:[
       {pre:"5 raundai, kas 6 minutės (30 min iš viso):\n  500 m Row (irklavimo ergometras)\n  10 Dumbbell Ground to Overhead, 15 kg\n  10 Box Step-up, 50 cm\n  – likusį laiką iki 6 min ilsiesi –"},
       {t:"<b>Dumbbell Ground to Overhead</b> — koks svoris",log:"DB Ground to Overhead",plan:15}]}],
   n:"Kiekvienas raundas turi baigtis bent 1 min poilsio. Jei poilsio nebelieka — mažini apimtį. Judesiai parinkti pagal ATHX MetCon X rungtį, tik dvigubai lengviau."},
- {d:"Sk",dt:"10-05",wd:"Sekmadienis",k:"rest",t:"Poilsis",tg:"Poilsis",s:"—",b:[],n:""}
+ {d:"Sk",dt:"10-04",wd:"Sekmadienis",k:"rest",t:"Poilsis",tg:"Poilsis",s:"—",b:[],n:""}
 ];
 const GOALS=[
  {nm:"Jėga · ATHX balas",unit:"kg",max:500,c:"var(--c1)",cur:380,cur_l:"80 + 125 + 175",
@@ -387,7 +390,7 @@ const GOALS=[
   why:"Keturi iš septynių silpnųjų judesių yra gimnastika.",st:["q","testuojam"]}
 ];
 const BLOK=[
- ["0","09-29 → 10-04","lengvai, 60 %","1 × 20 min","grįžimas po ligos","crit"],
+ ["0","09-28 → 10-04","lengvai, 60 %","1 × 20 min","grįžimas po ligos","crit"],
  ["1","10-05 → 10-11","4 × 5 @ 75 %","1 × 30 min","",""],
  ["2","10-12 → 10-18","4 × 5 @ 75 %","2 × 30 min","Testas B: gimnastika","warn"],
  ["3","10-19 → 10-25","4 × 5 @ 77 %","2 × 35 min","Testas A: ATHX jėga","warn"],
@@ -550,14 +553,14 @@ function spark(vals,color,lo,hi){
 (function week(){
   const strip=$("strip"),sess=$("sess");
   let done={},notes={},w={},dbRef=null,timer=null,sel=0;
-  const todayIdx=PLAN.findIndex(p=>"2026-"+p.dt===DATA.atnaujinta);
+  const todayIdx=PLAN.findIndex(p=>"2026-"+p.dt===DATA.atnaujinta&&p.k!=="past");
   if(todayIdx>=0)sel=todayIdx;
 
   function chips(){
     strip.innerHTML="";
     PLAN.forEach((p,i)=>{
       const b=document.createElement("button");
-      b.className="chip"+(done[i]?" done":"");b.setAttribute("role","tab");
+      b.className="chip "+p.k+(done[i]?" done":"");b.setAttribute("role","tab");
       b.setAttribute("aria-selected",i===sel?"true":"false");
       b.innerHTML='<div class="wd">'+p.d+'</div><div class="dd">'+p.dt.slice(3)+'</div><div class="tg">'+p.tg+'</div>';
       b.addEventListener("click",()=>{sel=i;chips();session();});
@@ -568,7 +571,7 @@ function spark(vals,color,lo,hi){
     const p=PLAN[sel];
     let h='<div class="row"><div><h3>'+p.wd+' '+p.dt+' · '+p.t+'</h3>'+
       '<p class="eyebrow" style="margin:5px 0 0">'+p.s+'</p></div>';
-    if(p.k!=="rest")h+='<button class="btn" id="mark" aria-pressed="'+(done[sel]?"true":"false")+'">'+
+    if(p.k!=="rest"&&p.k!=="past")h+='<button class="btn" id="mark" aria-pressed="'+(done[sel]?"true":"false")+'">'+
       (done[sel]?"padaryta":"pažymėti")+'</button>';
     h+='</div>';
     p.b.forEach(bl=>{
@@ -591,7 +594,7 @@ function spark(vals,color,lo,hi){
     });
     });
     if(p.n)h+='<p class="sn">'+p.n+'</p>';
-    if(p.k!=="rest")h+='<div class="cmt"><label for="nt">Kaip jautėsi · ką pakeitei · kas skaudėjo</label>'+
+    if(p.k!=="rest"&&p.k!=="past")h+='<div class="cmt"><label for="nt">Kaip jautėsi · ką pakeitei · kas skaudėjo</label>'+
       '<textarea id="nt" placeholder="Pvz. pulsas laikėsi 142, kojos sunkios po 3 serijos, BS nuėmiau 5 kg.">'+
       esc(notes[sel]??"")+'</textarea><p class="hint" id="hint">Įrašoma automatiškai. Skaitysiu kartu su laikrodžio rodmenimis.</p></div>';
     sess.innerHTML=h;
