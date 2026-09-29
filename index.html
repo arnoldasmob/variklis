@@ -107,6 +107,12 @@ section{margin-top:30px}
 .banner.ok{background:color-mix(in srgb,var(--good) 12%,transparent);border-color:var(--good)}
 .banner a{color:var(--c2)}
 
+/* --- saukinys --- */
+.quote{padding:18px 20px;margin-bottom:16px;border-left:3px solid var(--c2)}
+.quote p{margin:0;font-family:"Barlow Condensed",sans-serif;font-size:clamp(19px,3.6vw,25px);
+  font-weight:600;line-height:1.25;letter-spacing:.01em}
+.quote .who{margin-top:7px;font-size:12.5px;color:var(--ink-3);font-family:Barlow,sans-serif;font-weight:400}
+
 /* --- savaites juosta --- */
 .strip{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:none}
 .strip::-webkit-scrollbar{display:none}
@@ -125,6 +131,29 @@ section{margin-top:30px}
 .chip.done .dd::after{content:" ✓";color:var(--c1);font-size:14px}
 .chip:focus-visible{outline:2px solid var(--c1);outline-offset:2px}
 
+/* --- laikas / planavimas --- */
+.slots{display:grid;gap:8px}
+.slot{display:grid;grid-template-columns:52px 1fr;gap:10px;align-items:center;padding:10px 14px;
+  border-radius:var(--r-s);background:var(--glass);border:1px solid var(--edge)}
+.slot .sd{font-family:"Barlow Condensed",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:13px;letter-spacing:.08em;color:var(--ink-3)}
+.slot .opts{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.opt{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.06em;
+  font-size:12.5px;font-weight:600;padding:7px 12px;min-height:38px;border-radius:8px;
+  border:1px solid var(--edge-2);background:transparent;color:var(--ink-3);cursor:pointer}
+.opt[aria-pressed="true"]{background:var(--c3);border-color:var(--c3);color:var(--btn-ink)}
+.opt:focus-visible{outline:2px solid var(--c3);outline-offset:2px}
+.slot input[type=time]{background:var(--glass-2);border:1px solid var(--edge-2);border-radius:8px;
+  color:var(--ink);font:inherit;font-size:14px;padding:6px 9px;min-height:38px}
+
+/* --- recovery --- */
+.rec{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.recb{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.06em;
+  font-size:13px;font-weight:600;padding:9px 14px;min-height:42px;border-radius:9px;
+  border:1px solid var(--edge-2);background:transparent;color:var(--ink-2);cursor:pointer}
+.recb[aria-pressed="true"]{background:var(--c5);border-color:var(--c5);color:var(--btn-ink)}
+.recb:focus-visible{outline:2px solid var(--c5);outline-offset:2px}
+
 /* --- sesija --- */
 .sess h4{text-transform:uppercase;letter-spacing:.11em;font-size:11.5px;color:var(--ink-3);
   margin:16px 0 7px;font-weight:600}
@@ -138,7 +167,24 @@ section{margin-top:30px}
 .wf .wl{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.1em;
   font-size:10.5px;font-weight:600;color:var(--ink-3)}
 .wf.main .wl{color:var(--c2)}
-.wf .box{display:flex;align-items:center}
+.wf .box{display:flex;align-items:center;gap:3px}
+.wf .x{color:var(--ink-3);font-size:14px;padding:0 1px}
+.mv input.reps{width:56px;font-size:17px}
+.mv .main input.reps{width:62px;font-size:19px;color:var(--c2)}
+.chk{width:46px;height:46px;flex:none;border-radius:11px;border:1.5px solid var(--edge-2);
+  background:transparent;color:var(--ink-3);font-size:20px;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;align-self:flex-end}
+.chk[aria-pressed="true"]{background:var(--c1);border-color:var(--c1);color:var(--btn-ink)}
+.chk:focus-visible{outline:2px solid var(--c1);outline-offset:2px}
+.mv.ok .txt{opacity:.62}
+.savebar{position:sticky;bottom:0;z-index:20;margin-top:18px;padding:12px 0 calc(12px + env(safe-area-inset-bottom,0px));
+  background:linear-gradient(to top,var(--bg) 62%,transparent);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.savebtn{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.08em;
+  font-size:15px;font-weight:700;padding:13px 26px;min-height:50px;border-radius:11px;border:none;
+  background:var(--c1);color:var(--btn-ink);cursor:pointer;flex:none}
+.savebtn:disabled{opacity:.45;cursor:default}
+.savebtn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.savemsg{font-size:13.5px;color:var(--ink-3)}
 .mv input{width:88px;min-height:44px;background:var(--glass-2);border:1.5px solid var(--edge-2);
   border-radius:9px;color:var(--ink-2);font-family:"Barlow Condensed",sans-serif;font-size:19px;
   font-weight:700;padding:6px 10px;text-align:right;font-variant-numeric:tabular-nums}
@@ -272,6 +318,7 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--edge);font-si
 </header>
 
 <div id="banner" hidden></div>
+<div class="g quote" id="quote"></div>
 <section style="margin-top:0">
   <div class="sechead"><h2>Šiandien</h2><span class="eyebrow" id="today-date">—</span></div>
   <div class="today">
@@ -298,6 +345,15 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--edge);font-si
      traukdamas statistiką aš jų nuo darbinių neatskirčiau ir tavo skaičiai atrodytų mažesni,
      nei yra. Įrašęs apšilimo svorį, tu man pasakai, kur riba.
      Komentaras ir abu svoriai įrašomi automatiškai.</p>
+</section>
+
+<section>
+  <div class="sechead"><h2>Kitos savaitės laikas</h2><span class="eyebrow">kada realiai galėsi</span></div>
+  <div class="slots" id="slots"></div>
+  <p class="note">Pažymėk, kada kurią dieną turi laiko. <b>Rytas duoda jėgą, vakaras — variklį:</b>
+     ryte organizmas geriau kelia sunkius svorius, vakare geriau toleruoja ilgą aerobinį darbą.
+     Jei diena turi ir rytą, ir vakarą — jėga ryte, bėgimas ar dviratis vakare.
+     Pagal tai sudėliosiu kitą savaitę, o tu iš anksto matysi, kur sportas įsiterpia tarp darbų.</p>
 </section>
 
 <section>
@@ -379,8 +435,11 @@ const SAV=[["03-30",9.6,6],["04-06",8.0,4],["04-13",10.1,5],["04-20",8.1,4],["04
 const MEN=[["2025-01",0,67.5],["2025-02",0,79.2],["2025-03",0,3.3],["2025-04",11,0],["2025-05",28,16.5],["2025-06",138,0],["2025-07",210,0],["2025-08",85,38.1],["2025-09",0,11.8],["2025-10",0,26.4],["2025-11",0,16.3],["2025-12",0,32.7],["2026-01",0,15.5],["2026-02",0,29.6],["2026-03",26,7.9],["2026-04",72,0],["2026-05",230,0],["2026-06",256,0],["2026-07",423,1.0],["2026-08",93,0],["2026-09",176,0]];
 const E1={"Back squat":{2022:139,2023:152,2024:187,2025:140,2026:133},"Deadlift":{2022:171,2023:187,2024:207,2025:198,2026:152},"Bench press":{2022:121,2023:124,2024:136,2025:133,2026:125},"Strict press":{2022:null,2023:72,2024:91,2025:91,2026:79}};
 const YEARS=[2022,2023,2024,2025,2026];
-const MOB=["T-spine extension ant volo · 10","Shoulder external rotation su guma · 15/side",
- "Cossack squat · 8/side","Ankle rocks prie sienos · 10/side","Bar hang · 2 × 30\""];
+const MOB=["<b>Aparatas iki kalorijų:</b> dviratis, SkiErg arba Row — <b>surink 40–60 kal</b>, pulsas iki 120",
+ "<b>GOWOD</b> dienos mobilumo programa · laikrodyje jungi <b>Yoga</b>",
+ "Tempimai su gumomis: pečių praėjimai 2 × 10, išorinė rotacija 15/side",
+ "T-spine extension ant volo · 10 · Cossack squat 8/side · Ankle rocks 10/side",
+ "Bar hang · 2 × 30\""];
 const PLAN=[
  {d:"Pr",dt:"09-28",wd:"Pirmadienis",k:"past",t:"Praėjo",tg:"—",s:"savaitė prasidėjo antradienį",b:[],n:""},
  {d:"An",dt:"09-29",wd:"Antradienis",k:"core",t:"Lower body, lengvai",tg:"Lower",s:"RPE 5/10 · planas top 78 kg",
@@ -423,8 +482,15 @@ const PLAN=[
       {pre:"5 raundai, kas 6 minutės (30 min iš viso):\n  500 m Row (irklavimo ergometras)\n  10 Dumbbell Ground to Overhead, 15 kg\n  10 Box Step-up, 50 cm\n  – likusį laiką iki 6 min ilsiesi –"},
       {t:"<b>Dumbbell Ground to Overhead</b> — koks svoris",log:"DB Ground to Overhead",plan:15}]}],
   n:"Kiekvienas raundas turi baigtis bent 1 min poilsio. Jei poilsio nebelieka — mažini apimtį. Judesiai parinkti pagal ATHX MetCon X rungtį, tik dvigubai lengviau."},
- {d:"Sk",dt:"10-04",wd:"Sekmadienis",k:"rest",t:"Poilsis",tg:"Poilsis",s:"—",b:[],n:""}
+ {d:"Sk",dt:"10-04",wd:"Sekmadienis",k:"recovery",t:"Recovery",tg:"Recovery",s:"aktyvus atsigavimas · pažymėk, ką darei",
+  b:[{h:"Kvėpavimas · 5–10 min",i:[
+      {t:"<b>Ramus kvėpavimas</b> 1-0-2-0 ritmu: 4 s įkvėpimas, 8 s iškvėpimas · 5 min"},
+      {t:"Arba dėžutės kvėpavimas 4-4-4-4 · 10 ciklų"}]},
+     {h:"Mobilumas",i:[{t:"<b>GOWOD</b> dienos programa · laikrodyje jungi <b>Yoga</b>"}]}],
+  n:"Recovery diena nėra laisva diena. Ji yra ta, kuri leidžia kitą savaitę pakartoti tą patį krūvį. Pažymėk, ką realiai darei — po kelių savaičių pamatysim, kas tavo HRV ir pulsui ramybėje daro daugiausiai."}
 ];
+const RECOVERY=["Sauna","Pasivaikščiojimas","Kvėpavimas","GOWOD mobilumas",
+ "Tempimai su gumomis","Šalta vonia","Masažas","Volas / foam roll","Plaukimas","Ilgas miegas"];
 const GOALS=[
  {nm:"Jėga · ATHX balas",unit:"kg",max:500,c:"var(--c1)",cur:380,cur_l:"80 + 125 + 175",
   tgt:420,tgt_l:"90 + 140 + 190",hist:438,hist_l:"2024 lygis · 438",
@@ -530,6 +596,56 @@ function hm(sec){if(sec==null)return"—";return Math.floor(sec/3600)+":"+String
 function esc(x){return String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");}
 
 function boot(){
+/* ---------- dienos šaukinys ---------- */
+const SAUKINIAI=[
+ ["Disciplina yra pasirinkimas tarp to, ko nori dabar, ir to, ko nori labiausiai.",""],
+ ["Kūnas pasiduoda anksčiau nei būtina. Galva sprendžia, kiek to klausyti.",""],
+ ["Tu nekyli iki savo tikslų lygio. Tu nusileidi iki savo sistemų lygio.","James Clear"],
+ ["Sunkiausia serija yra ta, kurią darai, kai niekas nežiūri.",""],
+ ["Kantrybė nėra laukimas. Tai gebėjimas dirbti, kol rezultato dar nematyti.",""],
+ ["Nereikia būti motyvuotam. Reikia tiesiog pradėti apšilimą.",""],
+ ["Blogiausia treniruotė yra ta, kurios nepadarei.",""],
+ ["Jėga ateina ne iš to, ką gali. Ji ateina iš to, ko negalėjai ir išmokai.",""],
+ ["Kiekviena serija yra balsas už tai, kuo tampi.",""],
+ ["Lengva diena šiandien yra sunki diena po trijų savaičių.",""],
+ ["Technika pirma. Svoris antra. Ego niekada.",""],
+ ["Nugalėk save, o ne šalia esantį.",""],
+ ["Progresas yra tylus. Triukšmauja tik nuovargis.",""],
+ ["Tavo silpniausias judesys sprendžia, kur baigiasi tavo stipriausias.",""],
+ ["Nesureikšmink vienos sesijos. Sureikšmink šimtą.",""],
+ ["Kas nemyli proceso, nesulaukia rezultato.",""],
+ ["Kūnas atsigauna miegant, ne treniruojantis.",""],
+ ["Daryk mažiau, bet nenutrūkstamai. Tai visada laimi.",""],
+ ["Skausmas yra informacija, ne priešas. Klausyk, bet nepaklusk aklai.",""],
+ ["Tie, kurie laimi, dažniausiai tiesiog nesustojo.",""],
+ ["Šiandien nereikia rekordo. Reikia kokybiškos serijos.",""],
+ ["Ištvermė yra sugebėjimas likti ramiam, kai nepatogu.",""],
+ ["Nusistatyk ribą pats, kol kūnas jos nenustatė už tave.",""],
+ ["Sunku daro stipriu. Lengva daro patogiu.",""],
+ ["Tu esi tai, ką darai kasdien, ne tai, ką planuoji.",""],
+ ["Nepainiok nuovargio su nesugebėjimu.",""],
+ ["Geriausias laikas pradėti buvo pernai. Antras geriausias — dabar.",""],
+ ["Atsitraukti laiku yra ne silpnumas, o strategija.",""],
+ ["Kiekvienas kilogramas ant štangos buvo kažkada per sunkus.",""],
+ ["Kvėpavimas yra pirmas dalykas, kurį prarandi, ir pirmas, kurį reikia susigrąžinti.",""],
+ ["Nereikia būti geriausiu. Reikia būti geresniu nei vakar.",""],
+ ["Sistema stipresnė už valios pastangą.",""],
+ ["Kai nesinori, darai branduolį. Tam jis ir yra.",""],
+ ["Ribą pajunti tik prie jos priėjęs. Eik ir pažiūrėk, kur ji.",""],
+ ["Poilsis yra treniruotės dalis, ne pertrauka joje.",""],
+ ["Jėga be judesio yra tik svoris. Judesys be jėgos yra tik judėjimas.",""],
+ ["Didžiausias pranašumas yra nuoseklumas, o ne talentas.",""],
+ ["Tavo kūnas gali. Reikia įtikinti galvą.",""],
+ ["Rytoj tau patiks, kad padarei šiandien.",""],
+ ["Sunkumas nėra kliūtis kelyje. Sunkumas ir yra kelias.",""]
+];
+(function(){
+  const el=$("quote"); if(!el)return;
+  const d=new Date(); const n=Math.floor((d-new Date(d.getFullYear(),0,0))/864e5);
+  const q=SAUKINIAI[n%SAUKINIAI.length];
+  el.innerHTML='<p>'+q[0]+'</p>'+(q[1]?'<p class="who">'+q[1]+'</p>':'');
+})();
+
 /* ---------- ŠIANDIEN ---------- */
 const D=DATA.dienos, T=D[D.length-1], Y=D[D.length-2]||{};
 const base=k=>{const v=D.slice(0,-1).map(x=>x[k]).filter(x=>x!=null);
@@ -604,11 +720,13 @@ function spark(vals,color,lo,hi){
 })();
 
 /* ---------- SAVAITĖ ---------- */
-(function week(){
-  const strip=$("strip"),sess=$("sess");
-  let done={},notes={},w={},dbRef=null,timer=null,sel=0;
+let WEEK=null;
+(function(){
+  const strip=$("strip"),sess=$("sess"),slots=$("slots");
+  let done={},notes={},extra={},w={},rec={},plan={},dbRef=null,timer=null,sel=0,dirty=false;
   const todayIdx=PLAN.findIndex(p=>"2026-"+p.dt===DATA.atnaujinta&&p.k!=="past");
   if(todayIdx>=0)sel=todayIdx;
+  WEEK={get:()=>({done,notes,extra,svoriai:w,recovery:rec,planas:plan})};
 
   function chips(){
     strip.innerHTML="";
@@ -621,11 +739,15 @@ function spark(vals,color,lo,hi){
       strip.appendChild(b);
     });
   }
+  function numIn(id,val,ph,cls,lab){
+    return '<input id="'+id+'" class="'+(cls||"")+'" inputmode="decimal" placeholder="'+ph+
+      '" value="'+esc(val??"")+'" aria-label="'+esc(lab)+'">';
+  }
   function session(){
     const p=PLAN[sel];
     let h='<div class="row"><div><h3>'+p.wd+' '+p.dt+' · '+p.t+'</h3>'+
       '<p class="eyebrow" style="margin:5px 0 0">'+p.s+'</p></div>';
-    if(p.k!=="rest"&&p.k!=="past")h+='<button class="btn" id="mark" aria-pressed="'+(done[sel]?"true":"false")+'">'+
+    if(p.k!=="past")h+='<button class="btn" id="mark" aria-pressed="'+(done[sel]?"true":"false")+'">'+
       (done[sel]?"padaryta":"pažymėti")+'</button>';
     h+='</div>';
     p.b.forEach(bl=>{
@@ -633,64 +755,122 @@ function spark(vals,color,lo,hi){
       bl.i.forEach(it=>{
         if(it.pre){h+='<pre>'+esc(it.pre)+'</pre>';return;}
         if(!it.log){h+='<div class="plain">'+it.t+'</div>';return;}
-        const kw=sel+":"+it.log+":w", ka=sel+":"+it.log+":a";
-        const unit=it.unit||"kg";
+        const base=sel+":"+it.log, unit=it.unit||"kg", isKg=unit==="kg";
+        const dn=!!w[base+":d"];
         const planTxt=it.plan?' <span style="color:var(--ink-3)">· planas '+it.plan+' '+unit+'</span>':'';
-        const warm=unit==="kg"?
-          '<div class="wf"><span class="wl">Apšilimas</span><span class="box">'+
-          '<input id="w-'+esc(ka)+'" inputmode="decimal" placeholder="—" value="'+esc(w[ka]??"")+'" '+
-          'aria-label="'+esc(it.log)+' apšilimo svoris"><span class="unit">'+unit+'</span></span></div>':'';
-        h+='<div class="mv"><span class="txt">'+it.t+planTxt+'</span><span class="wsets">'+warm+
+        const warm=isKg?'<div class="wf"><span class="wl">Apšilimas</span><span class="box">'+
+          numIn("w-"+base+":a",w[base+":a"],"—","",it.log+" apšilimo svoris")+
+          '<span class="x">×</span>'+numIn("w-"+base+":ar",w[base+":ar"],"k.","reps",it.log+" apšilimo kartojimai")+
+          '<span class="unit">'+unit+'</span></span></div>':'';
+        h+='<div class="mv'+(dn?" ok":"")+'"><span class="txt">'+it.t+planTxt+'</span><span class="wsets">'+warm+
            '<div class="wf main"><span class="wl">Darbinis</span><span class="box">'+
-           '<input id="w-'+esc(kw)+'" inputmode="decimal" placeholder="'+(it.plan??"—")+'" '+
-           'value="'+esc(w[kw]??"")+'" aria-label="'+esc(it.log)+' darbinis svoris"><span class="unit">'+
-           unit+'</span></span></div></span></div>';
+           numIn("w-"+base+":w",w[base+":w"],String(it.plan??"—"),"",it.log+" darbinis")+
+           '<span class="x">×</span>'+numIn("w-"+base+":wr",w[base+":wr"],"k.","reps",it.log+" kartojimai")+
+           '<span class="unit">'+unit+'</span></span></div>'+
+           '<button class="chk" id="d-'+esc(base)+'" aria-pressed="'+(dn?"true":"false")+
+           '" aria-label="'+esc(it.log)+' padaryta" title="padaryta">✓</button>'+
+           '</span></div>';
+      });
     });
-    });
+    if(p.k==="recovery"){
+      h+='<h4>Ką darei</h4><div class="rec">'+RECOVERY.map((r,ri)=>
+        '<button class="recb" id="r-'+ri+'" aria-pressed="'+(rec[ri]?"true":"false")+'">'+r+'</button>').join("")+'</div>';
+    }
     if(p.n)h+='<p class="sn">'+p.n+'</p>';
-    if(p.k!=="rest"&&p.k!=="past")h+='<div class="cmt"><label for="nt">Kaip jautėsi · ką pakeitei · kas skaudėjo</label>'+
-      '<textarea id="nt" placeholder="Pvz. pulsas laikėsi 142, kojos sunkios po 3 serijos, BS nuėmiau 5 kg.">'+
-      esc(notes[sel]??"")+'</textarea><p class="hint" id="hint">Įrašoma automatiškai. Skaitysiu kartu su laikrodžio rodmenimis.</p></div>';
+    if(p.k!=="past"){
+      h+='<div class="cmt"><label for="ex">Dariau papildomai</label>'+
+        '<textarea id="ex" style="min-height:60px" placeholder="Pvz. 4 × 20 s Hanging L-Sit vietoje planko, plius 10 min sauna.">'+
+        esc(extra[sel]??"")+'</textarea></div>'+
+        '<div class="cmt"><label for="nt">Kaip jautėsi · ką pakeitei · kas skaudėjo</label>'+
+        '<textarea id="nt" placeholder="Pvz. pulsas laikėsi 142, kojos sunkios po 3 serijos, riešai priminė apie save.">'+
+        esc(notes[sel]??"")+'</textarea></div>'+
+        '<div class="savebar"><button class="savebtn" id="save">Išsaugoti sesiją</button>'+
+        '<span class="savemsg" id="savemsg"></span></div>';
+    }
     sess.innerHTML=h;
     const mk2=$("mark");
-    if(mk2)mk2.addEventListener("click",()=>{done[sel]=!done[sel];chips();session();save();});
-    sess.querySelectorAll("input[id^=w-]").forEach(inp=>{
-      inp.addEventListener("input",()=>{w[inp.id.slice(2)]=inp.value;queue();});
+    if(mk2)mk2.addEventListener("click",()=>{done[sel]=!done[sel];touch();chips();session();});
+    sess.querySelectorAll("input[id^=w-]").forEach(inp=>
+      inp.addEventListener("input",()=>{w[inp.id.slice(2)]=inp.value;touch();}));
+    sess.querySelectorAll("button[id^=d-]").forEach(btn=>
+      btn.addEventListener("click",()=>{const k=btn.id.slice(2)+":d";w[k]=!w[k];touch();session();}));
+    sess.querySelectorAll("button[id^=r-]").forEach(btn=>
+      btn.addEventListener("click",()=>{const k=btn.id.slice(2);rec[k]=!rec[k];touch();
+        btn.setAttribute("aria-pressed",rec[k]?"true":"false");}));
+    const ta=$("nt"); if(ta)ta.addEventListener("input",()=>{notes[sel]=ta.value;touch();});
+    const tx=$("ex"); if(tx)tx.addEventListener("input",()=>{extra[sel]=tx.value;touch();});
+    const sv=$("save");
+    if(sv)sv.addEventListener("click",async()=>{
+      sv.disabled=true; msg("Saugau…");
+      const ok=await save(true);
+      sv.disabled=false;
+      msg(ok?'<span class="saved">✓ Išsaugota '+new Date().toTimeString().slice(0,5)+
+        (STORE.mode==="gh"?" · GitHub":STORE.mode==="db"?" · claude.ai":" · tik šis įrenginys")+"</span>":
+        "Nepavyko išsaugoti. Bandyk dar kartą.");
+      dirty=false; updBtn();
     });
-    const ta=$("nt");
-    if(ta)ta.addEventListener("input",()=>{notes[sel]=ta.value;queue();});
+    updBtn();
+    totals();
   }
-  function queue(){clearTimeout(timer);timer=setTimeout(()=>{save().then(()=>{
-    const h=$("hint");if(h)h.innerHTML='<span class="saved">Įrašyta.</span> Skaitysiu kartu su laikrodžio rodmenimis.';});},700);}
-  async function save(){
-    const payload={week:WK_START,done,notes,svoriai:w,ts:Date.now()};
-    try{localStorage.setItem("vs-"+WK_START,JSON.stringify({done,notes,w}));}catch(e){}
+  function msg(t){const e=$("savemsg"); if(e)e.innerHTML=t;}
+  function updBtn(){const sv=$("save"); if(sv)sv.textContent=dirty?"Išsaugoti sesiją •":"Išsaugoti sesiją";}
+  function touch(){dirty=true;updBtn();clearTimeout(timer);timer=setTimeout(()=>save(false),1500);}
+  function totals(){
+    const st=$("status"); if(!st)return;
+    const n=Object.values(done).filter(Boolean).length;
+    const core=PLAN.map((p,i)=>p.k==="core"&&done[i]).filter(Boolean).length;
+    st.innerHTML="<b>"+WEEK_ID+"</b> · padaryta "+n+" · branduolys "+core+"/4";
+  }
+  async function save(loud){
+    const payload={week:WK_START,done,notes,extra,svoriai:w,recovery:rec,planas:plan,ts:Date.now()};
+    try{localStorage.setItem("vs-"+WK_START,JSON.stringify(payload));}catch(e){}
     try{
-      if(STORE.mode==="db"&&dbRef){await dbRef.set(payload);syncState("Įrašyta",1);}
-      else if(STORE.mode==="gh"){await ghPut("zurnalas/"+WK_START+".json",payload);syncState("Įrašyta į GitHub",1);}
-      else syncState("Įrašyta tik šiame įrenginyje");
-    }catch(e){syncState("Neįrašyta: "+e.message);}
+      if(STORE.mode==="db"&&dbRef){await dbRef.set(payload);if(!loud)syncState("Įrašyta",1);return true;}
+      if(STORE.mode==="gh"){await ghPut("zurnalas/"+WK_START+".json",payload);if(!loud)syncState("Įrašyta į GitHub",1);return true;}
+      if(!loud)syncState("Įrašyta tik šiame įrenginyje");
+      return false;
+    }catch(e){syncState("Neįrašyta: "+e.message);return false;}
+  }
+  /* --- kitos savaitės laikas --- */
+  function slotUI(){
+    if(!slots)return;
+    const DAYS=["Pr","An","Tr","Kt","Pn","Št","Sk"];
+    slots.innerHTML=DAYS.map((d,i)=>{
+      const p=plan[i]||{};
+      return '<div class="slot"><span class="sd">'+d+'</span><span class="opts">'+
+        ['rytas','vakaras','abu','nėra'].map(o=>'<button class="opt" data-d="'+i+'" data-o="'+o+
+          '" aria-pressed="'+(p.kada===o?"true":"false")+'">'+o+'</button>').join("")+
+        '<input type="time" data-d="'+i+'" value="'+(p.val||"")+'" aria-label="'+d+' valanda">'+
+        '</span></div>';
+    }).join("");
+    slots.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>{
+      const i=b.dataset.d; plan[i]=plan[i]||{}; plan[i].kada=(plan[i].kada===b.dataset.o)?null:b.dataset.o;
+      touch(); slotUI();}));
+    slots.querySelectorAll("input[type=time]").forEach(inp=>inp.addEventListener("input",()=>{
+      const i=inp.dataset.d; plan[i]=plan[i]||{}; plan[i].val=inp.value; touch();}));
   }
   try{const raw=localStorage.getItem("vs-"+WK_START);
-      if(raw){const o=JSON.parse(raw)||{};done=o.done||{};notes=o.notes||{};w=o.w||{};}}catch(e){}
-  chips();session();
+    if(raw){const o=JSON.parse(raw)||{};done=o.done||{};notes=o.notes||{};extra=o.extra||{};
+      w=o.svoriai||o.w||{};rec=o.recovery||{};plan=o.planas||{};}}catch(e){}
+  chips();session();slotUI();
   (async()=>{
     const db=await window.claude?.use?.("db");
     if(db){STORE.mode="db";dbRef=db.doc("savaites/"+WK_START);
       try{const s=await dbRef.get();
-        if(s){done=s.done||done;notes=s.notes||notes;w=s.svoriai||w;}}catch(e){}
-      syncState("claude.ai saugykla",1);chips();session();return;}
+        if(s){done=s.done||done;notes=s.notes||notes;extra=s.extra||extra;
+          w=s.svoriai||w;rec=s.recovery||rec;plan=s.planas||plan;}}catch(e){}
+      syncState("claude.ai saugykla",1);chips();session();slotUI();return;}
     if(ghTok()){STORE.mode="gh";
-      const hadLocal=Object.keys(done).length||Object.keys(notes).length||Object.keys(w).length;
+      const had=Object.keys(done).length||Object.keys(notes).length||Object.keys(w).length;
       try{const s=await ghGet("zurnalas/"+WK_START+".json");
-        if(s&&!s.missing){done=s.done||done;notes=s.notes||notes;w=s.svoriai||w;
-          syncState("GitHub saugykla",1);}
+        if(s&&!s.missing){done=s.done||done;notes=s.notes||notes;extra=s.extra||extra;
+          w=s.svoriai||w;rec=s.recovery||rec;plan=s.planas||plan;syncState("GitHub saugykla",1);}
         else{syncState("GitHub saugykla",1);
-          if(hadLocal){await save();banner("<b>Radau įrašų, kurie buvo likę tik šitame įrenginyje, "+
+          if(had){await save(false);banner("<b>Radau įrašų, kurie buvo likę tik šitame įrenginyje, "+
             "ir ką tik nusiunčiau juos.</b> Dabar viskas sinchronizuota.",1);}}
       }catch(e){syncState("GitHub klaida: "+e.message);
         banner("<b>Raktas neveikia:</b> "+e.message+". Įrašai kol kas lieka tik šitame įrenginyje.");}
-      chips();session();return;}
+      chips();session();slotUI();return;}
     syncState("Tik šis įrenginys");
     banner("<b>Šitame įrenginyje raktas neįrašytas.</b> Ką įrašysi — svoriai ir komentarai — "+
       "liks tik šitos naršyklės atmintyje ir manęs nepasieks. Raktas galioja vienam įrenginiui, "+
