@@ -185,6 +185,19 @@ section{margin-top:30px}
   font-size:10.5px;color:var(--ink-3);font-weight:600}
 .stat .sv{font-family:"Barlow Condensed",sans-serif;font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
 .stat .sv small{font-size:12px;color:var(--ink-3);font-weight:500;margin-left:2px}
+.mvtbl{width:100%;border-collapse:collapse;margin-top:12px;font-size:13.5px;font-variant-numeric:tabular-nums}
+.mvtbl th{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.08em;
+  font-size:11px;color:var(--ink-3);font-weight:600;text-align:right;padding:5px 7px;border-bottom:1px solid var(--edge)}
+.mvtbl th:first-child{text-align:left}
+.mvtbl td{padding:8px 7px;border-bottom:1px solid var(--edge);text-align:right}
+.mvtbl td:first-child{text-align:left;font-weight:600;font-size:14px}
+.mvtbl tr:last-child td{border-bottom:none}
+.mvtbl .warm{color:var(--ink-3);font-size:12.5px}
+.mvtbl .work{color:var(--c2);font-family:"Barlow Condensed",sans-serif;font-size:19px;font-weight:700}
+.pcw{display:flex;align-items:center;gap:7px;justify-content:flex-end}
+.pcbar{width:46px;height:6px;border-radius:99px;background:var(--track);overflow:hidden;flex:none}
+.pcbar i{display:block;height:100%;border-radius:99px;background:var(--c1)}
+@media(max-width:620px){.mvtbl .hidem{display:none}}
 
 /* --- likusi dalis --- */
 .goals{display:grid;gap:12px}
@@ -290,9 +303,10 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--edge);font-si
 <section>
   <div class="sechead"><h2>Po treniruotės</h2><span class="eyebrow">iš laikrodžio</span></div>
   <div class="acts" id="acts"></div>
-  <p class="note">Rodmenys imami iš Garmin per <code>tools/sportas_sync.py</code>. Jie atsinaujina,
-     kai paleidžiu sinchronizaciją, ne realiu laiku. Kiekvienam sporto tipui rodomi tik tie
-     rodikliai, kurie jam turi prasmę.</p>
+  <p class="note">Rodmenys imami iš Garmin ir atsinaujina kas vakarą 21:30, kai automatas
+     paleidžia sinchronizaciją. Kiekvienam sporto tipui rodomi tik tie rodikliai, kurie jam
+     turi prasmę: jėgai — judesiai, tonažas ir e1RM, bėgimui — tempas ir zona, dviračiui —
+     greitis, galia ir aukščiai.</p>
 </section>
 
 <section>
@@ -357,7 +371,7 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--edge);font-si
 <div class="tip" id="tip" role="status" aria-live="polite"></div>
 
 <script>
-window.DATA={"atnaujinta":"2026-09-29","dienos":[{"d":"2026-09-16","rhr":53,"hrv":42,"miegas":22260,"miego_balas":75,"stresas":34,"bb":16,"bb_max":64},{"d":"2026-09-17","rhr":49,"hrv":49,"miegas":22380,"miego_balas":71,"stresas":40,"bb":5,"bb_max":69},{"d":"2026-09-18","rhr":50,"hrv":54,"miegas":24180,"miego_balas":75,"stresas":34,"bb":7,"bb_max":65},{"d":"2026-09-19","rhr":51,"hrv":45,"miegas":25320,"miego_balas":78,"stresas":30,"bb":14,"bb_max":71},{"d":"2026-09-20","rhr":56,"hrv":39,"miegas":24540,"miego_balas":51,"stresas":35,"bb":10,"bb_max":50},{"d":"2026-09-21","rhr":49,"hrv":52,"miegas":24960,"miego_balas":77,"stresas":31,"bb":8,"bb_max":79},{"d":"2026-09-22","rhr":49,"hrv":48,"miegas":23040,"miego_balas":75,"stresas":44,"bb":5,"bb_max":63},{"d":"2026-09-23","rhr":55,"hrv":32,"miegas":22020,"miego_balas":32,"stresas":47,"bb":5,"bb_max":20},{"d":"2026-09-24","rhr":53,"hrv":48,"miegas":28440,"miego_balas":85,"stresas":29,"bb":14,"bb_max":65},{"d":"2026-09-25","rhr":52,"hrv":43,"miegas":22860,"miego_balas":61,"stresas":35,"bb":8,"bb_max":50},{"d":"2026-09-26","rhr":48,"hrv":63,"miegas":31980,"miego_balas":81,"stresas":31,"bb":19,"bb_max":100},{"d":"2026-09-27","rhr":50,"hrv":54,"miegas":19980,"miego_balas":64,"stresas":37,"bb":9,"bb_max":58},{"d":"2026-09-28","rhr":49,"hrv":49,"miegas":26100,"miego_balas":80,"stresas":29,"bb":19,"bb_max":81},{"d":"2026-09-29","rhr":49,"hrv":54,"miegas":18360,"miego_balas":60,"stresas":21,"bb":62,"bb_max":62}],"svoris":[{"d":"2026-09-29","kg":90.2,"rieb":25.7,"raum":35.4},{"d":"2026-09-27","kg":90.1,"rieb":25.3,"raum":35.4},{"d":"2026-09-26","kg":91.0,"rieb":25.2,"raum":35.6},{"d":"2026-09-23","kg":91.7,"rieb":25.2,"raum":35.8},{"d":"2026-09-21","kg":91.7,"rieb":22.0,"raum":35.8},{"d":"2026-09-19","kg":91.4,"rieb":25.7,"raum":35.7},{"d":"2026-09-01","kg":89.0,"rieb":null,"raum":null}],"vo2":51.6,"veiklos":[{"id":24477893925,"d":"2026-09-24 08:25","tipas":"strength_training","min":58,"km":0.0,"hr":134.0,"hr_max":169.0,"kcal":687.0},{"id":24477461627,"d":"2026-09-24 08:07","tipas":"indoor_cardio","min":17,"km":0.0,"hr":135.0,"hr_max":166.0,"kcal":225.0},{"id":24453455608,"d":"2026-09-22 11:56","tipas":"indoor_cardio","min":33,"km":0.0,"hr":157.0,"hr_max":177.0,"kcal":543.0},{"id":24453144335,"d":"2026-09-22 11:13","tipas":"strength_training","min":36,"km":0.0,"hr":133.0,"hr_max":166.0,"kcal":429.0},{"id":24452858509,"d":"2026-09-22 10:53","tipas":"indoor_cardio","min":19,"km":0.0,"hr":142.0,"hr_max":174.0,"kcal":274.0},{"id":24444177412,"d":"2026-09-21 17:19","tipas":"indoor_cardio","min":30,"km":0.0,"hr":157.0,"hr_max":179.0,"kcal":505.0},{"id":24443739870,"d":"2026-09-21 16:29","tipas":"indoor_cardio","min":38,"km":0.0,"hr":142.0,"hr_max":169.0,"kcal":551.0},{"id":24443298455,"d":"2026-09-21 16:08","tipas":"indoor_cardio","min":15,"km":0.0,"hr":126.0,"hr_max":156.0,"kcal":191.0},{"id":24404025304,"d":"2026-09-18 08:47","tipas":"strength_training","min":26,"km":0.0,"hr":127.0,"hr_max":154.0,"kcal":300.0},{"id":24403828584,"d":"2026-09-18 08:22","tipas":"indoor_cardio","min":25,"km":0.0,"hr":132.0,"hr_max":168.0,"kcal":295.0},{"id":24393954377,"d":"2026-09-17 12:13","tipas":"strength_training","min":74,"km":0.0,"hr":121.0,"hr_max":160.0,"kcal":663.0},{"id":24393271198,"d":"2026-09-17 11:29","tipas":"indoor_cardio","min":43,"km":0.0,"hr":144.0,"hr_max":176.0,"kcal":573.0}]};
+window.DATA={"atnaujinta":"2026-09-29","dienos":[{"d":"2026-09-16","rhr":53,"hrv":42,"miegas":22260,"miego_balas":75,"stresas":34,"bb":16,"bb_max":64},{"d":"2026-09-17","rhr":49,"hrv":49,"miegas":22380,"miego_balas":71,"stresas":40,"bb":5,"bb_max":69},{"d":"2026-09-18","rhr":50,"hrv":54,"miegas":24180,"miego_balas":75,"stresas":34,"bb":7,"bb_max":65},{"d":"2026-09-19","rhr":51,"hrv":45,"miegas":25320,"miego_balas":78,"stresas":30,"bb":14,"bb_max":71},{"d":"2026-09-20","rhr":56,"hrv":39,"miegas":24540,"miego_balas":51,"stresas":35,"bb":10,"bb_max":50},{"d":"2026-09-21","rhr":49,"hrv":52,"miegas":24960,"miego_balas":77,"stresas":31,"bb":8,"bb_max":79},{"d":"2026-09-22","rhr":49,"hrv":48,"miegas":23040,"miego_balas":75,"stresas":44,"bb":5,"bb_max":63},{"d":"2026-09-23","rhr":55,"hrv":32,"miegas":22020,"miego_balas":32,"stresas":47,"bb":5,"bb_max":20},{"d":"2026-09-24","rhr":53,"hrv":48,"miegas":28440,"miego_balas":85,"stresas":29,"bb":14,"bb_max":65},{"d":"2026-09-25","rhr":52,"hrv":43,"miegas":22860,"miego_balas":61,"stresas":35,"bb":8,"bb_max":50},{"d":"2026-09-26","rhr":48,"hrv":63,"miegas":31980,"miego_balas":81,"stresas":31,"bb":19,"bb_max":100},{"d":"2026-09-27","rhr":50,"hrv":54,"miegas":19980,"miego_balas":64,"stresas":37,"bb":9,"bb_max":58},{"d":"2026-09-28","rhr":49,"hrv":49,"miegas":26100,"miego_balas":80,"stresas":29,"bb":19,"bb_max":81},{"d":"2026-09-29","rhr":49,"hrv":54,"miegas":18360,"miego_balas":60,"stresas":30,"bb":22,"bb_max":62}],"svoris":[{"d":"2026-09-29","kg":90.2,"rieb":25.7,"raum":35.4},{"d":"2026-09-27","kg":90.1,"rieb":25.3,"raum":35.4},{"d":"2026-09-26","kg":91.0,"rieb":25.2,"raum":35.6},{"d":"2026-09-23","kg":91.7,"rieb":25.2,"raum":35.8},{"d":"2026-09-21","kg":91.7,"rieb":22.0,"raum":35.8},{"d":"2026-09-19","kg":91.4,"rieb":25.7,"raum":35.7},{"d":"2026-09-01","kg":89.0,"rieb":null,"raum":null}],"vo2":51.6,"apzvalga":[{"tipas":"strength_training","data":"2026-09-29 12:48","min":85,"hr":119,"hr_max":162,"kcal":730,"zona":"Z1","judesiai":[{"nm":"Front Squat","serijos":7,"tonazas":2650,"darbinis":90.0,"darb_serijos":"4 × 3 / 3 / 5 / 5","apsilimas":"50×10 / 50×10 / 70×3","e1rm":105,"vs_geriausias":73},{"nm":"Overhead Squat","serijos":5,"tonazas":1300,"darbinis":60.0,"darb_serijos":"3 × 5 / 5 / 5","apsilimas":"40×5 / 40×5","e1rm":70,"vs_geriausias":71},{"nm":"Back Squat","serijos":5,"tonazas":2400,"darbinis":90.0,"darb_serijos":"4 × 5 / 5 / 5 / 5","apsilimas":"60×10","e1rm":105,"vs_geriausias":69},{"nm":"Romanian Deadlift","serijos":4,"tonazas":3200,"darbinis":100.0,"darb_serijos":"3 × 8 / 8 / 8","apsilimas":"80×10","e1rm":127,"vs_geriausias":89},{"nm":"Hanging L-Sit","serijos":4,"tonazas":0,"kartojimai":4}],"tonazas":9550,"seriju":25},{"tipas":"strength_training","data":"2026-09-24 08:25","min":58,"hr":134,"hr_max":169,"kcal":687,"zona":"Z2","judesiai":[{"nm":"Nepažymėta","serijos":17,"tonazas":9980,"darbinis":150.0,"darb_serijos":"1 × 2","apsilimas":"40×9 / 40×9 / 50×9 / 50×9 / 60×9 / 60×9 / 60×9 / 110×2 / 130×2 / 50×20 / 60×20 / 70×20 / 50×10 / 60×10 / 70×10 / 70×8","e1rm":160,"vs_geriausias":68}],"tonazas":9980,"seriju":17},{"tipas":"indoor_cardio","data":"2026-09-24 08:07","min":17,"hr":135,"hr_max":166,"kcal":225,"zona":"Z2"},{"tipas":"indoor_cardio","data":"2026-09-22 11:56","min":33,"hr":157,"hr_max":177,"kcal":543,"zona":"Z4"}],"veiklos":[{"id":24539798602,"d":"2026-09-29 12:48","tipas":"strength_training","min":85,"km":0.0,"hr":119.0,"hr_max":162.0,"kcal":730.0},{"id":24477893925,"d":"2026-09-24 08:25","tipas":"strength_training","min":58,"km":0.0,"hr":134.0,"hr_max":169.0,"kcal":687.0},{"id":24477461627,"d":"2026-09-24 08:07","tipas":"indoor_cardio","min":17,"km":0.0,"hr":135.0,"hr_max":166.0,"kcal":225.0},{"id":24453455608,"d":"2026-09-22 11:56","tipas":"indoor_cardio","min":33,"km":0.0,"hr":157.0,"hr_max":177.0,"kcal":543.0},{"id":24453144335,"d":"2026-09-22 11:13","tipas":"strength_training","min":36,"km":0.0,"hr":133.0,"hr_max":166.0,"kcal":429.0},{"id":24452858509,"d":"2026-09-22 10:53","tipas":"indoor_cardio","min":19,"km":0.0,"hr":142.0,"hr_max":174.0,"kcal":274.0},{"id":24444177412,"d":"2026-09-21 17:19","tipas":"indoor_cardio","min":30,"km":0.0,"hr":157.0,"hr_max":179.0,"kcal":505.0},{"id":24443739870,"d":"2026-09-21 16:29","tipas":"indoor_cardio","min":38,"km":0.0,"hr":142.0,"hr_max":169.0,"kcal":551.0}]};
 const WK_START="2026-09-28";
 let DATA=null;
 const C=["var(--c1)","var(--c2)","var(--c3)","var(--c4)","var(--c5)"];
@@ -686,31 +700,47 @@ function spark(vals,color,lo,hi){
 })();
 
 /* ---------- PO TRENIRUOTĖS ---------- */
-(function acts(){
-  const el=$("acts");
-  const list=DATA.veiklos.slice(0,6);
-  if(!list.length){el.innerHTML='<p class="note">Veiklų nėra.</p>';return;}
-  list.forEach(v=>{
+(function(){
+  const el=$("acts"); if(!el)return;
+  const list=(DATA.apzvalga&&DATA.apzvalga.length)?DATA.apzvalga:[];
+  if(!list.length){el.innerHTML='<p class="note">Apžvalgos dar nėra.</p>';return;}
+  list.forEach((v,idx)=>{
     const meta=TIPAI[v.tipas]||[v.tipas,"var(--ink-3)"];
     const st=[];
     st.push(["Trukmė",v.min+"<small>min</small>"]);
-    if(v.km>0.05){
-      st.push(["Atstumas",v.km.toFixed(2)+"<small>km</small>"]);
-      const pace=(v.min/v.km);
-      if(/run/.test(v.tipas))st.push(["Tempas",Math.floor(pace)+"’"+String(Math.round(pace%1*60)).padStart(2,"0")+"”<small>/km</small>"]);
-      else st.push(["Greitis",(v.km/(v.min/60)).toFixed(1)+"<small>km/h</small>"]);
+    if(v.tonazas)st.push(["Tonažas",(v.tonazas/1000).toFixed(1)+"<small>t</small>"]);
+    if(v.seriju)st.push(["Serijų",v.seriju]);
+    if(v.km)st.push(["Atstumas",v.km.toFixed(2)+"<small>km</small>"]);
+    if(v.tempas)st.push(["Tempas",v.tempas+"<small>/km</small>"]);
+    if(v.greitis)st.push(["Greitis",v.greitis+"<small>km/h</small>"]);
+    if(v.galia)st.push(["Galia",v.galia+"<small>W</small>"]);
+    if(v.auksciai)st.push(["Aukščiai",v.auksciai+"<small>m</small>"]);
+    if(v.hr)st.push(["Vid. pulsas",v.hr+"<small>bpm</small>"]);
+    if(v.hr_max)st.push(["Maks.",v.hr_max+"<small>bpm</small>"]);
+    if(v.zona)st.push(["Zona",v.zona]);
+    if(v.kcal)st.push(["Kalorijos",v.kcal+"<small>kcal</small>"]);
+    let h='<div class="ah"><span class="an" style="color:'+meta[1]+'">'+meta[0]+
+      (idx===0?' <span class="pill ok">paskutinė</span>':'')+'</span><span class="dt">'+v.data+'</span></div>'+
+      '<div class="stats">'+st.map(s=>'<span class="stat"><span class="sl">'+s[0]+
+      '</span><br><span class="sv">'+s[1]+'</span></span>').join("")+'</div>';
+    if(v.judesiai&&v.judesiai.length){
+      h+='<table class="mvtbl"><tr><th>Judesys</th><th class="hidem">Apšilimas</th>'+
+         '<th>Darbinis</th><th class="hidem">Serijos</th><th>e1RM</th><th>vs geriausias</th></tr>'+
+        v.judesiai.map(m=>{
+          const pc=m.vs_geriausias;
+          return '<tr><td>'+m.nm+'</td>'+
+            '<td class="warm hidem">'+(m.apsilimas||"—")+'</td>'+
+            '<td>'+(m.darbinis?'<span class="work">'+m.darbinis+'</span>':(m.kartojimai?m.kartojimai+" kart.":"—"))+'</td>'+
+            '<td class="warm hidem">'+(m.darb_serijos||"—")+'</td>'+
+            '<td>'+(m.e1rm?m.e1rm+" kg":"—")+'</td>'+
+            '<td>'+(pc?'<span class="pcw"><span class="pcbar"><i style="width:'+Math.min(100,pc)+
+              '%"></i></span>'+pc+" %</span>":"—")+'</td></tr>';
+        }).join("")+'</table>'+
+        '<p class="note" style="margin-top:10px">„vs geriausias“ — kiek procentų nuo tavo geriausio to judesio rezultato per visą Garmin istoriją. Apšilimo serijos atskirtos pagal tavo pačio įrašytą ribą.</p>';
     }
-    if(v.hr)st.push(["Vid. pulsas",Math.round(v.hr)+"<small>bpm</small>"]);
-    if(v.hr_max)st.push(["Maks.",Math.round(v.hr_max)+"<small>bpm</small>"]);
-    if(v.kcal)st.push(["Kalorijos",Math.round(v.kcal)+"<small>kcal</small>"]);
-    if(v.hr){const z=v.hr<128?"Z1":v.hr<143?"Z2":v.hr<155?"Z3":v.hr<168?"Z4":"Z5";
-      st.push(["Zona",z]);}
-    const d=document.createElement("div");d.className="act";
-    d.innerHTML='<div class="ah"><span class="an" style="color:'+meta[1]+'">'+meta[0]+'</span>'+
-      '<span class="dt">'+v.d+'</span></div><div class="stats">'+
-      st.map(s=>'<span class="stat"><span class="sl">'+s[0]+'</span><br><span class="sv">'+s[1]+'</span></span>').join("")+
-      '</div>';
-    el.appendChild(d);
+    if(v.vs_pask!=null)h+='<p class="note" style="margin-top:8px">Prieš tris ankstesnius to paties tipo: <b>'+
+      (v.vs_pask>0?"+":"")+v.vs_pask+" km</b></p>";
+    const d=document.createElement("div");d.className="act";d.innerHTML=h;el.appendChild(d);
   });
 })();
 
