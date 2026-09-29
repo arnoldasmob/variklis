@@ -1,0 +1,813 @@
+<title>Variklis ir štanga</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#0C100F; --bg-2:#121716;
+  --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.07);
+  --edge:rgba(255,255,255,.09); --edge-2:rgba(255,255,255,.16);
+  --ink:#F0F4EE; --ink-2:#A8B2AC; --ink-3:#77827C;
+  --c1:#3DA882; --c2:#D9762F; --c3:#7183D2; --c4:#C79A22; --c5:#BC74A8;
+  --good:#3DA882; --warn:#C79A22; --crit:#D9604A;
+  --target:#8B958F; --hist:#5C6661;
+  --r:16px; --r-s:11px;
+  --glow1:rgba(61,168,130,.30); --glow2:rgba(217,118,47,.22);
+  --glow3:rgba(113,131,210,.20); --glow4:rgba(199,154,34,.14);
+  --pre-bg:rgba(0,0,0,.28); --track:rgba(255,255,255,.07);
+  --warm-in:var(--warm-in); --warm-br:var(--warm-br);
+  --warm-ph:var(--warm-ph); --warm-fc:var(--warm-fc);
+  --btn-ink:#08110D;
+}
+:root[data-theme="light"]{
+  --bg:#F1F4F0; --bg-2:#FBFCFA;
+  --glass:rgba(255,255,255,.66); --glass-2:rgba(255,255,255,.86);
+  --edge:rgba(18,28,23,.11); --edge-2:rgba(18,28,23,.20);
+  --ink:#121815; --ink-2:#4B554F; --ink-3:#727D77;
+  --c1:#087F5B; --c2:#C2551B; --c3:#4657A6; --c4:#B8860B; --c5:#96407F;
+  --good:#087F5B; --warn:#B8860B; --crit:#B3261E;
+  --target:#7A837D; --hist:#A5ACA7;
+  --glow1:rgba(8,127,91,.16); --glow2:rgba(194,85,27,.13);
+  --glow3:rgba(70,87,166,.12); --glow4:rgba(184,134,11,.10);
+  --pre-bg:rgba(18,28,23,.05); --track:rgba(18,28,23,.08);
+  --warm-in:rgba(194,85,27,.08); --warm-br:rgba(194,85,27,.40);
+  --warm-ph:rgba(194,85,27,.40); --warm-fc:rgba(194,85,27,.14);
+  --btn-ink:#FFFFFF;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);
+  font-family:Barlow,system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
+/* ambient svytejimas */
+body::before{content:"";position:fixed;inset:-20% -10% auto -10%;height:120vh;z-index:-1;
+  background:
+   radial-gradient(42vw 34vw at 18% 20%, var(--glow1), transparent 62%),
+   radial-gradient(38vw 30vw at 82% 14%, var(--glow2), transparent 62%),
+   radial-gradient(46vw 32vw at 55% 62%, var(--glow3), transparent 64%),
+   radial-gradient(30vw 24vw at 12% 78%, var(--glow4), transparent 62%);
+  filter:blur(46px);pointer-events:none}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:16px;padding-block:22px 72px}
+h1,h2,h3,h4,.cond{font-family:"Barlow Condensed",Barlow,system-ui,sans-serif}
+h1{font-size:clamp(26px,5.5vw,40px);font-weight:700;line-height:1;margin:0;text-transform:uppercase;letter-spacing:.01em}
+h2{font-size:20px;font-weight:600;margin:0;text-transform:uppercase;letter-spacing:.08em}
+h3{font-size:16px;font-weight:600;margin:0;letter-spacing:.05em;text-transform:uppercase}
+.eyebrow{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.17em;
+  font-size:11.5px;color:var(--ink-3);font-weight:600}
+.note{font-size:14.5px;line-height:1.55;color:var(--ink-2);max-width:66ch;margin:12px 0 0}
+section{margin-top:30px}
+.sechead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+
+/* --- stiklas --- */
+.g{background:var(--glass);border:1px solid var(--edge);border-radius:var(--r);
+  backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
+.pad{padding:16px 18px}
+
+/* --- siandien --- */
+.today{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:820px){.today{grid-template-columns:minmax(230px,300px) 1fr}}
+.bbcard{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:20px 18px}
+.ring{position:relative;width:170px;height:170px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
+.ring .big{font-family:"Barlow Condensed",sans-serif;font-size:52px;font-weight:700;line-height:.95;
+  font-variant-numeric:tabular-nums}
+.tiles{display:grid;gap:10px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:560px){.tiles{grid-template-columns:repeat(3,1fr)}}
+.tile{padding:13px 14px;border-radius:var(--r-s);background:var(--glass);border:1px solid var(--edge);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;flex-direction:column;gap:3px}
+.tile .lab{display:flex;align-items:center;gap:6px;font-family:"Barlow Condensed",sans-serif;
+  text-transform:uppercase;letter-spacing:.11em;font-size:11px;color:var(--ink-3);font-weight:600}
+.dot{width:7px;height:7px;border-radius:99px;flex:none}
+.tile .v{font-family:"Barlow Condensed",sans-serif;font-size:28px;font-weight:700;line-height:1.05;
+  font-variant-numeric:tabular-nums}
+.tile .v small{font-size:14px;font-weight:500;color:var(--ink-3);margin-left:3px}
+.tile .d{font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.tile .d b{font-weight:600}
+.up{color:var(--good)} .dn{color:var(--crit)} .fl{color:var(--ink-3)}
+.spark{margin-top:4px;height:26px}
+.verdict{margin-top:12px;padding:13px 16px;border-radius:var(--r-s);
+  background:var(--glass-2);border:1px solid var(--edge);font-size:14px;line-height:1.45}
+.verdict b{font-weight:600}
+
+/* --- savaites juosta --- */
+.strip{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.chip{flex:none;min-width:70px;padding:10px 8px;border-radius:var(--r-s);text-align:center;cursor:pointer;
+  background:var(--glass);border:1px solid var(--edge);color:var(--ink-2);font:inherit;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:border-color .12s,background .12s}
+.chip:hover{border-color:var(--edge-2)}
+.chip .wd{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.1em;
+  font-size:11px;color:var(--ink-3);font-weight:600}
+.chip .dd{font-family:"Barlow Condensed",sans-serif;font-size:21px;font-weight:700;line-height:1.1;color:var(--ink)}
+.chip .tg{font-size:10.5px;color:var(--ink-3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip[aria-selected="true"]{background:var(--glass-2);border-color:var(--c1)}
+.chip[aria-selected="true"] .wd{color:var(--c1)}
+.chip.done .dd::after{content:" ✓";color:var(--c1);font-size:14px}
+.chip:focus-visible{outline:2px solid var(--c1);outline-offset:2px}
+
+/* --- sesija --- */
+.sess h4{text-transform:uppercase;letter-spacing:.11em;font-size:11.5px;color:var(--ink-3);
+  margin:16px 0 7px;font-weight:600}
+.mv{display:grid;grid-template-columns:1fr;gap:9px;padding:11px 0;border-bottom:1px solid var(--edge)}
+@media(min-width:620px){.mv{grid-template-columns:1fr auto;gap:14px;align-items:center}}
+.mv:last-child{border-bottom:none}
+.mv .txt{font-size:15.5px;min-width:0;line-height:1.45}
+.mv .txt b{font-weight:600}
+.wsets{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.wf{display:flex;flex-direction:column;gap:4px}
+.wf .wl{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.1em;
+  font-size:10.5px;font-weight:600;color:var(--ink-3)}
+.wf.main .wl{color:var(--c2)}
+.wf .box{display:flex;align-items:center}
+.mv input{width:86px;background:var(--glass-2);border:1.5px solid var(--edge-2);
+  border-radius:9px;color:var(--ink-2);font-family:"Barlow Condensed",sans-serif;font-size:19px;
+  font-weight:700;padding:6px 10px;text-align:right;font-variant-numeric:tabular-nums}
+.mv input::placeholder{color:var(--ink-3);font-weight:600}
+.mv input:focus{outline:2px solid var(--ink-2);outline-offset:1px}
+.mv .main input{width:104px;background:var(--warm-in);border-color:var(--warm-br);
+  color:var(--c2);font-size:23px;padding:7px 11px}
+.mv .main input::placeholder{color:var(--warm-ph)}
+.mv .main input:hover{border-color:var(--edge-2)}
+.mv .main input:focus{outline:2px solid var(--c2);border-color:var(--c2);background:var(--warm-fc)}
+.mv .unit{font-size:13px;color:var(--ink-3);margin-left:5px;font-weight:600;
+  font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.06em}
+.mv .main .unit{color:var(--c2);font-size:14px}
+.plain{font-size:15px;padding:7px 0;color:var(--ink-2)}
+.sess pre{background:var(--pre-bg);border:1px solid var(--edge);border-radius:10px;
+  padding:13px 15px;margin:6px 0 0;font-size:13.5px;line-height:1.6;overflow-x:auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink-2)}
+.sn{font-size:14.5px;line-height:1.55;color:var(--ink-2);margin:14px 0 0;border-left:2px solid var(--edge-2);padding-left:11px}
+.cmt{margin-top:16px}
+.cmt label{display:block;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;
+  letter-spacing:.11em;font-size:11.5px;color:var(--ink-3);margin-bottom:6px;font-weight:600}
+.cmt textarea{width:100%;min-height:72px;background:var(--glass-2);color:var(--ink);
+  border:1px solid var(--edge);border-radius:10px;padding:10px 12px;font:inherit;font-size:14px;resize:vertical}
+.cmt textarea:focus{outline:2px solid var(--c1);outline-offset:1px;border-color:var(--c1)}
+.hint{font-size:13.5px;color:var(--ink-3);margin-top:7px}
+.saved{color:var(--good)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.btn{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.08em;
+  font-size:13px;font-weight:600;padding:8px 16px;border-radius:9px;border:1px solid var(--edge-2);
+  background:var(--glass-2);color:var(--ink-2);cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--c1);color:var(--c1)}
+.btn[aria-pressed="true"]{background:var(--c1);border-color:var(--c1);color:var(--btn-ink)}
+.btn:focus-visible{outline:2px solid var(--c1);outline-offset:2px}
+
+/* --- po treniruotes --- */
+.acts{display:grid;gap:10px}
+.act{padding:13px 16px;border-radius:var(--r-s);background:var(--glass);border:1px solid var(--edge);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.act .ah{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.act .an{font-family:"Barlow Condensed",sans-serif;font-size:17px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.act .dt{font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.stats{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:9px}
+.stat .sl{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.11em;
+  font-size:10.5px;color:var(--ink-3);font-weight:600}
+.stat .sv{font-family:"Barlow Condensed",sans-serif;font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .sv small{font-size:12px;color:var(--ink-3);font-weight:500;margin-left:2px}
+
+/* --- likusi dalis --- */
+.goals{display:grid;gap:12px}
+.goal{padding:15px 18px}
+.goal .top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.goal .nm{font-family:"Barlow Condensed",sans-serif;font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.goal .val{font-variant-numeric:tabular-nums;font-size:13.5px;color:var(--ink-2)}
+.goal .val b{font-size:22px;color:var(--ink);font-family:"Barlow Condensed",sans-serif;font-weight:700}
+.scale{position:relative;height:34px;margin-top:26px}
+.track{position:absolute;inset:11px 0 auto 0;height:11px;background:var(--track);border-radius:99px;overflow:hidden}
+.fill{height:100%;border-radius:99px}
+.tick{position:absolute;top:3px;height:27px;width:2px;background:var(--target);border-radius:1px}
+.tick.hist{background:var(--hist);height:21px;top:6px}
+.tick::after{content:attr(data-l);position:absolute;top:29px;left:50%;transform:translateX(-50%);
+  font-size:10.5px;color:var(--ink-3);white-space:nowrap;font-variant-numeric:tabular-nums}
+.tick.hist::after{top:-16px;color:var(--hist)}
+.goal .why{font-size:12.5px;color:var(--ink-3);margin-top:30px}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;
+  padding:2px 9px;border-radius:99px;text-transform:uppercase;letter-spacing:.07em;
+  font-family:"Barlow Condensed",sans-serif}
+.pill.ok{background:color-mix(in srgb,var(--good) 17%,transparent);color:var(--good)}
+.pill.warn{background:color-mix(in srgb,var(--warn) 20%,transparent);color:var(--warn)}
+.pill.crit{background:color-mix(in srgb,var(--crit) 17%,transparent);color:var(--crit)}
+.pill.q{background:var(--track);color:var(--ink-3)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;padding:8px 2px 2px}
+.lg{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink-2)}
+.sw{width:11px;height:11px;border-radius:3px;flex:none}
+figure{margin:0}
+svg{display:block;width:100%;height:auto;overflow:visible}
+.tip{position:fixed;pointer-events:none;z-index:40;background:var(--bg-2);color:var(--ink);
+  border:1px solid var(--edge-2);padding:8px 11px;border-radius:9px;font-size:12.5px;line-height:1.35;
+  opacity:0;transition:opacity .1s;font-variant-numeric:tabular-nums;max-width:230px}
+.tip b{font-family:"Barlow Condensed",sans-serif;font-size:14px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+.tbl th,.tbl td{text-align:right;padding:6px 9px;border-bottom:1px solid var(--edge)}
+.tbl th:first-child,.tbl td:first-child{text-align:left}
+.tbl th{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.07em;
+  font-size:11.5px;color:var(--ink-3);font-weight:600}
+.scrollx{overflow-x:auto}
+details summary{cursor:pointer;font-size:13px;color:var(--ink-3);padding:6px 0}
+details summary:focus-visible{outline:2px solid var(--c1);outline-offset:2px}
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--edge);font-size:12.5px;color:var(--ink-3)}
+.footrow{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+#theme{display:inline-flex;align-items:center;gap:8px}
+.setup{margin-top:14px;padding:16px 18px}
+.setup input{width:100%;max-width:440px;background:var(--glass-2);border:1px solid var(--edge-2);
+  border-radius:9px;color:var(--ink);font:inherit;font-size:14px;padding:9px 12px;margin-top:8px}
+.setup input:focus{outline:2px solid var(--c1);outline-offset:1px}
+.sync{font-size:13px;color:var(--ink-3);margin-top:8px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+<header class="row" style="margin-bottom:18px">
+  <div>
+    <p class="eyebrow" id="hdr-week">Sav. 0 · grįžimas po ligos</p>
+    <h1>Variklis ir štanga</h1>
+  </div>
+  <p class="eyebrow" id="hdr-upd">—</p>
+</header>
+
+<section style="margin-top:0">
+  <div class="sechead"><h2>Šiandien</h2><span class="eyebrow" id="today-date">—</span></div>
+  <div class="today">
+    <div class="g bbcard">
+      <span class="eyebrow">Body Battery</span>
+      <div class="ring" id="ring"></div>
+      <span class="eyebrow" id="bb-sub">—</span>
+    </div>
+    <div>
+      <div class="tiles" id="tiles"></div>
+      <div class="verdict" id="verdict">—</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><h2>Savaitė</h2><span class="eyebrow">spausk dieną</span></div>
+  <div class="strip" id="strip" role="tablist"></div>
+  <div class="g pad sess" id="sess" style="margin-top:10px"></div>
+  <p class="note">Svoriai laukeliuose yra <b>tai, ką realiai kėlei</b>, ne planas. Plano skaičius
+     lieka matomas šalia judesio, o į laukelius rašai savo.</p>
+  <p class="note"><b>Kodėl du laukeliai.</b> Prieš darbinį svorį tu visada padarai 1–2 apšilimo
+     priėjimus. Laikrodis juos įrašo kaip tokias pačias to paties pratimo serijas, todėl
+     traukdamas statistiką aš jų nuo darbinių neatskirčiau ir tavo skaičiai atrodytų mažesni,
+     nei yra. Įrašęs apšilimo svorį, tu man pasakai, kur riba.
+     Komentaras ir abu svoriai įrašomi automatiškai.</p>
+</section>
+
+<section>
+  <div class="sechead"><h2>Po treniruotės</h2><span class="eyebrow">iš laikrodžio</span></div>
+  <div class="acts" id="acts"></div>
+  <p class="note">Rodmenys imami iš Garmin per <code>tools/sportas_sync.py</code>. Jie atsinaujina,
+     kai paleidžiu sinchronizaciją, ne realiu laiku. Kiekvienam sporto tipui rodomi tik tie
+     rodikliai, kurie jam turi prasmę.</p>
+</section>
+
+<section>
+  <div class="sechead"><h2>Taikiniai</h2><span class="eyebrow">dabar · taikinys · 2024 lygis</span></div>
+  <div class="goals" id="goals"></div>
+  <p class="note">Juosta rodo <b>dabar</b>, apatinis brūkšnys — <b>taikinį</b>, viršutinis pilkas —
+     <b>istorinį maksimumą su data</b>. Taikinys sąmoningai žemesnis už 2024 viršūnę: pirma grįžtam.</p>
+</section>
+
+<section>
+  <div class="sechead"><h2>Kas nutiko jėgai</h2><span class="eyebrow">geriausias e1RM per metus, kg</span></div>
+  <div class="g pad">
+    <figure><div id="c-e1rm"></div></figure>
+    <div class="legend" id="lg-e1rm"></div>
+    <details><summary>Rodyti lentelę</summary><div class="scrollx"><table class="tbl" id="t-e1rm"></table></div></details>
+  </div>
+  <p class="note"><b>Deadlift 2026 eilutė meluoja.</b> Kovo 31 d. buvo 220 kg × 2, bet laikrodis tos
+     serijos nepriskyrė pratimui. Apie 40 % serijų lieka be pratimo vardo.</p>
+</section>
+
+<section>
+  <div class="sechead"><h2>Apimtis</h2><span class="eyebrow">valandos per savaitę, 26 sav.</span></div>
+  <div class="g pad"><figure><div id="c-vol"></div></figure></div>
+  <p class="note">Nuo 9,4 val. iki 4,1 val. Tai ne deload. Būtent toks kritimas 2022, 2024 ir 2025
+     baigdavosi nutrūkimu, todėl planas turi <b>branduolį iš keturių sesijų</b>.</p>
+</section>
+
+<section>
+  <div class="sechead"><h2>Dviratis prieš bėgimą</h2><span class="eyebrow">km per mėnesį</span></div>
+  <div class="g pad"><figure><div id="c-km"></div></figure><div class="legend" id="lg-km"></div></div>
+  <p class="note">Bėgimas sausį–vasarį, dviratis gegužę–liepą. Bet bėgimo apimtis per metus krito
+     tris kartus, o dviratis išaugo nuo 472 iki 1 276 km. <b>Tai paaiškina, kodėl krito squat.</b></p>
+</section>
+
+<section>
+  <div class="sechead"><h2>Blokas</h2><span class="eyebrow">09-29 → 12-13</span></div>
+  <div class="g pad"><div class="scrollx"><table class="tbl" id="t-blok"></table></div></div>
+  <p class="note"><b>Ribos:</b> rytinis pulsas ramybėje 5 vienetais virš bazės → diena tampa lengva.
+     HRV du rytus iš eilės žemiau 40 → visa savaitė nukeliama viena žemyn.</p>
+</section>
+
+<footer>
+  <div class="footrow">
+    <button class="btn" id="theme">Šviesi tema</button>
+    <span class="eyebrow" id="sync-state">—</span>
+  </div>
+  <details class="g setup" id="setup"><summary>GitHub prieiga · nustatymai</summary>
+    <p class="note" style="margin-top:10px">Duomenys guli <b>privačiame</b> repozitorijoje
+       <code>arnoldasmob/variklis-duomenys</code>. Šis puslapis yra viešas, bet jame
+       nėra nė vieno tavo skaičiaus: viskas užkraunama tik su tavo raktu, kuris lieka
+       šitame įrenginyje ir niekada nepatenka į puslapio kodą.</p>
+    <label class="eyebrow" for="ghtok">Fine-grained token (Contents: read and write)</label>
+    <input id="ghtok" type="password" placeholder="github_pat_…" autocomplete="off">
+    <p class="sync"><button class="btn" id="ghsave" style="margin-top:8px">Išsaugoti raktą</button>
+       <button class="btn" id="ghclear" style="margin-top:8px">Pašalinti</button></p>
+    <p class="sync" id="ghmsg"></p>
+  </details>
+  Garmin Connect: 2 223 veiklos, 708 jėgos sesijos, 9 621 serija · VO₂ testai 2024-11-29 ir MAP 381 W ·
+  išmaniosios svarstyklės · rungtys: athxgames.com, ATHX divizija.
+</footer>
+</div>
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+
+<script>
+const WK_START="2026-09-29";
+let DATA=null;
+const C=["var(--c1)","var(--c2)","var(--c3)","var(--c4)","var(--c5)"];
+const SAV=[["03-30",9.6,6],["04-06",8.0,4],["04-13",10.1,5],["04-20",8.1,4],["04-27",7.1,4],["05-04",14.1,5],["05-11",9.1,6],["05-18",5.5,3],["05-25",5.9,5],["06-01",4.8,4],["06-08",6.6,4],["06-15",6.3,4],["06-22",4.7,2],["06-29",7.9,4],["07-06",9.4,6],["07-13",7.7,5],["07-20",6.4,4],["07-27",9.8,5],["08-03",6.8,5],["08-10",5.7,5],["08-17",4.9,5],["08-24",7.0,4],["08-31",4.3,3],["09-07",6.2,4],["09-14",4.2,3],["09-21",4.1,3]];
+const MEN=[["2025-01",0,67.5],["2025-02",0,79.2],["2025-03",0,3.3],["2025-04",11,0],["2025-05",28,16.5],["2025-06",138,0],["2025-07",210,0],["2025-08",85,38.1],["2025-09",0,11.8],["2025-10",0,26.4],["2025-11",0,16.3],["2025-12",0,32.7],["2026-01",0,15.5],["2026-02",0,29.6],["2026-03",26,7.9],["2026-04",72,0],["2026-05",230,0],["2026-06",256,0],["2026-07",423,1.0],["2026-08",93,0],["2026-09",176,0]];
+const E1={"Back squat":{2022:139,2023:152,2024:187,2025:140,2026:133},"Deadlift":{2022:171,2023:187,2024:207,2025:198,2026:152},"Bench press":{2022:121,2023:124,2024:136,2025:133,2026:125},"Strict press":{2022:null,2023:72,2024:91,2025:91,2026:79}};
+const YEARS=[2022,2023,2024,2025,2026];
+const MOB=["T-spine extension ant volo · 10","Shoulder external rotation su guma · 15/side",
+ "Cossack squat · 8/side","Ankle rocks prie sienos · 10/side","Bar hang · 2 × 30\""];
+const PLAN=[
+ {d:"Pr",dt:"09-29",wd:"Pirmadienis",k:"core",t:"Lower body, lengvai",tg:"Lower",s:"RPE 5/10 · planas top 78 kg",
+  b:[{h:"Mobility · 10 min",i:MOB.map(x=>({t:x}))},
+     {h:"A · technika",i:[
+       {t:"<b>A1. Front Squat</b> — 3 serijos × 5 kart. · tempas 3 s žemyn, 1 s pauzė",log:"Front Squat",plan:70},
+       {t:"<b>A2. Overhead Squat</b> — 3 × 5 · 2 s pauzė apačioje",log:"Overhead Squat",plan:40},
+       {t:"Poilsis 90 s tarp porų"}]},
+     {h:"B · pagrindinis",i:[{t:"<b>Back Squat</b> — 4 × 5 (60 % nuo darbinio max) · <b>4–5 kartojimai atsargoje</b> · poilsis 2 min",log:"Back Squat",plan:78}]},
+     {h:"C · priedai",i:[{t:"<b>C1. Romanian Deadlift</b> — 3 × 8, lengvai",log:"Romanian Deadlift"},
+       {t:"<b>C2. Side Plank</b> — 3 × 30 s į pusę"}]}],
+  n:"Baigti geriau jaučiantis, nei pradėjus. Jei sunkiau nei „lengvai“ — nuimk 10 kg. Front Squat ir Overhead Squat čia dėl pozicijos, ne dėl skaičiaus: abu yra tavo silpnosios vietos."},
+ {d:"An",dt:"09-30",wd:"Antradienis",k:"core",t:"Bėgimas, 2 zona",tg:"Bėgimas 20'",s:"20 min · 135–145 bpm",
+  b:[{h:"Pagrindinis",i:[{t:"<b>20 min tolygiai</b>, pulsas 135–145, lubos 150"},
+      {t:"Manieže: <b>matuojam laiką, ne kilometrus</b>"},{t:"Jei pulsui išlaikyti reikia eiti — eini. Pirmą savaitę tai normalu"}]}],
+  n:"Rytas laisvas: pirmadienis jau padarytas."},
+ {d:"Tr",dt:"10-01",wd:"Trečiadienis",k:"extra",t:"Dviratis staklėse arba poilsis",tg:"Dviratis 40'",s:"40 min · 200–230 W",
+  b:[{h:"Pagrindinis",i:[{t:"<b>40 min 2 zonoje</b> · 200–230 W · pulsas 128–142 · kadencija 85–95"},
+      {t:"⚠ Laikrodyje rinkis <b>Indoor Cycling</b>, ne bendrą „Cardio“"},
+      {t:"Jei rytinis pulsas ramybėje 54 ar daugiau — praleidi"}]}],
+  n:"Priedas, ne branduolys. Praleisti galima be kaltės."},
+ {d:"Kt",dt:"10-02",wd:"Ketvirtadienis",k:"core",t:"Upper body plius gimnastika",tg:"Upper",s:"RPE 5/10 · gimnastika šviežia galva",
+  b:[{h:"Mobility · 10 min",i:MOB.map(x=>({t:x}))},
+     {h:"A · pagrindinis",i:[{t:"<b>Strict Press</b> — 4 × 5 (60 % nuo darbinio max) · 4 kart. atsargoje · poilsis 2 min",log:"Strict Press",plan:50}]},
+     {h:"B · pora",i:[{t:"<b>B1. Bench Press</b> — 3 × 6 · 4 kart. atsargoje",log:"Bench Press",plan:72},
+       {t:"<b>B2. Single Arm Dumbbell Row</b> — 3 × 10 į pusę",log:"DB Row"},{t:"Poilsis 90 s"}]},
+     {h:"C · gimnastika",i:[
+       {t:"<b>C1. Strict Pull-up</b> — 4 serijos po pusę maksimumo",log:"Pull-up",unit:"kart."},
+       {t:"<b>C2. Handstand Push-up</b> — 4 × 3 · lengvinimas: Pike Push-up ant dėžės arba su guma",log:"HS Push-up",unit:"kart."},
+       {t:"<b>C3. Ring Muscle-up</b>, progresija — 5 × 1–2",log:"Ring Muscle-up",unit:"kart."}]}],
+  n:"Handstand Push-up ir Ring Muscle-up šią savaitę yra susipažinimas, ne testas. Testas bus 2 savaitę."},
+ {d:"Pn",dt:"10-03",wd:"Penktadienis",k:"rest",t:"Poilsis",tg:"Poilsis",s:"pasivaikščiojimas 30–40 min, jei norisi",b:[],n:""},
+ {d:"Št",dt:"10-04",wd:"Šeštadienis",k:"core",t:"Mišrus aerobinis",tg:"Aerobinis 30'",s:"RPE 6/10 · 30 min",
+  b:[{h:"Pagrindinis",i:[
+      {pre:"5 raundai, kas 6 minutės (30 min iš viso):\n  500 m Row (irklavimo ergometras)\n  10 Dumbbell Ground to Overhead, 15 kg\n  10 Box Step-up, 50 cm\n  – likusį laiką iki 6 min ilsiesi –"},
+      {t:"<b>Dumbbell Ground to Overhead</b> — koks svoris",log:"DB Ground to Overhead",plan:15}]}],
+  n:"Kiekvienas raundas turi baigtis bent 1 min poilsio. Jei poilsio nebelieka — mažini apimtį. Judesiai parinkti pagal ATHX MetCon X rungtį, tik dvigubai lengviau."},
+ {d:"Sk",dt:"10-05",wd:"Sekmadienis",k:"rest",t:"Poilsis",tg:"Poilsis",s:"—",b:[],n:""}
+];
+const GOALS=[
+ {nm:"Jėga · ATHX balas",unit:"kg",max:500,c:"var(--c1)",cur:380,cur_l:"80 + 125 + 175",
+  tgt:420,tgt_l:"90 + 140 + 190",hist:438,hist_l:"2024 lygis · 438",
+  why:"Pigiausias rezervas — strict press: 64 serijos per 4 metus prieš deadlift 442.",st:["warn","reikia testo"]},
+ {nm:"Variklis · Z2 bėgimas",unit:"min/sav.",max:140,c:"var(--c2)",cur:0,cur_l:"9 km per 9 mėn.",
+  tgt:100,tgt_l:"2 × 50 min",hist:120,hist_l:"2025-02 · ~120",
+  why:"ATHX ištvermė — 22 min bėgimo ir irklavimo pakaitomis. Z2 rėžis 135–150 bpm.",st:["crit","nuo nulio"]},
+ {nm:"Dviratis staklėse",unit:"min/sav.",max:140,c:"var(--c3)",cur:0,cur_l:"Garmin: nė vienos",
+  tgt:60,tgt_l:"1 × 60 min",hist:null,hist_l:null,
+  why:"Žiemos variklis. Z2 rėžis 200–250 W, 128–142 bpm.",st:["q","nauja"]},
+ {nm:"Gimnastika · HSPU ir MU",unit:"kart.",max:20,c:"var(--c5)",cur:null,cur_l:"neišmatuota",
+  tgt:null,tgt_l:null,hist:null,hist_l:null,
+  why:"Keturi iš septynių silpnųjų judesių yra gimnastika.",st:["q","testuojam"]}
+];
+const BLOK=[
+ ["0","09-29 → 10-04","lengvai, 60 %","1 × 20 min","grįžimas po ligos","crit"],
+ ["1","10-05 → 10-11","4 × 5 @ 75 %","1 × 30 min","",""],
+ ["2","10-12 → 10-18","4 × 5 @ 75 %","2 × 30 min","Testas B: gimnastika","warn"],
+ ["3","10-19 → 10-25","4 × 5 @ 77 %","2 × 35 min","Testas A: ATHX jėga","warn"],
+ ["4","10-26 → 11-01","3 × 5 @ 70 %","2 × 30 min","lengvesnė",""],
+ ["5","11-02 → 11-08","5 × 3 @ 82 %","2 × 40 min","",""],
+ ["6","11-09 → 11-15","5 × 3 @ 84 %","2 × 45 min","",""],
+ ["7","11-16 → 11-22","4 × 3 @ 75 %","2 × 35 min","ATHX ištvermės simuliacija","warn"],
+ ["8","11-23 → 11-29","3 × 2 @ 88 %","2 × 50 min","",""],
+ ["9","11-30 → 12-06","3 × 2 @ 90 %","2 × 50 min","",""],
+ ["10","12-07 → 12-13","deload 60 %","1 × 30 min","Testas A pakartotinai","ok"]
+];
+const TIPAI={strength_training:["Jėga","var(--c1)"],indoor_cardio:["Salė / metcon","var(--c2)"],
+ running:["Bėgimas","var(--c2)"],track_running:["Bėgimas","var(--c2)"],treadmill_running:["Bėgimas","var(--c2)"],
+ trail_running:["Takų bėgimas","var(--c2)"],gravel_cycling:["Gravel","var(--c3)"],
+ mountain_biking:["MTB","var(--c3)"],indoor_cycling:["Staklės","var(--c3)"],road_biking:["Plentas","var(--c3)"],
+ lap_swimming:["Plaukimas","var(--c5)"],rowing_v2:["Irklavimas","var(--c5)"],indoor_rowing:["C2 Row","var(--c5)"],
+ kiteboarding_v2:["Kite","var(--c4)"],hiking:["Žygis","var(--c4)"],other:["Kita","var(--c4)"]};
+
+/* ---------- tema ---------- */
+(function(){
+  const root=document.documentElement;
+  let t=null; try{t=localStorage.getItem("vs-tema");}catch(e){}
+  if(t)root.setAttribute("data-theme",t);
+  addEventListener("DOMContentLoaded",()=>{
+    const b=document.getElementById("theme"); if(!b)return;
+    const lab=()=>b.textContent=(root.getAttribute("data-theme")==="light")?"Tamsi tema":"Šviesi tema";
+    lab();
+    b.addEventListener("click",()=>{
+      const now=root.getAttribute("data-theme")==="light"?"dark":"light";
+      root.setAttribute("data-theme",now);
+      try{localStorage.setItem("vs-tema",now);}catch(e){}
+      lab();
+    });
+  });
+})();
+
+/* ---------- saugykla: GitHub privatus repo arba claude.ai db ---------- */
+const GH={owner:"arnoldasmob",repo:"variklis-duomenys",branch:"main"};
+const STORE={mode:"local",db:null,shas:{}};
+function ghTok(){try{return localStorage.getItem("vs-gh")||"";}catch(e){return "";}}
+function b64d(s){return decodeURIComponent(escape(atob(s.replace(/\n/g,""))));}
+function b64e(s){return btoa(unescape(encodeURIComponent(s)));}
+async function ghGet(path){
+  const t=ghTok(); if(!t)return null;
+  const r=await fetch("https://api.github.com/repos/"+GH.owner+"/"+GH.repo+"/contents/"+path+"?ref="+GH.branch,
+    {headers:{Authorization:"Bearer "+t,Accept:"application/vnd.github+json"}});
+  if(r.status===404)return {missing:true};
+  if(!r.ok)throw new Error("GitHub "+r.status);
+  const j=await r.json(); STORE.shas[path]=j.sha;
+  return JSON.parse(b64d(j.content));
+}
+async function ghPut(path,obj,msg){
+  const t=ghTok(); if(!t)throw new Error("nėra rakto");
+  const body={message:msg||("zurnalas "+new Date().toISOString().slice(0,16)),
+    content:b64e(JSON.stringify(obj,null,1)),branch:GH.branch};
+  if(STORE.shas[path])body.sha=STORE.shas[path];
+  const r=await fetch("https://api.github.com/repos/"+GH.owner+"/"+GH.repo+"/contents/"+path,
+    {method:"PUT",headers:{Authorization:"Bearer "+t,Accept:"application/vnd.github+json",
+     "Content-Type":"application/json"},body:JSON.stringify(body)});
+  if(!r.ok)throw new Error("GitHub "+r.status);
+  const j=await r.json(); STORE.shas[path]=j.content.sha;
+}
+function syncState(txt,ok){
+  const e=document.getElementById("sync-state");
+  if(e)e.innerHTML=ok?'<span class="saved">'+txt+"</span>":txt;
+}
+
+/* ---------- pagalbinės ---------- */
+const $=id=>document.getElementById(id);
+const tip=$("tip");
+function showTip(e,html){tip.innerHTML=html;tip.style.opacity="1";
+  const r=tip.getBoundingClientRect();let x=e.clientX+14,y=e.clientY-10;
+  if(x+r.width>innerWidth-8)x=e.clientX-r.width-14;
+  if(y+r.height>innerHeight-8)y=innerHeight-r.height-8; if(y<8)y=8;
+  tip.style.left=x+"px";tip.style.top=y+"px";}
+function hideTip(){tip.style.opacity="0";}
+function svg(w,h){const s=document.createElementNS("http://www.w3.org/2000/svg","svg");
+  s.setAttribute("viewBox","0 0 "+w+" "+h);s.setAttribute("role","img");return s;}
+function mk(n,a){const e=document.createElementNS("http://www.w3.org/2000/svg",n);
+  for(const k in a)e.setAttribute(k,a[k]);return e;}
+const INK3="var(--ink-3)",EDGE="rgba(255,255,255,.09)";
+function hm(sec){if(sec==null)return"—";return Math.floor(sec/3600)+":"+String(Math.round(sec%3600/60)).padStart(2,"0");}
+function esc(x){return String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");}
+
+function boot(){
+/* ---------- ŠIANDIEN ---------- */
+const D=DATA.dienos, T=D[D.length-1], Y=D[D.length-2]||{};
+const base=k=>{const v=D.slice(0,-1).map(x=>x[k]).filter(x=>x!=null);
+  return v.length?v.reduce((a,b)=>a+b,0)/v.length:null;};
+
+$("hdr-upd").textContent="Atnaujinta "+DATA.atnaujinta;
+$("today-date").textContent=T.d;
+
+(function ring(){
+  const v=T.bb??0,R=76,cx=85,cy=85,circ=2*Math.PI*R;
+  const s=svg(170,170);
+  s.appendChild(mk("circle",{cx,cy,r:R,fill:"none",stroke:"rgba(255,255,255,.08)","stroke-width":13}));
+  s.appendChild(mk("circle",{cx,cy,r:R,fill:"none",stroke:"var(--c1)","stroke-width":13,
+    "stroke-linecap":"round","stroke-dasharray":circ,"stroke-dashoffset":circ*(1-v/100)}));
+  const d=document.createElement("div");d.className="mid";
+  d.innerHTML='<span class="big">'+v+'</span><span class="eyebrow">iš 100</span>';
+  $("ring").appendChild(s);$("ring").appendChild(d);
+  $("bb-sub").textContent="dienos maksimumas "+(T.bb_max??"—");
+})();
+
+function spark(vals,color,lo,hi){
+  const W=150,H=26,n=vals.length;
+  const mn=lo??Math.min(...vals),mx=hi??Math.max(...vals),rg=(mx-mn)||1;
+  const x=i=>i*(W/(n-1)),y=v=>H-2-((v-mn)/rg)*(H-6);
+  const s=svg(W,H);
+  const pts=vals.map((v,i)=>[x(i),y(v)]);
+  s.appendChild(mk("path",{d:"M"+pts.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join("L"),
+    fill:"none",stroke:color,"stroke-width":1.8,"stroke-linejoin":"round","stroke-linecap":"round"}));
+  s.appendChild(mk("circle",{cx:pts[n-1][0],cy:pts[n-1][1],r:3.2,fill:color}));
+  return s;
+}
+(function tiles(){
+  const defs=[
+   {k:"miegas",lab:"Miegas",c:"var(--c3)",fmt:v=>hm(v),sub:()=>T.miego_balas!=null?"balas "+T.miego_balas:""},
+   {k:"hrv",lab:"HRV",c:"var(--c1)",fmt:v=>v,sub:()=>"bazė 43–56"},
+   {k:"rhr",lab:"Pulsas ramybėje",c:"var(--c2)",fmt:v=>v,sub:()=>"bazė 48–50",inv:true},
+   {k:"stresas",lab:"Stresas",c:"var(--c4)",fmt:v=>v,sub:()=>"paros vidurkis",inv:true},
+   {k:"bb",lab:"Body Battery",c:"var(--c1)",fmt:v=>v,sub:()=>"dabar"},
+   {k:"__sv",lab:"Svoris",c:"var(--c5)",fmt:v=>v.toFixed(1)+" kg",sub:()=>{
+     const s=DATA.svoris[0];return s&&s.rieb?"riebalai "+s.rieb+" %":"";}}
+  ];
+  const el=$("tiles");
+  defs.forEach(def=>{
+    let vals,cur;
+    if(def.k==="__sv"){vals=DATA.svoris.slice(0,8).map(x=>x.kg).reverse();cur=vals[vals.length-1];}
+    else {vals=D.map(x=>x[def.k]).filter(x=>x!=null);cur=T[def.k];}
+    if(cur==null||!vals.length)return;
+    const b=def.k==="__sv"?(vals.slice(0,-1).reduce((a,c)=>a+c,0)/Math.max(1,vals.length-1)):base(def.k);
+    let delta="",cls="fl";
+    if(b!=null){const d=cur-b;const pct=Math.abs(d)/(Math.abs(b)||1);
+      if(pct>0.03){const better=def.inv?d<0:d>0;cls=better?"up":"dn";
+        delta=(d>0?"+":"")+(Math.abs(d)>=1?Math.round(d):d.toFixed(1));}
+      else delta="≈";}
+    const t=document.createElement("div");t.className="tile";
+    t.innerHTML='<span class="lab"><span class="dot" style="background:'+def.c+'"></span>'+def.lab+'</span>'+
+      '<span class="v">'+def.fmt(cur)+'</span>'+
+      '<span class="d"><b class="'+cls+'">'+delta+'</b> vs 13 d. vid. · '+def.sub()+'</span>';
+    const sp=document.createElement("div");sp.className="spark";
+    sp.appendChild(spark(vals,def.c));t.appendChild(sp);
+    el.appendChild(t);
+  });
+})();
+(function verdict(){
+  const v=[];const bh=base("hrv"),br=base("rhr");
+  if(T.rhr!=null&&br!=null&&T.rhr>=br+5)v.push(["crit","Pulsas ramybėje "+T.rhr+", tai 5+ virš bazės. <b>Šiandien lengva diena arba poilsis.</b>"]);
+  if(T.hrv!=null&&T.hrv<40&&(Y.hrv??99)<40)v.push(["crit","HRV du rytus žemiau 40. <b>Savaitė nukeliama viena žemyn.</b>"]);
+  if(T.miegas!=null&&T.miegas<21600)v.push(["warn","Miegota "+hm(T.miegas)+". Mažiau nei 6 val. — sunkiausią seriją nuimk vieną laiptelį."]);
+  if(T.bb!=null&&T.bb<40)v.push(["warn","Body Battery "+T.bb+". Variklis pakrautas ne iki galo."]);
+  if(!v.length)v.push(["ok","Rodikliai bazėje. <b>Dirbam pagal planą.</b>"]);
+  $("verdict").innerHTML=v.map(x=>'<span class="pill '+x[0]+'">'+
+    (x[0]==="crit"?"stop":x[0]==="warn"?"atsargiai":"veikiam")+'</span> &nbsp;'+x[1]).join("<br><br>");
+})();
+
+/* ---------- SAVAITĖ ---------- */
+(function week(){
+  const strip=$("strip"),sess=$("sess");
+  let done={},notes={},w={},dbRef=null,timer=null,sel=0;
+  const todayIdx=PLAN.findIndex(p=>"2026-"+p.dt===DATA.atnaujinta);
+  if(todayIdx>=0)sel=todayIdx;
+
+  function chips(){
+    strip.innerHTML="";
+    PLAN.forEach((p,i)=>{
+      const b=document.createElement("button");
+      b.className="chip"+(done[i]?" done":"");b.setAttribute("role","tab");
+      b.setAttribute("aria-selected",i===sel?"true":"false");
+      b.innerHTML='<div class="wd">'+p.d+'</div><div class="dd">'+p.dt.slice(3)+'</div><div class="tg">'+p.tg+'</div>';
+      b.addEventListener("click",()=>{sel=i;chips();session();});
+      strip.appendChild(b);
+    });
+  }
+  function session(){
+    const p=PLAN[sel];
+    let h='<div class="row"><div><h3>'+p.wd+' '+p.dt+' · '+p.t+'</h3>'+
+      '<p class="eyebrow" style="margin:5px 0 0">'+p.s+'</p></div>';
+    if(p.k!=="rest")h+='<button class="btn" id="mark" aria-pressed="'+(done[sel]?"true":"false")+'">'+
+      (done[sel]?"padaryta":"pažymėti")+'</button>';
+    h+='</div>';
+    p.b.forEach(bl=>{
+      h+='<h4>'+bl.h+'</h4>';
+      bl.i.forEach(it=>{
+        if(it.pre){h+='<pre>'+esc(it.pre)+'</pre>';return;}
+        if(!it.log){h+='<div class="plain">'+it.t+'</div>';return;}
+        const kw=sel+":"+it.log+":w", ka=sel+":"+it.log+":a";
+        const unit=it.unit||"kg";
+        const planTxt=it.plan?' <span style="color:var(--ink-3)">· planas '+it.plan+' '+unit+'</span>':'';
+        const warm=unit==="kg"?
+          '<div class="wf"><span class="wl">Apšilimas</span><span class="box">'+
+          '<input id="w-'+esc(ka)+'" inputmode="decimal" placeholder="—" value="'+esc(w[ka]??"")+'" '+
+          'aria-label="'+esc(it.log)+' apšilimo svoris"><span class="unit">'+unit+'</span></span></div>':'';
+        h+='<div class="mv"><span class="txt">'+it.t+planTxt+'</span><span class="wsets">'+warm+
+           '<div class="wf main"><span class="wl">Darbinis</span><span class="box">'+
+           '<input id="w-'+esc(kw)+'" inputmode="decimal" placeholder="'+(it.plan??"—")+'" '+
+           'value="'+esc(w[kw]??"")+'" aria-label="'+esc(it.log)+' darbinis svoris"><span class="unit">'+
+           unit+'</span></span></div></span></div>';
+    });
+    });
+    if(p.n)h+='<p class="sn">'+p.n+'</p>';
+    if(p.k!=="rest")h+='<div class="cmt"><label for="nt">Kaip jautėsi · ką pakeitei · kas skaudėjo</label>'+
+      '<textarea id="nt" placeholder="Pvz. pulsas laikėsi 142, kojos sunkios po 3 serijos, BS nuėmiau 5 kg.">'+
+      esc(notes[sel]??"")+'</textarea><p class="hint" id="hint">Įrašoma automatiškai. Skaitysiu kartu su laikrodžio rodmenimis.</p></div>';
+    sess.innerHTML=h;
+    const mk2=$("mark");
+    if(mk2)mk2.addEventListener("click",()=>{done[sel]=!done[sel];chips();session();save();});
+    sess.querySelectorAll("input[id^=w-]").forEach(inp=>{
+      inp.addEventListener("input",()=>{w[inp.id.slice(2)]=inp.value;queue();});
+    });
+    const ta=$("nt");
+    if(ta)ta.addEventListener("input",()=>{notes[sel]=ta.value;queue();});
+  }
+  function queue(){clearTimeout(timer);timer=setTimeout(()=>{save().then(()=>{
+    const h=$("hint");if(h)h.innerHTML='<span class="saved">Įrašyta.</span> Skaitysiu kartu su laikrodžio rodmenimis.';});},700);}
+  async function save(){
+    const payload={week:WK_START,done,notes,svoriai:w,ts:Date.now()};
+    try{localStorage.setItem("vs-"+WK_START,JSON.stringify({done,notes,w}));}catch(e){}
+    try{
+      if(STORE.mode==="db"&&dbRef){await dbRef.set(payload);syncState("Įrašyta",1);}
+      else if(STORE.mode==="gh"){await ghPut("zurnalas/"+WK_START+".json",payload);syncState("Įrašyta į GitHub",1);}
+      else syncState("Įrašyta tik šiame įrenginyje");
+    }catch(e){syncState("Neįrašyta: "+e.message);}
+  }
+  try{const raw=localStorage.getItem("vs-"+WK_START);
+      if(raw){const o=JSON.parse(raw)||{};done=o.done||{};notes=o.notes||{};w=o.w||{};}}catch(e){}
+  chips();session();
+  (async()=>{
+    const db=await window.claude?.use?.("db");
+    if(db){STORE.mode="db";dbRef=db.doc("savaites/"+WK_START);
+      try{const s=await dbRef.get();
+        if(s){done=s.done||done;notes=s.notes||notes;w=s.svoriai||w;}}catch(e){}
+      syncState("claude.ai saugykla",1);chips();session();return;}
+    if(ghTok()){STORE.mode="gh";
+      try{const s=await ghGet("zurnalas/"+WK_START+".json");
+        if(s&&!s.missing){done=s.done||done;notes=s.notes||notes;w=s.svoriai||w;}
+        syncState("GitHub saugykla",1);}catch(e){syncState("GitHub klaida: "+e.message);}
+      chips();session();return;}
+    syncState("Tik šis įrenginys");
+  })();
+})();
+
+/* ---------- PO TRENIRUOTĖS ---------- */
+(function acts(){
+  const el=$("acts");
+  const list=DATA.veiklos.slice(0,6);
+  if(!list.length){el.innerHTML='<p class="note">Veiklų nėra.</p>';return;}
+  list.forEach(v=>{
+    const meta=TIPAI[v.tipas]||[v.tipas,"var(--ink-3)"];
+    const st=[];
+    st.push(["Trukmė",v.min+"<small>min</small>"]);
+    if(v.km>0.05){
+      st.push(["Atstumas",v.km.toFixed(2)+"<small>km</small>"]);
+      const pace=(v.min/v.km);
+      if(/run/.test(v.tipas))st.push(["Tempas",Math.floor(pace)+"’"+String(Math.round(pace%1*60)).padStart(2,"0")+"”<small>/km</small>"]);
+      else st.push(["Greitis",(v.km/(v.min/60)).toFixed(1)+"<small>km/h</small>"]);
+    }
+    if(v.hr)st.push(["Vid. pulsas",Math.round(v.hr)+"<small>bpm</small>"]);
+    if(v.hr_max)st.push(["Maks.",Math.round(v.hr_max)+"<small>bpm</small>"]);
+    if(v.kcal)st.push(["Kalorijos",Math.round(v.kcal)+"<small>kcal</small>"]);
+    if(v.hr){const z=v.hr<128?"Z1":v.hr<143?"Z2":v.hr<155?"Z3":v.hr<168?"Z4":"Z5";
+      st.push(["Zona",z]);}
+    const d=document.createElement("div");d.className="act";
+    d.innerHTML='<div class="ah"><span class="an" style="color:'+meta[1]+'">'+meta[0]+'</span>'+
+      '<span class="dt">'+v.d+'</span></div><div class="stats">'+
+      st.map(s=>'<span class="stat"><span class="sl">'+s[0]+'</span><br><span class="sv">'+s[1]+'</span></span>').join("")+
+      '</div>';
+    el.appendChild(d);
+  });
+})();
+
+/* ---------- TAIKINIAI ---------- */
+(function goals(){
+  const el=$("goals");
+  GOALS.forEach(g=>{
+    const d=document.createElement("div");d.className="g pad goal";
+    const pct=g.cur==null?0:Math.max(1.5,Math.min(100,g.cur/g.max*100));
+    const tp=g.tgt==null?null:Math.min(100,g.tgt/g.max*100);
+    const hp=g.hist==null?null:Math.min(100,g.hist/g.max*100);
+    d.innerHTML='<div class="top"><span class="nm">'+g.nm+'</span><span class="val">'+
+      (g.cur==null?'<b>—</b>':'<b>'+g.cur+'</b> '+g.unit)+
+      ' <span style="color:var(--ink-3)">· '+g.cur_l+'</span></span></div>'+
+      '<div class="scale"><div class="track"><div class="fill" style="width:'+pct+'%;background:'+g.c+'"></div></div>'+
+      (hp==null?'':'<div class="tick hist" style="left:calc('+hp+'% - 1px)" data-l="'+g.hist_l+'"></div>')+
+      (tp==null?'':'<div class="tick" style="left:calc('+tp+'% - 1px)" data-l="taikinys '+g.tgt+' · '+g.tgt_l+'"></div>')+
+      '</div><div class="why"><span class="pill '+g.st[0]+'">'+g.st[1]+'</span> &nbsp;'+g.why+'</div>';
+    el.appendChild(d);
+  });
+})();
+
+/* ---------- e1RM ---------- */
+(function(){
+  const W=680,H=290,ml=40,mr=94,mt=14,mb=28;
+  const names=Object.keys(E1);
+  const vals=names.flatMap(n=>YEARS.map(y=>E1[n][y])).filter(v=>v!=null);
+  const lo=60,hi=Math.ceil(Math.max(...vals)/20)*20;
+  const x=i=>ml+i*(W-ml-mr)/(YEARS.length-1), y=v=>mt+(1-(v-lo)/(hi-lo))*(H-mt-mb);
+  const s=svg(W,H);
+  for(let v=lo;v<=hi;v+=40){
+    s.appendChild(mk("line",{x1:ml,x2:W-mr,y1:y(v),y2:y(v),stroke:EDGE,"stroke-width":1}));
+    s.appendChild(mk("text",{x:ml-8,y:y(v)+4,"text-anchor":"end",fill:INK3,"font-size":11})).textContent=v;}
+  YEARS.forEach((yr,i)=>s.appendChild(mk("text",{x:x(i),y:H-8,"text-anchor":"middle",fill:INK3,"font-size":11.5})).textContent=yr);
+  names.forEach((n,ni)=>{
+    const pts=YEARS.map((yr,i)=>E1[n][yr]==null?null:[x(i),y(E1[n][yr])]).filter(Boolean);
+    s.appendChild(mk("path",{d:"M"+pts.map(p=>p[0]+","+p[1]).join("L"),fill:"none",stroke:C[ni],
+      "stroke-width":2,"stroke-linejoin":"round","stroke-linecap":"round"}));
+    YEARS.forEach((yr,i)=>{const v=E1[n][yr];if(v==null)return;
+      s.appendChild(mk("circle",{cx:x(i),cy:y(v),r:4,fill:C[ni],stroke:"var(--bg)","stroke-width":2}));
+      const hit=mk("circle",{cx:x(i),cy:y(v),r:13,fill:"transparent",style:"cursor:pointer"});
+      hit.addEventListener("mousemove",e=>showTip(e,"<b>"+n+" "+yr+"</b><br>"+v+" kg"));
+      hit.addEventListener("mouseleave",hideTip);s.appendChild(hit);});
+    const last=YEARS.filter(yr=>E1[n][yr]!=null).pop();
+    s.appendChild(mk("text",{x:x(YEARS.indexOf(last))+10,y:y(E1[n][last])+4,fill:"var(--ink-2)",
+      "font-size":12,"font-weight":500})).textContent=n;});
+  $("c-e1rm").appendChild(s);
+  const lg=$("lg-e1rm");
+  names.forEach((n,i)=>{const d=document.createElement("span");d.className="lg";
+    d.innerHTML='<span class="sw" style="background:'+C[i]+'"></span>'+n;lg.appendChild(d);});
+  $("t-e1rm").innerHTML="<tr><th>Pratimas</th>"+YEARS.map(y=>"<th>"+y+"</th>").join("")+"</tr>"+
+    names.map(n=>"<tr><td>"+n+"</td>"+YEARS.map(y=>"<td>"+(E1[n][y]??"—")+"</td>").join("")+"</tr>").join("");
+})();
+
+/* ---------- apimtis ---------- */
+(function(){
+  const W=680,H=220,ml=34,mr=10,mt=14,mb=34;
+  const hi=Math.ceil(Math.max(...SAV.map(d=>d[1]))/2)*2, bw=(W-ml-mr)/SAV.length;
+  const y=v=>mt+(1-v/hi)*(H-mt-mb);
+  const s=svg(W,H);
+  for(let v=0;v<=hi;v+=4){
+    s.appendChild(mk("line",{x1:ml,x2:W-mr,y1:y(v),y2:y(v),stroke:EDGE,"stroke-width":1}));
+    s.appendChild(mk("text",{x:ml-7,y:y(v)+4,"text-anchor":"end",fill:INK3,"font-size":11})).textContent=v;}
+  SAV.forEach((d,i)=>{
+    const h=Math.max(2,(H-mt-mb)*d[1]/hi), col=d[1]<5?"var(--c2)":"var(--c1)";
+    s.appendChild(mk("rect",{x:ml+i*bw+1,y:y(d[1]),width:Math.max(3,bw-3),height:h,fill:col,rx:4,ry:4}));
+    const hit=mk("rect",{x:ml+i*bw,y:mt,width:bw,height:H-mt-mb,fill:"transparent",style:"cursor:pointer"});
+    hit.addEventListener("mousemove",e=>showTip(e,"<b>"+d[0]+"</b><br>"+d[1].toFixed(1)+" val. · "+d[2]+" d."));
+    hit.addEventListener("mouseleave",hideTip);s.appendChild(hit);
+    if(i%4===0||i===SAV.length-1)
+      s.appendChild(mk("text",{x:ml+i*bw+bw/2,y:H-16,"text-anchor":"middle",fill:INK3,"font-size":10.5})).textContent=d[0];});
+  s.appendChild(mk("text",{x:ml,y:H-2,fill:INK3,"font-size":11})).textContent="oranžinė = po 5 val.";
+  $("c-vol").appendChild(s);
+})();
+
+/* ---------- km per mėnesį ---------- */
+(function(){
+  const W=680,H=240,ml=38,mr=10,mt=14,mb=42;
+  const hi=Math.ceil(Math.max(...MEN.map(d=>Math.max(d[1],d[2])))/50)*50;
+  const gw=(W-ml-mr)/MEN.length, bw=(gw-6)/2, y=v=>mt+(1-v/hi)*(H-mt-mb);
+  const s=svg(W,H);
+  for(let v=0;v<=hi;v+=100){
+    s.appendChild(mk("line",{x1:ml,x2:W-mr,y1:y(v),y2:y(v),stroke:EDGE,"stroke-width":1}));
+    s.appendChild(mk("text",{x:ml-7,y:y(v)+4,"text-anchor":"end",fill:INK3,"font-size":11})).textContent=v;}
+  MEN.forEach((d,i)=>{
+    [[d[1],"var(--c3)"],[d[2],"var(--c2)"]].forEach((b,j)=>{
+      if(b[0]<=0)return;
+      const h=Math.max(2,(H-mt-mb)*b[0]/hi);
+      s.appendChild(mk("rect",{x:ml+i*gw+2+j*(bw+2),y:y(b[0]),width:bw,height:h,fill:b[1],rx:3,ry:3}));});
+    const hit=mk("rect",{x:ml+i*gw,y:mt,width:gw,height:H-mt-mb,fill:"transparent",style:"cursor:pointer"});
+    hit.addEventListener("mousemove",e=>showTip(e,"<b>"+d[0]+"</b><br>Dviratis "+d[1]+" km<br>Bėgimas "+d[2].toFixed(1)+" km"));
+    hit.addEventListener("mouseleave",hideTip);s.appendChild(hit);
+    if(d[0].slice(5)==="01"||d[0].slice(5)==="07")
+      s.appendChild(mk("text",{x:ml+i*gw+gw/2,y:H-22,"text-anchor":"middle",fill:INK3,"font-size":10.5})).textContent=d[0];});
+  $("c-km").appendChild(s);
+  const lg=$("lg-km");
+  [["Dviratis","var(--c3)"],["Bėgimas","var(--c2)"]].forEach(l=>{
+    const d=document.createElement("span");d.className="lg";
+    d.innerHTML='<span class="sw" style="background:'+l[1]+'"></span>'+l[0];lg.appendChild(d);});
+})();
+
+/* ---------- blokas ---------- */
+$("t-blok").innerHTML="<tr><th>Sav.</th><th>Datos</th><th>Jėga</th><th>Bėgimas</th><th>Įvykis</th></tr>"+
+  BLOK.map(r=>{const cur=r[0]==="0";
+    return "<tr"+(cur?' style="background:rgba(255,255,255,.05)"':'')+"><td><b>"+r[0]+"</b>"+
+      (cur?' <span class="pill ok">dabar</span>':'')+"</td><td>"+r[1]+"</td><td>"+r[2]+"</td><td>"+r[3]+"</td><td>"+
+      (r[4]?'<span class="pill '+(r[5]||"q")+'">'+r[4]+"</span>":"—")+"</td></tr>";}).join("");
+
+}
+
+/* ---------- įkrova ---------- */
+function gate(msg){
+  const w=document.querySelector(".wrap");
+  document.querySelectorAll("section").forEach(s=>s.hidden=true);
+  const g=document.createElement("section");
+  g.innerHTML='<div class="g pad"><h2>Reikia prieigos</h2>'+
+    '<p class="note">Šis puslapis yra viešas, todėl jame nelaikomas nė vienas tavo skaičius. '+
+    'Svoris, miegas, HRV, treniruotės ir žurnalas guli <b>privačiame</b> repozitorijoje '+
+    '<code>arnoldasmob/variklis-duomenys</code> ir užkraunami tik su tavo raktu. '+
+    'Raktas lieka šitame įrenginyje.</p>'+
+    (msg?'<p class="note"><b>'+msg+'</b></p>':'')+
+    '<p class="note">Įklijuok raktą apačioje, skiltyje <b>GitHub prieiga</b>, ir perkrauk.</p></div>';
+  w.insertBefore(g,w.querySelector("section"));
+  const st=document.getElementById("setup"); if(st)st.open=true;
+}
+(async function(){
+  if(window.DATA){DATA=window.DATA;boot();return;}
+  if(!ghTok()){gate();return;}
+  try{
+    const d=await ghGet("duomenys.json");
+    if(d&&!d.missing){DATA=d;window.DATA=d;boot();}
+    else gate("Duomenų failo dar nėra. Paleisk sinchronizaciją.");
+  }catch(e){gate("Prieiga nepavyko: "+e.message);}
+})();
+
+
+/* ---------- GitHub rakto nustatymai ---------- */
+(function(){
+  const inp=$("ghtok"),msg=$("ghmsg");
+  if(!inp)return;
+  if(ghTok())msg.textContent="Raktas įrašytas šiame įrenginyje.";
+  $("ghsave").addEventListener("click",async()=>{
+    const v=inp.value.trim(); if(!v){msg.textContent="Įklijuok raktą.";return;}
+    try{localStorage.setItem("vs-gh",v);}catch(e){msg.textContent="Naršyklė neleidžia įrašyti.";return;}
+    inp.value="";msg.textContent="Tikrinu…";
+    try{ await ghGet("duomenys.json"); msg.innerHTML='<span class="saved">Veikia.</span> Perkrauk puslapį.'; }
+    catch(e){ msg.textContent="Raktas neveikia: "+e.message; }
+  });
+  $("ghclear").addEventListener("click",()=>{
+    try{localStorage.removeItem("vs-gh");}catch(e){}
+    msg.textContent="Raktas pašalintas.";
+  });
+})();
+
+</script>
