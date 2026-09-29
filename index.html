@@ -598,46 +598,46 @@ function esc(x){return String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;").repl
 function boot(){
 /* ---------- dienos šaukinys ---------- */
 const SAUKINIAI=[
- ["Disciplina yra pasirinkimas tarp to, ko nori dabar, ir to, ko nori labiausiai.",""],
- ["Kūnas pasiduoda anksčiau nei būtina. Galva sprendžia, kiek to klausyti.",""],
- ["Tu nekyli iki savo tikslų lygio. Tu nusileidi iki savo sistemų lygio.","James Clear"],
- ["Sunkiausia serija yra ta, kurią darai, kai niekas nežiūri.",""],
- ["Kantrybė nėra laukimas. Tai gebėjimas dirbti, kol rezultato dar nematyti.",""],
- ["Nereikia būti motyvuotam. Reikia tiesiog pradėti apšilimą.",""],
- ["Blogiausia treniruotė yra ta, kurios nepadarei.",""],
- ["Jėga ateina ne iš to, ką gali. Ji ateina iš to, ko negalėjai ir išmokai.",""],
- ["Kiekviena serija yra balsas už tai, kuo tampi.",""],
- ["Lengva diena šiandien yra sunki diena po trijų savaičių.",""],
- ["Technika pirma. Svoris antra. Ego niekada.",""],
- ["Nugalėk save, o ne šalia esantį.",""],
- ["Progresas yra tylus. Triukšmauja tik nuovargis.",""],
- ["Tavo silpniausias judesys sprendžia, kur baigiasi tavo stipriausias.",""],
- ["Nesureikšmink vienos sesijos. Sureikšmink šimtą.",""],
- ["Kas nemyli proceso, nesulaukia rezultato.",""],
- ["Kūnas atsigauna miegant, ne treniruojantis.",""],
- ["Daryk mažiau, bet nenutrūkstamai. Tai visada laimi.",""],
- ["Skausmas yra informacija, ne priešas. Klausyk, bet nepaklusk aklai.",""],
- ["Tie, kurie laimi, dažniausiai tiesiog nesustojo.",""],
- ["Šiandien nereikia rekordo. Reikia kokybiškos serijos.",""],
- ["Ištvermė yra sugebėjimas likti ramiam, kai nepatogu.",""],
- ["Nusistatyk ribą pats, kol kūnas jos nenustatė už tave.",""],
- ["Sunku daro stipriu. Lengva daro patogiu.",""],
- ["Tu esi tai, ką darai kasdien, ne tai, ką planuoji.",""],
- ["Nepainiok nuovargio su nesugebėjimu.",""],
- ["Geriausias laikas pradėti buvo pernai. Antras geriausias — dabar.",""],
- ["Atsitraukti laiku yra ne silpnumas, o strategija.",""],
- ["Kiekvienas kilogramas ant štangos buvo kažkada per sunkus.",""],
- ["Kvėpavimas yra pirmas dalykas, kurį prarandi, ir pirmas, kurį reikia susigrąžinti.",""],
- ["Nereikia būti geriausiu. Reikia būti geresniu nei vakar.",""],
- ["Sistema stipresnė už valios pastangą.",""],
- ["Kai nesinori, darai branduolį. Tam jis ir yra.",""],
- ["Ribą pajunti tik prie jos priėjęs. Eik ir pažiūrėk, kur ji.",""],
- ["Poilsis yra treniruotės dalis, ne pertrauka joje.",""],
- ["Jėga be judesio yra tik svoris. Judesys be jėgos yra tik judėjimas.",""],
- ["Didžiausias pranašumas yra nuoseklumas, o ne talentas.",""],
- ["Tavo kūnas gali. Reikia įtikinti galvą.",""],
- ["Rytoj tau patiks, kad padarei šiandien.",""],
- ["Sunkumas nėra kliūtis kelyje. Sunkumas ir yra kelias.",""]
+ ["Discipline is choosing between what you want now and what you want most.",""],
+ ["The body gives up long before it has to. The mind decides how much to listen.",""],
+ ["You do not rise to the level of your goals. You fall to the level of your systems.","James Clear"],
+ ["The hardest set is the one you do when nobody is watching.",""],
+ ["Patience is not waiting. It is working while the result is still invisible.",""],
+ ["You don't need motivation. You need to start the warm-up.",""],
+ ["The worst session is the one you skipped.",""],
+ ["Strength doesn't come from what you can do. It comes from what you couldn't, and learned.",""],
+ ["Every set is a vote for the person you are becoming.",""],
+ ["An easy day today is a hard day three weeks from now.",""],
+ ["Technique first. Load second. Ego never.",""],
+ ["Beat yourself, not the guy next to you.",""],
+ ["Progress is quiet. Only fatigue makes noise.",""],
+ ["Your weakest movement decides where your strongest one ends.",""],
+ ["Don't make one session matter. Make a hundred matter.",""],
+ ["Whoever doesn't love the process never gets the result.",""],
+ ["You recover in your sleep, not in the gym.",""],
+ ["Do less, but never stop. That always wins.",""],
+ ["Pain is information, not an enemy. Listen, but don't obey blindly.",""],
+ ["The ones who win are usually the ones who simply didn't stop.",""],
+ ["Today doesn't need a record. It needs one clean set.",""],
+ ["Endurance is the ability to stay calm while uncomfortable.",""],
+ ["Set your own limit before your body sets it for you.",""],
+ ["Hard makes you strong. Easy makes you comfortable.",""],
+ ["You are what you do daily, not what you plan.",""],
+ ["Don't confuse being tired with being unable.",""],
+ ["The best time to start was last year. The second best is now.",""],
+ ["Backing off on time is strategy, not weakness.",""],
+ ["Every kilo on that bar was once too heavy.",""],
+ ["Breathing is the first thing you lose and the first thing to get back.",""],
+ ["You don't have to be the best. Just better than yesterday.",""],
+ ["A system beats willpower every single time.",""],
+ ["When you don't feel like it, you do the core. That's what it's for.",""],
+ ["You only find the limit by walking up to it. Go look.",""],
+ ["Rest is part of the training, not a break from it.",""],
+ ["Strength without movement is just weight. Movement without strength is just motion.",""],
+ ["Consistency is the advantage. Talent is the rumour.",""],
+ ["Your body can. You have to convince your head.",""],
+ ["Tomorrow you'll be glad you did it today.",""],
+ ["The obstacle on the path is not in the way. It is the way.","Marcus Aurelius"]
 ];
 (function(){
   const el=$("quote"); if(!el)return;
@@ -708,8 +708,15 @@ function spark(vals,color,lo,hi){
     el.appendChild(t);
   });
 })();
+let RECO=null;
 (function verdict(){
-  const v=[];const bh=base("hrv"),br=base("rhr");
+  const v=[];const bh=base("hrv"),br=base("rhr");const why=[];
+  if(T.rhr!=null&&br!=null&&T.rhr>=br+5)why.push("pulsas ramybėje "+T.rhr+", tai "+Math.round(T.rhr-br)+" virš bazės");
+  if(T.hrv!=null&&T.hrv<40&&(Y.hrv??99)<40)why.push("HRV du rytus žemiau 40");
+  if(T.bb!=null&&T.bb<25)why.push("Body Battery "+T.bb);
+  if(T.miegas!=null&&T.miegas<18000&&T.rhr!=null&&br!=null&&T.rhr>=br+3)
+    why.push("miegota "+hm(T.miegas)+" ir pulsas pakilęs");
+  if(why.length)RECO=why;
   if(T.rhr!=null&&br!=null&&T.rhr>=br+5)v.push(["crit","Pulsas ramybėje "+T.rhr+", tai 5+ virš bazės. <b>Šiandien lengva diena arba poilsis.</b>"]);
   if(T.hrv!=null&&T.hrv<40&&(Y.hrv??99)<40)v.push(["crit","HRV du rytus žemiau 40. <b>Savaitė nukeliama viena žemyn.</b>"]);
   if(T.miegas!=null&&T.miegas<21600)v.push(["warn","Miegota "+hm(T.miegas)+". Mažiau nei 6 val. — sunkiausią seriją nuimk vieną laiptelį."]);
@@ -723,10 +730,10 @@ function spark(vals,color,lo,hi){
 let WEEK=null;
 (function(){
   const strip=$("strip"),sess=$("sess"),slots=$("slots");
-  let done={},notes={},extra={},w={},rec={},plan={},dbRef=null,timer=null,sel=0,dirty=false;
+  let done={},notes={},extra={},w={},rec={},plan={},poilsis={},dbRef=null,timer=null,sel=0,dirty=false;
   const todayIdx=PLAN.findIndex(p=>"2026-"+p.dt===DATA.atnaujinta&&p.k!=="past");
   if(todayIdx>=0)sel=todayIdx;
-  WEEK={get:()=>({done,notes,extra,svoriai:w,recovery:rec,planas:plan})};
+  WEEK={get:()=>({done,notes,extra,svoriai:w,recovery:rec,planas:plan,poilsis})};
 
   function chips(){
     strip.innerHTML="";
@@ -744,12 +751,25 @@ let WEEK=null;
       '" value="'+esc(val??"")+'" aria-label="'+esc(lab)+'">';
   }
   function session(){
-    const p=PLAN[sel];
+    let p=PLAN[sel];
+    if(poilsis[sel]&&p.k!=="recovery"&&p.k!=="past")
+      p=Object.assign({},PLAN.find(x=>x.k==="recovery"),{d:p.d,dt:p.dt,wd:p.wd,
+        t:"Recovery (pakeista)",tg:"Recovery",s:"pakeista vietoje: "+p.t});
     let h='<div class="row"><div><h3>'+p.wd+' '+p.dt+' · '+p.t+'</h3>'+
       '<p class="eyebrow" style="margin:5px 0 0">'+p.s+'</p></div>';
     if(p.k!=="past")h+='<button class="btn" id="mark" aria-pressed="'+(done[sel]?"true":"false")+'">'+
       (done[sel]?"padaryta":"pažymėti")+'</button>';
     h+='</div>';
+    if(typeof RECO!=="undefined"&&RECO&&sel===todayIdx&&!poilsis[sel]&&p.k!=="recovery"&&p.k!=="past"){
+      h+='<div class="banner" style="margin:14px 0 0"><b>Kūnas prašo atsigavimo.</b> '+
+        RECO.join("; ")+'. Siūlau šiandienos sesiją pakeisti į recovery — kvėpavimas, '+
+        'GOWOD, pasivaikščiojimas. Sprendi tu.<div class="savebar" style="position:static;'+
+        'background:none;margin-top:10px"><button class="savebtn" id="toreco">Keičiu į recovery</button>'+
+        '<button class="btn" id="keepit">Darau kaip planuota</button></div></div>';
+    }
+    if(poilsis[sel]&&PLAN[sel].k!=="recovery")
+      h+='<p class="note" style="color:var(--c5)"><b>Ši diena pakeista į recovery</b> pagal rytinius rodiklius. '+
+        'Originalus planas: '+PLAN[sel].t+'. <button class="btn" id="undoreco" style="margin-left:8px">Grąžinti planą</button></p>';
     p.b.forEach(bl=>{
       h+='<h4>'+bl.h+'</h4>';
       bl.i.forEach(it=>{
@@ -760,19 +780,17 @@ let WEEK=null;
         const planTxt=it.plan?' <span style="color:var(--ink-3)">· planas '+it.plan+' '+unit+'</span>':'';
         const warm=isKg?'<div class="wf"><span class="wl">Apšilimas</span><span class="box">'+
           numIn("w-"+base+":a",w[base+":a"],"—","",it.log+" apšilimo svoris")+
-          '<span class="x">×</span>'+numIn("w-"+base+":ar",w[base+":ar"],"k.","reps",it.log+" apšilimo kartojimai")+
           '<span class="unit">'+unit+'</span></span></div>':'';
         h+='<div class="mv'+(dn?" ok":"")+'"><span class="txt">'+it.t+planTxt+'</span><span class="wsets">'+warm+
            '<div class="wf main"><span class="wl">Darbinis</span><span class="box">'+
            numIn("w-"+base+":w",w[base+":w"],String(it.plan??"—"),"",it.log+" darbinis")+
-           '<span class="x">×</span>'+numIn("w-"+base+":wr",w[base+":wr"],"k.","reps",it.log+" kartojimai")+
            '<span class="unit">'+unit+'</span></span></div>'+
            '<button class="chk" id="d-'+esc(base)+'" aria-pressed="'+(dn?"true":"false")+
            '" aria-label="'+esc(it.log)+' padaryta" title="padaryta">✓</button>'+
            '</span></div>';
       });
     });
-    if(p.k==="recovery"){
+    if(p.k==="recovery"||poilsis[sel]===true){
       h+='<h4>Ką darei</h4><div class="rec">'+RECOVERY.map((r,ri)=>
         '<button class="recb" id="r-'+ri+'" aria-pressed="'+(rec[ri]?"true":"false")+'">'+r+'</button>').join("")+'</div>';
     }
@@ -788,6 +806,12 @@ let WEEK=null;
         '<span class="savemsg" id="savemsg"></span></div>';
     }
     sess.innerHTML=h;
+    const tr=$("toreco");
+    if(tr)tr.addEventListener("click",()=>{poilsis[sel]=true;touch();save(false);chips();session();});
+    const kp=$("keepit");
+    if(kp)kp.addEventListener("click",()=>{poilsis[sel]="ne";touch();save(false);session();});
+    const ur=$("undoreco");
+    if(ur)ur.addEventListener("click",()=>{poilsis[sel]=false;touch();save(false);chips();session();});
     const mk2=$("mark");
     if(mk2)mk2.addEventListener("click",()=>{done[sel]=!done[sel];touch();chips();session();});
     sess.querySelectorAll("input[id^=w-]").forEach(inp=>
@@ -822,7 +846,7 @@ let WEEK=null;
     st.innerHTML="<b>"+WEEK_ID+"</b> · padaryta "+n+" · branduolys "+core+"/4";
   }
   async function save(loud){
-    const payload={week:WK_START,done,notes,extra,svoriai:w,recovery:rec,planas:plan,ts:Date.now()};
+    const payload={week:WK_START,done,notes,extra,svoriai:w,recovery:rec,planas:plan,poilsis,ts:Date.now()};
     try{localStorage.setItem("vs-"+WK_START,JSON.stringify(payload));}catch(e){}
     try{
       if(STORE.mode==="db"&&dbRef){await dbRef.set(payload);if(!loud)syncState("Įrašyta",1);return true;}
@@ -851,20 +875,20 @@ let WEEK=null;
   }
   try{const raw=localStorage.getItem("vs-"+WK_START);
     if(raw){const o=JSON.parse(raw)||{};done=o.done||{};notes=o.notes||{};extra=o.extra||{};
-      w=o.svoriai||o.w||{};rec=o.recovery||{};plan=o.planas||{};}}catch(e){}
+      w=o.svoriai||o.w||{};rec=o.recovery||{};plan=o.planas||{};poilsis=o.poilsis||{};}}catch(e){}
   chips();session();slotUI();
   (async()=>{
     const db=await window.claude?.use?.("db");
     if(db){STORE.mode="db";dbRef=db.doc("savaites/"+WK_START);
       try{const s=await dbRef.get();
         if(s){done=s.done||done;notes=s.notes||notes;extra=s.extra||extra;
-          w=s.svoriai||w;rec=s.recovery||rec;plan=s.planas||plan;}}catch(e){}
+          w=s.svoriai||w;rec=s.recovery||rec;plan=s.planas||plan;poilsis=s.poilsis||poilsis;}}catch(e){}
       syncState("claude.ai saugykla",1);chips();session();slotUI();return;}
     if(ghTok()){STORE.mode="gh";
       const had=Object.keys(done).length||Object.keys(notes).length||Object.keys(w).length;
       try{const s=await ghGet("zurnalas/"+WK_START+".json");
         if(s&&!s.missing){done=s.done||done;notes=s.notes||notes;extra=s.extra||extra;
-          w=s.svoriai||w;rec=s.recovery||rec;plan=s.planas||plan;syncState("GitHub saugykla",1);}
+          w=s.svoriai||w;rec=s.recovery||rec;plan=s.planas||plan;poilsis=s.poilsis||poilsis;syncState("GitHub saugykla",1);}
         else{syncState("GitHub saugykla",1);
           if(had){await save(false);banner("<b>Radau įrašų, kurie buvo likę tik šitame įrenginyje, "+
             "ir ką tik nusiunčiau juos.</b> Dabar viskas sinchronizuota.",1);}}
