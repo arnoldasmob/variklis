@@ -101,6 +101,11 @@ section{margin-top:30px}
 .verdict{margin-top:12px;padding:13px 16px;border-radius:var(--r-s);
   background:var(--glass-2);border:1px solid var(--edge);font-size:14px;line-height:1.45}
 .verdict b{font-weight:600}
+.banner{margin:0 0 14px;padding:13px 16px;border-radius:var(--r-s);font-size:14.5px;line-height:1.5;
+  background:color-mix(in srgb,var(--crit) 14%,transparent);border:1px solid var(--crit);color:var(--ink)}
+.banner b{font-weight:600}
+.banner.ok{background:color-mix(in srgb,var(--good) 12%,transparent);border-color:var(--good)}
+.banner a{color:var(--c2)}
 
 /* --- savaites juosta --- */
 .strip{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:none}
@@ -253,6 +258,7 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--edge);font-si
   <p class="eyebrow" id="hdr-upd">—</p>
 </header>
 
+<div id="banner" hidden></div>
 <section style="margin-top:0">
   <div class="sechead"><h2>Šiandien</h2><span class="eyebrow" id="today-date">—</span></div>
   <div class="today">
@@ -482,6 +488,10 @@ function syncState(txt,ok){
   const e=document.getElementById("sync-state");
   if(e)e.innerHTML=ok?'<span class="saved">'+txt+"</span>":txt;
 }
+function banner(html,ok){
+  const e=document.getElementById("banner"); if(!e)return;
+  e.className="banner"+(ok?" ok":""); e.innerHTML=html; e.hidden=false;
+}
 
 /* ---------- pagalbinės ---------- */
 const $=id=>document.getElementById(id);
@@ -652,11 +662,21 @@ function spark(vals,color,lo,hi){
         if(s){done=s.done||done;notes=s.notes||notes;w=s.svoriai||w;}}catch(e){}
       syncState("claude.ai saugykla",1);chips();session();return;}
     if(ghTok()){STORE.mode="gh";
+      const hadLocal=Object.keys(done).length||Object.keys(notes).length||Object.keys(w).length;
       try{const s=await ghGet("zurnalas/"+WK_START+".json");
-        if(s&&!s.missing){done=s.done||done;notes=s.notes||notes;w=s.svoriai||w;}
-        syncState("GitHub saugykla",1);}catch(e){syncState("GitHub klaida: "+e.message);}
+        if(s&&!s.missing){done=s.done||done;notes=s.notes||notes;w=s.svoriai||w;
+          syncState("GitHub saugykla",1);}
+        else{syncState("GitHub saugykla",1);
+          if(hadLocal){await save();banner("<b>Radau įrašų, kurie buvo likę tik šitame įrenginyje, "+
+            "ir ką tik nusiunčiau juos.</b> Dabar viskas sinchronizuota.",1);}}
+      }catch(e){syncState("GitHub klaida: "+e.message);
+        banner("<b>Raktas neveikia:</b> "+e.message+". Įrašai kol kas lieka tik šitame įrenginyje.");}
       chips();session();return;}
     syncState("Tik šis įrenginys");
+    banner("<b>Šitame įrenginyje raktas neįrašytas.</b> Ką įrašysi — svoriai ir komentarai — "+
+      "liks tik šitos naršyklės atmintyje ir manęs nepasieks. Raktas galioja vienam įrenginiui, "+
+      "tad telefone jį reikia įvesti atskirai: slinkis į patį apačią, skiltis "+
+      "<b>„GitHub prieiga · nustatymai“</b>.");
   })();
 })();
 
