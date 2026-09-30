@@ -108,6 +108,17 @@ section{margin-top:30px}
 .banner a{color:var(--c2)}
 
 /* --- saukinys --- */
+.cd{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:16px 20px;margin-bottom:12px;
+  border-left:3px solid var(--c1)}
+.cd .big{font-family:"Barlow Condensed",sans-serif;font-size:clamp(38px,8vw,56px);font-weight:700;
+  line-height:.92;font-variant-numeric:tabular-nums;color:var(--c1)}
+.cd .lab{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.14em;
+  font-size:11.5px;color:var(--ink-3);font-weight:600}
+.cd .nm{font-family:"Barlow Condensed",sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.04em;line-height:1.15}
+.cd .sub{font-size:13px;color:var(--ink-3);margin-top:3px}
+.cd .ph{margin-left:auto;text-align:right}
+@media(max-width:560px){.cd .ph{margin-left:0;text-align:left;width:100%}}
 .quote{padding:18px 20px;margin-bottom:16px;border-left:3px solid var(--c2)}
 .quote p{margin:0;font-family:"Barlow Condensed",sans-serif;font-size:clamp(19px,3.6vw,25px);
   font-weight:600;line-height:1.25;letter-spacing:.01em}
@@ -339,6 +350,7 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--edge);font-si
 </header>
 
 <div id="banner" hidden></div>
+<div class="g cd" id="cd"></div>
 <div class="g quote" id="quote"></div>
 <section style="margin-top:0">
   <div class="sechead"><h2>Šiandien</h2><span class="eyebrow" id="today-date">—</span></div>
@@ -427,7 +439,7 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--edge);font-si
 </section>
 
 <section>
-  <div class="sechead"><h2>Blokas</h2><span class="eyebrow">09-29 → 12-13</span></div>
+  <div class="sechead"><h2>Kelias į Londoną</h2><span class="eyebrow">16 savaičių · 09-28 → 01-24</span></div>
   <div class="g pad"><div class="scrollx"><table class="tbl" id="t-blok"></table></div></div>
   <p class="note"><b>Ribos:</b> rytinis pulsas ramybėje 5 vienetais virš bazės → diena tampa lengva.
      HRV du rytus iš eilės žemiau 40 → visa savaitė nukeliama viena žemyn.</p>
@@ -536,17 +548,24 @@ const GOALS=[
   why:"Keturi iš septynių silpnųjų judesių yra gimnastika.",st:["q","testuojam"]}
 ];
 const BLOK=[
- ["0","09-28 → 10-04","lengvai, 60 %","1 × 20 min","grįžimas po ligos","crit"],
- ["1","10-05 → 10-11","4 × 5 @ 75 %","1 × 30 min","",""],
- ["2","10-12 → 10-18","4 × 5 @ 75 %","2 × 30 min","Testas B: gimnastika","warn"],
- ["3","10-19 → 10-25","4 × 5 @ 77 %","2 × 35 min","Testas A: ATHX jėga","warn"],
- ["4","10-26 → 11-01","3 × 5 @ 70 %","2 × 30 min","lengvesnė",""],
- ["5","11-02 → 11-08","5 × 3 @ 82 %","2 × 40 min","",""],
- ["6","11-09 → 11-15","5 × 3 @ 84 %","2 × 45 min","",""],
- ["7","11-16 → 11-22","4 × 3 @ 75 %","2 × 35 min","ATHX ištvermės simuliacija","warn"],
- ["8","11-23 → 11-29","3 × 2 @ 88 %","2 × 50 min","",""],
- ["9","11-30 → 12-06","3 × 2 @ 90 %","2 × 50 min","",""],
- ["10","12-07 → 12-13","deload 60 %","1 × 30 min","Testas A pakartotinai","ok"]
+ ["0","09-28 → 10-04","grįžimas","60 %","20 min","po ligos","crit"],
+ ["1","10-05 → 10-11","bazė","4 × 5 @ 75 %","1 × 30","",""],
+ ["2","10-12 → 10-18","bazė","4 × 5 @ 75 %","2 × 30","Testas B: gimnastika","warn"],
+ ["3","10-19 → 10-25","bazė","4 × 5 @ 77 %","2 × 35","Testas A: ATHX jėga","warn"],
+ ["4","10-26 → 11-01","bazė","3 × 5 @ 70 %","2 × 30","lengvesnė",""],
+ ["5","11-02 → 11-08","bazė","5 × 3 @ 82 %","2 × 40","",""],
+ ["6","11-09 → 11-15","bazė","5 × 3 @ 84 %","2 × 45","",""],
+ ["7","11-16 → 11-22","specifika","4 × 3 @ 75 %","2 × 35","ATHX ištvermė: 22 min","warn"],
+ ["8","11-23 → 11-29","specifika","3 × 3 @ 85 %","2 × 45","lengvesnė",""],
+ ["9","11-30 → 12-06","specifika","3 × 2 @ 88 %","2 × 50","MetCon X pilnas","warn"],
+ ["10","12-07 → 12-13","specifika","3 × 2 @ 90 %","2 × 50","Pilna simuliacija","warn"],
+ ["11","12-14 → 12-20","specifika","4 × 3 @ 82 %","2 × 45","",""],
+ ["12","12-21 → 12-27","specifika","deload 65 %","2 × 30","Kalėdos",""],
+ ["13","12-28 → 01-03","aštrinimas","3 × 2 @ 90 %","2 × 45","Testas A pakartotinai","warn"],
+ ["14","01-04 → 01-10","aštrinimas","2 × 2 @ 92 %","2 × 40","MetCon X laikui","warn"],
+ ["15","01-11 → 01-17","aštrinimas","3 × 3 @ 85 %","2 × 35","Generalinė simuliacija","warn"],
+ ["16","01-18 → 01-22","taper","2 × 2 @ 80 %","1 × 20","apimtis −50 %","ok"],
+ ["—","01-23/24","STARTAS","","","ATHX LONDON","ok"]
 ];
 const TIPAI={strength_training:["Jėga","var(--c1)"],indoor_cardio:["Salė / metcon","var(--c2)"],
  running:["Bėgimas","var(--c2)"],track_running:["Bėgimas","var(--c2)"],treadmill_running:["Bėgimas","var(--c2)"],
@@ -626,6 +645,29 @@ function hm(sec){if(sec==null)return"—";return Math.floor(sec/3600)+":"+String
 function esc(x){return String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");}
 
 function boot(){
+/* ---------- atgalinis skaičiavimas ---------- */
+const FAZES=[["2026-10-04","Grįžimas po ligos","be maksimumų"],
+ ["2026-11-15","A fazė · bazė","apimtis atgal į normą, bėgimo bazė, jėga"],
+ ["2026-12-27","B fazė · specifika","ATHX rungtys, MetCon X, strict press"],
+ ["2027-01-17","C fazė · aštrinimas","varžybinės simuliacijos"],
+ ["2027-01-22","Taper","apimtis perpus, technika"],
+ ["2027-01-24","Varžybos","Excel London"]];
+(function(){
+  const el=$("cd"); if(!el)return;
+  const start=new Date("2027-01-23T09:00:00");
+  const now=new Date(DATA.atnaujinta+"T09:00:00");
+  const d=Math.round((start-now)/864e5);
+  const sav=Math.floor(d/7), lik=d%7;
+  let faze=FAZES[FAZES.length-1];
+  for(const f of FAZES){ if(DATA.atnaujinta<=f[0]){faze=f;break;} }
+  el.innerHTML='<div><span class="lab">Iki starto</span><div class="big">'+d+'</div>'+
+    '<span class="sub">'+sav+' sav. '+lik+' d.</span></div>'+
+    '<div><div class="nm">ATHX London</div>'+
+    '<div class="sub">2027-01-23/24 · Excel London · divizija ATHX</div></div>'+
+    '<div class="ph"><span class="lab">Dabartinė fazė</span><div class="nm" style="font-size:16px">'+
+    faze[1]+'</div><div class="sub">'+faze[2]+'</div></div>';
+})();
+
 /* ---------- dienos šaukinys ---------- */
 const SAUKINIAI=[
  ["Discipline is choosing between what you want now and what you want most.",""],
@@ -1139,11 +1181,12 @@ let WEEK=null;
 })();
 
 /* ---------- blokas ---------- */
-$("t-blok").innerHTML="<tr><th>Sav.</th><th>Datos</th><th>Jėga</th><th>Bėgimas</th><th>Įvykis</th></tr>"+
+$("t-blok").innerHTML="<tr><th>Sav.</th><th>Datos</th><th class=\"hidem\">Fazė</th><th>Jėga</th><th class=\"hidem\">Bėgimas</th><th>Įvykis</th></tr>"+
   BLOK.map(r=>{const cur=r[0]==="0";
     return "<tr"+(cur?' style="background:rgba(255,255,255,.05)"':'')+"><td><b>"+r[0]+"</b>"+
-      (cur?' <span class="pill ok">dabar</span>':'')+"</td><td>"+r[1]+"</td><td>"+r[2]+"</td><td>"+r[3]+"</td><td>"+
-      (r[4]?'<span class="pill '+(r[5]||"q")+'">'+r[4]+"</span>":"—")+"</td></tr>";}).join("");
+      (cur?' <span class="pill ok">dabar</span>':'')+"</td><td>"+r[1]+'</td><td class="hidem">'+r[2]+"</td><td>"+r[3]+
+      '</td><td class="hidem">'+r[4]+"</td><td>"+
+      (r[5]?'<span class="pill '+(r[6]||"q")+'">'+r[5]+"</span>":"—")+"</td></tr>";}).join("");
 
 }
 
