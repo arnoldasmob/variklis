@@ -131,6 +131,27 @@ section{margin-top:30px}
 .chip.done .dd::after{content:" ✓";color:var(--c1);font-size:14px}
 .chip:focus-visible{outline:2px solid var(--c1);outline-offset:2px}
 
+/* --- kruvio balansas --- */
+.loads{display:grid;gap:14px}
+.load{padding:14px 16px}
+.load .lh{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.load .ln{font-family:"Barlow Condensed",sans-serif;font-size:17px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.05em}
+.load .lv{font-family:"Barlow Condensed",sans-serif;font-size:24px;font-weight:700;
+  font-variant-numeric:tabular-nums}
+.load .lv small{font-size:13px;color:var(--ink-3);font-weight:500;margin-left:4px}
+.lbar{position:relative;height:38px;margin-top:14px}
+.lbar .rail{position:absolute;inset:13px 0 auto 0;height:12px;border-radius:99px;background:var(--track)}
+.lbar .band{position:absolute;top:13px;height:12px;background:color-mix(in srgb,var(--c1) 26%,transparent);
+  border-left:2px solid var(--target);border-right:2px solid var(--target)}
+.lbar .dot2{position:absolute;top:8px;width:22px;height:22px;border-radius:99px;
+  border:3px solid var(--bg);transform:translateX(-11px)}
+.lbar .lab{position:absolute;top:32px;font-size:10.5px;color:var(--ink-3);
+  transform:translateX(-50%);white-space:nowrap;font-variant-numeric:tabular-nums}
+.load .lw{font-size:13.5px;color:var(--ink-3);margin-top:22px;line-height:1.5}
+.load .lw b{color:var(--ink-2)}
+@media(max-width:560px){.load .lv{font-size:21px}}
+
 /* --- laikas / planavimas --- */
 .slots{display:grid;gap:8px}
 .slot{display:grid;grid-template-columns:52px 1fr;gap:10px;align-items:center;padding:10px 14px;
@@ -348,6 +369,14 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--edge);font-si
 </section>
 
 <section>
+  <div class="sechead"><h2>Krūvio balansas</h2><span class="eyebrow">28 dienų · Garmin</span></div>
+  <div class="loads" id="loads"></div>
+  <p class="note">Juostos rodo <b>kur esi</b>, šviesesnė sritis — <b>Garmin rekomenduojamą ruožą</b>
+     tavo pasiruošimo lygiui. Žemas aerobinis statomas ilgu lengvu darbu 2 zonoje, aukštas aerobinis —
+     tempu ir intervalais ties slenksčiu, anaerobinis — trumpais aštriais protrūkiais ir sunkiu metcon'u.</p>
+</section>
+
+<section>
   <div class="sechead"><h2>Kitos savaitės laikas</h2><span class="eyebrow">kada realiai galėsi</span></div>
   <div class="slots" id="slots"></div>
   <p class="note">Pažymėk, kada kurią dieną turi laiko. <b>Rytas duoda jėgą, vakaras — variklį:</b>
@@ -427,7 +456,7 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--edge);font-si
 <div class="tip" id="tip" role="status" aria-live="polite"></div>
 
 <script>
-window.DATA={"atnaujinta":"2026-09-29","dienos":[{"d":"2026-09-16","rhr":53,"hrv":42,"miegas":22260,"miego_balas":75,"stresas":34,"bb":16,"bb_max":64},{"d":"2026-09-17","rhr":49,"hrv":49,"miegas":22380,"miego_balas":71,"stresas":40,"bb":5,"bb_max":69},{"d":"2026-09-18","rhr":50,"hrv":54,"miegas":24180,"miego_balas":75,"stresas":34,"bb":7,"bb_max":65},{"d":"2026-09-19","rhr":51,"hrv":45,"miegas":25320,"miego_balas":78,"stresas":30,"bb":14,"bb_max":71},{"d":"2026-09-20","rhr":56,"hrv":39,"miegas":24540,"miego_balas":51,"stresas":35,"bb":10,"bb_max":50},{"d":"2026-09-21","rhr":49,"hrv":52,"miegas":24960,"miego_balas":77,"stresas":31,"bb":8,"bb_max":79},{"d":"2026-09-22","rhr":49,"hrv":48,"miegas":23040,"miego_balas":75,"stresas":44,"bb":5,"bb_max":63},{"d":"2026-09-23","rhr":55,"hrv":32,"miegas":22020,"miego_balas":32,"stresas":47,"bb":5,"bb_max":20},{"d":"2026-09-24","rhr":53,"hrv":48,"miegas":28440,"miego_balas":85,"stresas":29,"bb":14,"bb_max":65},{"d":"2026-09-25","rhr":52,"hrv":43,"miegas":22860,"miego_balas":61,"stresas":35,"bb":8,"bb_max":50},{"d":"2026-09-26","rhr":48,"hrv":63,"miegas":31980,"miego_balas":81,"stresas":31,"bb":19,"bb_max":100},{"d":"2026-09-27","rhr":50,"hrv":54,"miegas":19980,"miego_balas":64,"stresas":37,"bb":9,"bb_max":58},{"d":"2026-09-28","rhr":49,"hrv":49,"miegas":26100,"miego_balas":80,"stresas":29,"bb":19,"bb_max":81},{"d":"2026-09-29","rhr":49,"hrv":54,"miegas":18360,"miego_balas":60,"stresas":30,"bb":22,"bb_max":62}],"svoris":[{"d":"2026-09-29","kg":90.2,"rieb":25.7,"raum":35.4},{"d":"2026-09-27","kg":90.1,"rieb":25.3,"raum":35.4},{"d":"2026-09-26","kg":91.0,"rieb":25.2,"raum":35.6},{"d":"2026-09-23","kg":91.7,"rieb":25.2,"raum":35.8},{"d":"2026-09-21","kg":91.7,"rieb":22.0,"raum":35.8},{"d":"2026-09-19","kg":91.4,"rieb":25.7,"raum":35.7},{"d":"2026-09-01","kg":89.0,"rieb":null,"raum":null}],"vo2":51.6,"apzvalga":[{"tipas":"strength_training","data":"2026-09-29 12:48","min":85,"hr":119,"hr_max":162,"kcal":730,"zona":"Z1","judesiai":[{"nm":"Front Squat","serijos":7,"tonazas":2650,"darbinis":90.0,"darb_serijos":"4 × 3 / 3 / 5 / 5","apsilimas":"50×10 / 50×10 / 70×3","e1rm":105,"vs_geriausias":73},{"nm":"Overhead Squat","serijos":5,"tonazas":1300,"darbinis":60.0,"darb_serijos":"3 × 5 / 5 / 5","apsilimas":"40×5 / 40×5","e1rm":70,"vs_geriausias":71},{"nm":"Back Squat","serijos":5,"tonazas":2400,"darbinis":90.0,"darb_serijos":"4 × 5 / 5 / 5 / 5","apsilimas":"60×10","e1rm":105,"vs_geriausias":69},{"nm":"Romanian Deadlift","serijos":4,"tonazas":3200,"darbinis":100.0,"darb_serijos":"3 × 8 / 8 / 8","apsilimas":"80×10","e1rm":127,"vs_geriausias":89},{"nm":"Hanging L-Sit","serijos":4,"tonazas":0,"kartojimai":4}],"tonazas":9550,"seriju":25},{"tipas":"strength_training","data":"2026-09-24 08:25","min":58,"hr":134,"hr_max":169,"kcal":687,"zona":"Z2","judesiai":[{"nm":"Nepažymėta","serijos":17,"tonazas":9980,"darbinis":150.0,"darb_serijos":"1 × 2","apsilimas":"40×9 / 40×9 / 50×9 / 50×9 / 60×9 / 60×9 / 60×9 / 110×2 / 130×2 / 50×20 / 60×20 / 70×20 / 50×10 / 60×10 / 70×10 / 70×8","e1rm":160,"vs_geriausias":68}],"tonazas":9980,"seriju":17},{"tipas":"indoor_cardio","data":"2026-09-24 08:07","min":17,"hr":135,"hr_max":166,"kcal":225,"zona":"Z2"},{"tipas":"indoor_cardio","data":"2026-09-22 11:56","min":33,"hr":157,"hr_max":177,"kcal":543,"zona":"Z4"}],"veiklos":[{"id":24539798602,"d":"2026-09-29 12:48","tipas":"strength_training","min":85,"km":0.0,"hr":119.0,"hr_max":162.0,"kcal":730.0},{"id":24477893925,"d":"2026-09-24 08:25","tipas":"strength_training","min":58,"km":0.0,"hr":134.0,"hr_max":169.0,"kcal":687.0},{"id":24477461627,"d":"2026-09-24 08:07","tipas":"indoor_cardio","min":17,"km":0.0,"hr":135.0,"hr_max":166.0,"kcal":225.0},{"id":24453455608,"d":"2026-09-22 11:56","tipas":"indoor_cardio","min":33,"km":0.0,"hr":157.0,"hr_max":177.0,"kcal":543.0},{"id":24453144335,"d":"2026-09-22 11:13","tipas":"strength_training","min":36,"km":0.0,"hr":133.0,"hr_max":166.0,"kcal":429.0},{"id":24452858509,"d":"2026-09-22 10:53","tipas":"indoor_cardio","min":19,"km":0.0,"hr":142.0,"hr_max":174.0,"kcal":274.0},{"id":24444177412,"d":"2026-09-21 17:19","tipas":"indoor_cardio","min":30,"km":0.0,"hr":157.0,"hr_max":179.0,"kcal":505.0},{"id":24443739870,"d":"2026-09-21 16:29","tipas":"indoor_cardio","min":38,"km":0.0,"hr":142.0,"hr_max":169.0,"kcal":551.0}]};
+window.DATA={"atnaujinta":"2026-09-30","dienos":[{"d":"2026-09-17","rhr":49,"hrv":49,"miegas":22380,"miego_balas":71,"stresas":40,"bb":5,"bb_max":69},{"d":"2026-09-18","rhr":50,"hrv":54,"miegas":24180,"miego_balas":75,"stresas":34,"bb":7,"bb_max":65},{"d":"2026-09-19","rhr":51,"hrv":45,"miegas":25320,"miego_balas":78,"stresas":30,"bb":14,"bb_max":71},{"d":"2026-09-20","rhr":56,"hrv":39,"miegas":24540,"miego_balas":51,"stresas":35,"bb":10,"bb_max":50},{"d":"2026-09-21","rhr":49,"hrv":52,"miegas":24960,"miego_balas":77,"stresas":31,"bb":8,"bb_max":79},{"d":"2026-09-22","rhr":49,"hrv":48,"miegas":23040,"miego_balas":75,"stresas":44,"bb":5,"bb_max":63},{"d":"2026-09-23","rhr":55,"hrv":32,"miegas":22020,"miego_balas":32,"stresas":47,"bb":5,"bb_max":20},{"d":"2026-09-24","rhr":53,"hrv":48,"miegas":28440,"miego_balas":85,"stresas":29,"bb":14,"bb_max":65},{"d":"2026-09-25","rhr":52,"hrv":43,"miegas":22860,"miego_balas":61,"stresas":35,"bb":8,"bb_max":50},{"d":"2026-09-26","rhr":48,"hrv":63,"miegas":31980,"miego_balas":81,"stresas":31,"bb":19,"bb_max":100},{"d":"2026-09-27","rhr":50,"hrv":54,"miegas":19980,"miego_balas":64,"stresas":37,"bb":9,"bb_max":58},{"d":"2026-09-28","rhr":49,"hrv":49,"miegas":26100,"miego_balas":80,"stresas":29,"bb":19,"bb_max":81},{"d":"2026-09-29","rhr":49,"hrv":54,"miegas":18360,"miego_balas":60,"stresas":38,"bb":5,"bb_max":62},{"d":"2026-09-30","rhr":51,"hrv":50,"miegas":16380,"miego_balas":59,"stresas":18,"bb":47,"bb_max":47}],"svoris":[{"d":"2026-09-29","kg":90.2,"rieb":25.7,"raum":35.4},{"d":"2026-09-27","kg":90.1,"rieb":25.3,"raum":35.4},{"d":"2026-09-26","kg":91.0,"rieb":25.2,"raum":35.6},{"d":"2026-09-23","kg":91.7,"rieb":25.2,"raum":35.8},{"d":"2026-09-21","kg":91.7,"rieb":22.0,"raum":35.8},{"d":"2026-09-19","kg":91.4,"rieb":25.7,"raum":35.7},{"d":"2026-09-01","kg":89.0,"rieb":null,"raum":null}],"vo2":51.6,"kruvis":{"zemas_aerobinis":811,"zemas_min":487,"zemas_max":1140,"aukstas_aerobinis":885,"aukstas_min":709,"aukstas_max":1362,"anaerobinis":554,"ana_min":217,"ana_max":652,"balansas":"BALANCED"},"apkrova":{"ukas":269,"letinis":604,"tunelis_min":483,"tunelis_max":906,"acwr":0.4,"acwr_bukle":"LOW","busena":"RECOVERY_1"},"apzvalga":[],"veiklos":[{"id":24539798602,"d":"2026-09-29 12:48","tipas":"strength_training","min":85,"km":0.0,"hr":119.0,"hr_max":162.0,"kcal":730.0},{"id":24477893925,"d":"2026-09-24 08:25","tipas":"strength_training","min":58,"km":0.0,"hr":134.0,"hr_max":169.0,"kcal":687.0},{"id":24477461627,"d":"2026-09-24 08:07","tipas":"indoor_cardio","min":17,"km":0.0,"hr":135.0,"hr_max":166.0,"kcal":225.0},{"id":24453455608,"d":"2026-09-22 11:56","tipas":"indoor_cardio","min":33,"km":0.0,"hr":157.0,"hr_max":177.0,"kcal":543.0},{"id":24453144335,"d":"2026-09-22 11:13","tipas":"strength_training","min":36,"km":0.0,"hr":133.0,"hr_max":166.0,"kcal":429.0},{"id":24452858509,"d":"2026-09-22 10:53","tipas":"indoor_cardio","min":19,"km":0.0,"hr":142.0,"hr_max":174.0,"kcal":274.0},{"id":24444177412,"d":"2026-09-21 17:19","tipas":"indoor_cardio","min":30,"km":0.0,"hr":157.0,"hr_max":179.0,"kcal":505.0},{"id":24443739870,"d":"2026-09-21 16:29","tipas":"indoor_cardio","min":38,"km":0.0,"hr":142.0,"hr_max":169.0,"kcal":551.0}]};
 const WK_START="2026-09-28";
 let DATA=null;
 const C=["var(--c1)","var(--c2)","var(--c3)","var(--c4)","var(--c5)"];
@@ -452,12 +481,9 @@ const PLAN=[
      {h:"C · priedai",i:[{t:"<b>C1. Romanian Deadlift</b> — 3 × 8, lengvai",log:"Romanian Deadlift"},
        {t:"<b>C2. Side Plank</b> — 3 × 30 s į pusę"}]}],
   n:"✅ Padaryta 2026-09-29, 85 min, vidutinis pulsas 119. Faktas: Front Squat 90, Overhead Squat 60, Back Squat 90, Romanian Deadlift 100. Dirbta 15 iki 50 % sunkiau už planą. Riešai priminė apie save per Overhead Squat."},
- {d:"Tr",dt:"09-30",wd:"Trečiadienis",k:"core",t:"Bėgimas, 2 zona",tg:"Bėgimas 20'",s:"20 min · 135–145 bpm · vakare",
-  b:[{h:"Pagrindinis",i:[{t:"<b>20 min tolygiai</b>, pulsas 135–145, lubos 150"},
-      {t:"Manieže: <b>matuojam laiką, ne kilometrus</b>"},
-      {t:"Jei pulsui išlaikyti reikia eiti — eini. Pirmą savaitę tai normalu"}]}],
-  n:"Bėgimo dieną rytas yra tik štanga, be intensyvaus metcon‘o. Šią savaitę rytas laisvas: antradienis jau padarytas."},
- {d:"Kt",dt:"10-01",wd:"Ketvirtadienis",k:"core",t:"Upper body plius gimnastika",tg:"Upper",s:"RPE 5/10 · gimnastika šviežia galva",
+ {d:"Tr",dt:"09-30",wd:"Trečiadienis",k:"rest",t:"Poilsis",tg:"Poilsis",s:"nespėji · bėgimas perkeltas į ketvirtadienio vakarą",b:[],
+  n:"Diena be treniruotės. Branduolys nesugriuvo: bėgimas persikėlė į ketvirtadienio vakarą, jėga lieka ryte."},
+ {d:"Kt",dt:"10-01",wd:"Ketvirtadienis",k:"core",t:"Upper rytą plius bėgimas vakare",tg:"Upper + bėgimas",s:"rytas jėga · vakaras 20 min 2 zonoje",
   b:[{h:"Mobility · 10 min",i:MOB.map(x=>({t:x}))},
      {h:"⚠ Riešų ir pečių paruošimas · 5 min (naujas, po antradienio)",i:[
        {t:"Riešų ratai ir atramos ant keturių: 30 s į priekį, 30 s atgal, 30 s ant delnų nugarėlių"},
@@ -470,8 +496,12 @@ const PLAN=[
      {h:"C · gimnastika",i:[
        {t:"<b>C1. Strict Pull-up</b> — 4 serijos po pusę maksimumo",log:"Pull-up",unit:"kart."},
        {t:"<b>C2. Handstand Push-up</b> — 4 × 3 · <b>jei riešai primena apie save, renkis Pike Push-up ant dėžės</b>, ne pilną HSPU",log:"HS Push-up",unit:"kart."},
-       {t:"<b>C3. Ring Muscle-up</b>, progresija — 5 × 1–2",log:"Ring Muscle-up",unit:"kart."}]}],
-  n:"Handstand Push-up ir Ring Muscle-up šią savaitę yra susipažinimas, ne testas. Testas bus 2 savaitę. ⚠ Antradienį per Overhead Squat 60 kg skaudėjo riešus, todėl prieš sesiją atsirado riešų ir pečių blokas, o Handstand Push-up šiandien tik tiek, kiek neskauda."},
+       {t:"<b>C3. Ring Muscle-up</b>, progresija — 5 × 1–2",log:"Ring Muscle-up",unit:"kart."}]},
+     {h:"Vakare · bėgimas, 2 zona (perkelta iš trečiadienio)",i:[
+       {t:"<b>20 min tolygiai</b>, pulsas 135–145, lubos 150"},
+       {t:"Manieže: <b>matuojam laiką, ne kilometrus</b>"},
+       {t:"Jei pulsui išlaikyti reikia eiti — eini"}]}],
+  n:"Rytas jėga, vakaras variklis. Handstand Push-up ir Ring Muscle-up šią savaitę yra susipažinimas, ne testas. Testas bus 2 savaitę. ⚠ Antradienį per Overhead Squat 60 kg skaudėjo riešus, todėl prieš sesiją atsirado riešų ir pečių blokas, o Handstand Push-up šiandien tik tiek, kiek neskauda."},
  {d:"Pn",dt:"10-02",wd:"Penktadienis",k:"extra",t:"Dviratis staklėse arba poilsis",tg:"Dviratis 40'",s:"40 min · 200–230 W",
   b:[{h:"Pagrindinis",i:[{t:"<b>40 min 2 zonoje</b> · 200–230 W · pulsas 128–142 · kadencija 85–95"},
       {t:"⚠ Laikrodyje rinkis <b>Indoor Cycling</b>, ne bendrą „Cardio“"},
@@ -724,6 +754,68 @@ let RECO=null;
   if(!v.length)v.push(["ok","Rodikliai bazėje. <b>Dirbam pagal planą.</b>"]);
   $("verdict").innerHTML=v.map(x=>'<span class="pill '+x[0]+'">'+
     (x[0]==="crit"?"stop":x[0]==="warn"?"atsargiai":"veikiam")+'</span> &nbsp;'+x[1]).join("<br><br>");
+})();
+
+/* ---------- KRŪVIO BALANSAS ---------- */
+(function(){
+  const el=$("loads"); if(!el)return;
+  const K=DATA.kruvis, A=DATA.apkrova;
+  if(!K){el.innerHTML='<p class="note">Krūvio duomenų dar nėra.</p>';return;}
+  const rows=[
+   {nm:"Žemas aerobinis",v:K.zemas_aerobinis,lo:K.zemas_min,hi:K.zemas_max,c:"var(--c1)",
+    maz:"ilgesnio lengvo darbo 2 zonoje: bėgimo, dviračio staklėse arba Row",
+    dau:"lengvo darbo per daug, laikas įterpti intensyvumo"},
+   {nm:"Aukštas aerobinis",v:K.aukstas_aerobinis,lo:K.aukstas_min,hi:K.aukstas_max,c:"var(--c3)",
+    maz:"tempo darbo ir intervalų ties slenksčiu (pulsas 155–168)",
+    dau:"slenkstinio darbo per daug, reikia daugiau lengvo"},
+   {nm:"Anaerobinis",v:K.anaerobinis,lo:K.ana_min,hi:K.ana_max,c:"var(--c2)",
+    maz:"trumpų aštrių protrūkių: sprintų, sunkaus metcon'o, EMOM",
+    dau:"aštraus darbo per daug, rizikuoji nuovargiu"}];
+  const max=Math.max(...rows.map(r=>Math.max(r.v,r.hi)))*1.12;
+  rows.forEach(r=>{
+    const pv=r.v/max*100, plo=r.lo/max*100, phi=r.hi/max*100;
+    const inRange=r.v>=r.lo&&r.v<=r.hi;
+    const stat=inRange?["ok","ruože"]:(r.v<r.lo?["crit","per mažai"]:["warn","per daug"]);
+    const trukum=inRange?null:(r.v<r.lo?Math.round(r.lo-r.v):Math.round(r.v-r.hi));
+    const d=document.createElement("div");d.className="g pad load";
+    d.innerHTML='<div class="lh"><span class="ln">'+r.nm+'</span>'+
+      '<span class="lv" style="color:'+(inRange?"var(--ink)":r.c)+'">'+r.v+
+      '<small>ruožas '+r.lo+'–'+r.hi+'</small></span></div>'+
+      '<div class="lbar"><div class="rail"></div>'+
+      '<div class="band" style="left:'+plo+'%;width:'+(phi-plo)+'%"></div>'+
+      '<div class="dot2" style="left:'+pv+'%;background:'+r.c+'"></div>'+
+      '<span class="lab" style="left:'+plo+'%">'+r.lo+'</span>'+
+      '<span class="lab" style="left:'+phi+'%">'+r.hi+'</span></div>'+
+      '<div class="lw"><span class="pill '+stat[0]+'">'+stat[1]+'</span> &nbsp;'+
+      (inRange?'Laikykis to, ką darai.':
+        (r.v<r.lo?'Trūksta <b>'+trukum+'</b> vienetų. Reikia '+r.maz+'.':
+                  'Viršyta <b>'+trukum+'</b> vienetais. '+r.dau.charAt(0).toUpperCase()+r.dau.slice(1)+'.'))+
+      '</div>';
+    el.appendChild(d);
+  });
+  if(A&&A.letinis){
+    const mx=Math.max(A.tunelis_max,A.letinis,A.ukas)*1.12;
+    const pa=A.ukas/mx*100, pc=A.letinis/mx*100, plo=A.tunelis_min/mx*100, phi=A.tunelis_max/mx*100;
+    const low=A.acwr<0.8, high=A.acwr>1.3;
+    const st=low?["crit","krenta"]:high?["warn","kyla per greitai"]:["ok","tvarkinga"];
+    const d=document.createElement("div");d.className="g pad load";
+    d.innerHTML='<div class="lh"><span class="ln">Ūmus prieš lėtinį krūvį</span>'+
+      '<span class="lv" style="color:'+(low||high?"var(--c2)":"var(--ink)")+'">'+A.acwr.toFixed(2)+
+      '<small>santykis, norma 0,8–1,3</small></span></div>'+
+      '<div class="lbar"><div class="rail"></div>'+
+      '<div class="band" style="left:'+plo+'%;width:'+(phi-plo)+'%"></div>'+
+      '<div class="dot2" style="left:'+pc+'%;background:var(--c3)"></div>'+
+      '<div class="dot2" style="left:'+pa+'%;background:var(--c2)"></div>'+
+      '<span class="lab" style="left:'+pa+'%">ūmus '+A.ukas+'</span>'+
+      '<span class="lab" style="left:'+pc+'%;top:-14px">lėtinis '+A.letinis+'</span></div>'+
+      '<div class="lw"><span class="pill '+st[0]+'">'+st[1]+'</span> &nbsp;'+
+      (low?'Paskutinių 7 dienų krūvis (<b>'+A.ukas+'</b>) yra gerokai žemiau 28 dienų vidurkio (<b>'+
+        A.letinis+'</b>). Forma nyksta, ne auga. Tai ne poilsis, o atotrūkis.':
+       high?'Paskutinių dienų krūvis auga greičiau, nei kūnas spėja adaptuotis. Traumos rizika.':
+       'Ūmus ir lėtinis krūvis suderinti.')+
+      '</div>';
+    el.appendChild(d);
+  }
 })();
 
 /* ---------- SAVAITĖ ---------- */
