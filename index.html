@@ -165,8 +165,19 @@ section{margin-top:30px}
 
 /* --- laikas / planavimas --- */
 .slots{display:grid;gap:8px}
-.slot{display:grid;grid-template-columns:52px 1fr;gap:10px;align-items:center;padding:10px 14px;
+.slot{display:grid;grid-template-columns:52px 1fr;gap:10px 12px;align-items:center;padding:11px 14px;
   border-radius:var(--r-s);background:var(--glass);border:1px solid var(--edge)}
+.slot .vieta{grid-column:2;display:flex;gap:7px;flex-wrap:wrap;align-items:center;
+  padding-top:8px;border-top:1px dashed var(--edge)}
+.slot .vl{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.1em;
+  font-size:10.5px;color:var(--ink-3);font-weight:600;margin-right:2px}
+.opt.v[aria-pressed="true"]{background:var(--c5);border-color:var(--c5)}
+.gear{display:grid;gap:10px}
+.gearrow{padding:13px 16px;border-radius:var(--r-s);background:var(--glass);border:1px solid var(--edge)}
+.gearrow .gn{font-family:"Barlow Condensed",sans-serif;font-size:17px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.05em}
+.gearrow .gi{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+.gi .opt[aria-pressed="true"]{background:var(--c1);border-color:var(--c1);color:var(--btn-ink)}
 .slot .sd{font-family:"Barlow Condensed",sans-serif;font-weight:700;text-transform:uppercase;
   font-size:13px;letter-spacing:.08em;color:var(--ink-3)}
 .slot .opts{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
@@ -395,6 +406,16 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--edge);font-si
      ryte organizmas geriau kelia sunkius svorius, vakare geriau toleruoja ilgą aerobinį darbą.
      Jei diena turi ir rytą, ir vakarą — jėga ryte, bėgimas ar dviratis vakare.
      Pagal tai sudėliosiu kitą savaitę, o tu iš anksto matysi, kur sportas įsiterpia tarp darbų.</p>
+  <p class="note"><b>Vieta svarbi ne mažiau už laiką.</b> Vilniuje nėra nei sandbag'ų, nei žiedų
+     muscle-up'ams, todėl ten suplanuota ATHX sesija būtų negyva. Pažymėk vietą, ir tos dienos
+     programa bus sudėliota iš to, kas ten realiai yra.</p>
+</section>
+
+<section>
+  <div class="sechead"><h2>Vietos ir inventorius</h2><span class="eyebrow">ką kur turi</span></div>
+  <div class="gear" id="gear"></div>
+  <p class="note">Pažymėk, kas kurioje vietoje yra. Tai vienkartinis darbas: paskui kiekvienos
+     dienos programa automatiškai apsiribos tuo, kas toje vietoje prieinama.</p>
 </section>
 
 <section>
@@ -490,8 +511,8 @@ const PLAN=[
   b:[{h:"Apšilimas · 10 min",i:MOB.map(x=>({t:x}))},
      {h:"A · ATHX pozicija (prieš svorį)",i:[
        {t:"<b>Dual Dumbbell Front Rack Hold</b> — 3 × 30 s · dvi hantelės ant pečių, alkūnės aukštai",log:"DB Front Rack Hold",plan:15},
-       {t:"<b>Overhead Squat</b> — 3 × 5 · <b>ne daugiau 45 kg</b>, 2 s pauzė · riešas tiesus",log:"Overhead Squat",plan:45},
-       {t:"⚠ Praeitą antradienį 60 kg sukėlė riešų skausmą. Šią savaitę lubos 45."}]},
+       {t:"<b>Overhead Squat</b> — 3 × 5 · praeitą savaitę 60 kg, dabar <b>65</b> · 2 s pauzė apačioje",log:"Overhead Squat",plan:65},
+       {t:"Vienintelė sąlyga: <b>riešas lieka tiesus.</b> Pradeda linkti — tai jau ne jėgos, o pozicijos riba, ir svoris nuimamas"}]},
      {h:"B · pagrindinis",i:[
        {t:"<b>Back Squat</b> — 4 × 5 · praeitą savaitę buvo 90 × 5 × 4, dabar <b>+5 kg</b> · 3 kart. atsargoje · poilsis 2:30",log:"Back Squat",plan:95}]},
      {h:"C · priedai",i:[
@@ -501,7 +522,7 @@ const PLAN=[
        {t:"<b>20 min tolygiai</b> · pulsas 135–150 · lubos 155"},
        {t:"Manieže: laikas, ne kilometrai. Reikia eiti — eini"},
        {t:"Tai pirmas bėgimas per devynis mėnesius. Lėtai yra teisingai"}]}],
-  n:"HRV vakar 43, užvakar 38, bazė 43–56. Esi bazės apačioje, todėl Back Squat kyla tik 5 kg, o Overhead Squat nuleistas iki 45. Jei rytas jausis sunkus, bėgimas keliasi į trečiadienį."},
+  n:"HRV vakar 43, užvakar 38, bazė 43–56. Esi bazės apačioje, todėl Back Squat kyla tik 5 kg. Overhead Squat kyla iki 65, nes riešų skausmas buvo laikinas — bet pozicijos taisyklė lieka. Jei rytas jausis sunkus, bėgimas keliasi į trečiadienį."},
  {d:"Tr",dt:"10-07",wd:"Trečiadienis",k:"extra",t:"PUMP viršus · Christian Harris",tg:"PUMP",
   s:"iš tavo programos · apimtis, ne maksimumai",
   b:[{h:"Apšilimas",i:[{t:"3–5 min lengvas SkiErg"},
@@ -523,10 +544,10 @@ const PLAN=[
        {t:"<b>Handstand Push-up</b> — 4 × 3 · skauda riešus → Pike Push-up ant dėžės",log:"HS Push-up",unit:"kart."},
        {t:"<b>Ring Muscle-up</b>, progresija — 5 × 1–2",log:"Ring Muscle-up",unit:"kart."}]},
      {h:"C · ATHX judesiai, lengvai",i:[
-       {pre:"3 raundai, ne laikui:\n  10 Dual Dumbbell Ground to Overhead · lengvai\n  20 m Dual Dumbbell Front Rack Lunge · lengvai\n  10 Box Jump Over · 24\" arba 30\", jei dėžė verčiasi\n  15 kal SkiErg\n  – 2 min poilsio –"},
+       {pre:"3 raundai, ne laikui:\n  10 Dual Dumbbell Ground to Overhead · lengvai\n  20 m Dual Dumbbell Front Rack Lunge · lengvai\n  10 Box Jump Over · 30\" (varžybinis aukštis)\n  15 kal SkiErg\n  – 2 min poilsio –"},
        {t:"<b>Dual Dumbbell Ground to Overhead</b> — svoris",log:"Dual DB GTOH",plan:12.5},
        {t:"<b>Dual Dumbbell Front Rack Lunge</b> — svoris",log:"DB Front Rack Lunge",plan:12.5}]}],
-  n:"Varžybose bus 22,5 kg ir po 60 kartojimų. Šiandien imam ketvirtadalį svorio ir šeštadalį apimties: tikslas ne pavargti, o rasti poziciją. ⚠ Patikrink, ar salės dėžė verčiasi į 30 colių — dauguma CrossFit dėžių yra 20/24/30."},
+  n:"Varžybose bus 22,5 kg ir po 60 kartojimų. Šiandien imam ketvirtadalį svorio ir šeštadalį apimties: tikslas ne pavargti, o rasti poziciją. Dėžė verčiasi į 30 colių, tad box jump over darom varžybiniame aukštyje. Jei reikia dar aukščiau — blynas ant viršaus."},
  {d:"Pn",dt:"10-09",wd:"Penktadienis",k:"core",t:"Bėgimas plius irklavimo įvadas",tg:"Bėgimas 25'",
   s:"vakare · pulsas 135–150",
   b:[{h:"Pagrindinis",i:[
@@ -552,6 +573,10 @@ const PLAN=[
      {h:"Mobilumas",i:[{t:"<b>GOWOD</b> dienos programa · laikrodyje jungi <b>Yoga</b>"}]}],
   n:"Recovery diena nėra laisva diena. Ji leidžia kitą savaitę pakartoti tą patį krūvį. Pažymėk, ką realiai darei."}
 ];
+const VIETOS=["Klaipėda","Vilnius","Namai","Lauke","Kita"];
+const INVENTORIUS=["Štanga ir blynai","Stovai / rack","Hanteliai iki 25 kg","Sandbag",
+ "SkiErg","C2 Row","Echo / Air bike","Dviračio staklės","Dėžė 24\"","Dėžė 30\"",
+ "Žiedai (RMU)","Skersinis (BMU)","Guma / bandai","Sled","Kettlebell","Manieżas / takelis"];
 const RECOVERY=["Sauna","Pasivaikščiojimas","Kvėpavimas","GOWOD mobilumas",
  "Tempimai su gumomis","Šalta vonia","Masažas","Volas / foam roll","Plaukimas","Ilgas miegas"];
 const GOALS=[
@@ -885,7 +910,7 @@ let RECO=null;
 let WEEK=null;
 (function(){
   const strip=$("strip"),sess=$("sess"),slots=$("slots");
-  let done={},notes={},extra={},w={},rec={},plan={},poilsis={},dbRef=null,timer=null,sel=0,dirty=false;
+  let done={},notes={},extra={},w={},rec={},plan={},poilsis={},inv={},dbRef=null,timer=null,sel=0,dirty=false;
   const todayIdx=PLAN.findIndex(p=>"2026-"+p.dt===DATA.atnaujinta&&p.k!=="past");
   if(todayIdx>=0)sel=todayIdx;
   WEEK={get:()=>({done,notes,extra,svoriai:w,recovery:rec,planas:plan,poilsis})};
@@ -1001,7 +1026,7 @@ let WEEK=null;
     st.innerHTML="<b>"+WEEK_ID+"</b> · padaryta "+n+" · branduolys "+core+"/4";
   }
   async function save(loud){
-    const payload={week:WK_START,done,notes,extra,svoriai:w,recovery:rec,planas:plan,poilsis,ts:Date.now()};
+    const payload={week:WK_START,done,notes,extra,svoriai:w,recovery:rec,planas:plan,poilsis,inventorius:inv,ts:Date.now()};
     try{localStorage.setItem("vs-"+WK_START,JSON.stringify(payload));}catch(e){}
     try{
       if(STORE.mode==="db"&&dbRef){await dbRef.set(payload);if(!loud)syncState("Įrašyta",1);return true;}
@@ -1010,6 +1035,20 @@ let WEEK=null;
       return false;
     }catch(e){syncState("Neįrašyta: "+e.message);return false;}
   }
+  /* --- vietos ir inventorius --- */
+  function gearUI(){
+    const g=$("gear"); if(!g)return;
+    g.innerHTML=VIETOS.slice(0,3).map(v=>
+      '<div class="gearrow"><span class="gn">'+v+'</span><div class="gi">'+
+      INVENTORIUS.map((it,ii)=>'<button class="opt" data-v="'+v+'" data-i="'+ii+
+        '" aria-pressed="'+((inv[v]||{})[ii]?"true":"false")+'">'+it+'</button>').join("")+
+      '</div></div>').join("");
+    g.querySelectorAll(".opt").forEach(b2=>b2.addEventListener("click",()=>{
+      const v=b2.dataset.v, i=b2.dataset.i;
+      inv[v]=inv[v]||{}; inv[v][i]=!inv[v][i]; touch();
+      b2.setAttribute("aria-pressed",inv[v][i]?"true":"false");}));
+  }
+
   /* --- kitos savaitės laikas --- */
   function slotUI(){
     if(!slots)return;
@@ -1020,6 +1059,9 @@ let WEEK=null;
         ['rytas','vakaras','abu','nėra'].map(o=>'<button class="opt" data-d="'+i+'" data-o="'+o+
           '" aria-pressed="'+(p.kada===o?"true":"false")+'">'+o+'</button>').join("")+
         '<input type="time" data-d="'+i+'" value="'+(p.val||"")+'" aria-label="'+d+' valanda">'+
+        '</span><span class="vieta"><span class="vl">Vieta</span>'+
+        VIETOS.map(v=>'<button class="opt v" data-d="'+i+'" data-v="'+v+
+          '" aria-pressed="'+(p.vieta===v?"true":"false")+'">'+v+'</button>').join("")+
         '</span></div>';
     }).join("");
     slots.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>{
@@ -1027,29 +1069,32 @@ let WEEK=null;
       touch(); slotUI();}));
     slots.querySelectorAll("input[type=time]").forEach(inp=>inp.addEventListener("input",()=>{
       const i=inp.dataset.d; plan[i]=plan[i]||{}; plan[i].val=inp.value; touch();}));
+    slots.querySelectorAll(".opt.v").forEach(b2=>b2.addEventListener("click",()=>{
+      const i=b2.dataset.d; plan[i]=plan[i]||{};
+      plan[i].vieta=(plan[i].vieta===b2.dataset.v)?null:b2.dataset.v; touch(); slotUI();}));
   }
   try{const raw=localStorage.getItem("vs-"+WK_START);
     if(raw){const o=JSON.parse(raw)||{};done=o.done||{};notes=o.notes||{};extra=o.extra||{};
-      w=o.svoriai||o.w||{};rec=o.recovery||{};plan=o.planas||{};poilsis=o.poilsis||{};}}catch(e){}
-  chips();session();slotUI();
+      w=o.svoriai||o.w||{};rec=o.recovery||{};plan=o.planas||{};poilsis=o.poilsis||{};inv=o.inventorius||{};}}catch(e){}
+  chips();session();slotUI();gearUI();
   (async()=>{
     const db=await window.claude?.use?.("db");
     if(db){STORE.mode="db";dbRef=db.doc("savaites/"+WK_START);
       try{const s=await dbRef.get();
         if(s){done=s.done||done;notes=s.notes||notes;extra=s.extra||extra;
-          w=s.svoriai||w;rec=s.recovery||rec;plan=s.planas||plan;poilsis=s.poilsis||poilsis;}}catch(e){}
-      syncState("claude.ai saugykla",1);chips();session();slotUI();return;}
+          w=s.svoriai||w;rec=s.recovery||rec;plan=s.planas||plan;poilsis=s.poilsis||poilsis;inv=s.inventorius||inv;}}catch(e){}
+      syncState("claude.ai saugykla",1);chips();session();slotUI();gearUI();return;}
     if(ghTok()){STORE.mode="gh";
       const had=Object.keys(done).length||Object.keys(notes).length||Object.keys(w).length;
       try{const s=await ghGet("zurnalas/"+WK_START+".json");
         if(s&&!s.missing){done=s.done||done;notes=s.notes||notes;extra=s.extra||extra;
-          w=s.svoriai||w;rec=s.recovery||rec;plan=s.planas||plan;poilsis=s.poilsis||poilsis;syncState("GitHub saugykla",1);}
+          w=s.svoriai||w;rec=s.recovery||rec;plan=s.planas||plan;poilsis=s.poilsis||poilsis;inv=s.inventorius||inv;syncState("GitHub saugykla",1);}
         else{syncState("GitHub saugykla",1);
           if(had){await save(false);banner("<b>Radau įrašų, kurie buvo likę tik šitame įrenginyje, "+
             "ir ką tik nusiunčiau juos.</b> Dabar viskas sinchronizuota.",1);}}
       }catch(e){syncState("GitHub klaida: "+e.message);
         banner("<b>Raktas neveikia:</b> "+e.message+". Įrašai kol kas lieka tik šitame įrenginyje.");}
-      chips();session();slotUI();return;}
+      chips();session();slotUI();gearUI();return;}
     syncState("Tik šis įrenginys");
     banner("<b>Šitame įrenginyje raktas neįrašytas.</b> Ką įrašysi — svoriai ir komentarai — "+
       "liks tik šitos naršyklės atmintyje ir manęs nepasieks. Raktas galioja vienam įrenginiui, "+
