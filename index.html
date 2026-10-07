@@ -204,6 +204,9 @@ section{margin-top:30px}
 @media(min-width:620px){.mv{grid-template-columns:1fr auto;gap:14px;align-items:center}}
 .mv:last-child{border-bottom:none}
 .mv .txt{font-size:15.5px;min-width:0;line-height:1.45}
+.nr{display:inline-block;min-width:22px;font-family:"Barlow Condensed",sans-serif;font-weight:700;
+  color:var(--ink-3);font-size:14px;margin-right:3px;font-variant-numeric:tabular-nums}
+.plain .nr{color:var(--ink-3)}
 .mv .txt b{font-weight:600}
 .wsets{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
 .wf{display:flex;flex-direction:column;gap:4px}
@@ -534,7 +537,7 @@ const PLAN=[
        {t:"<b>Single Arm Dumbbell Row</b> — 3 × 12",log:"DB Row"},
        {t:"<b>Single Arm Z Press</b> — 3 × 10, lengvai",log:"Z Press"},
        {t:"Izoliaciją (pullover, hamstring curls) šiandien praleidžiam"}]}],
-  n:"⚠ Šiandien rodikliai žemiau bazės: pulsas ramybėje 54 prie bazės 48–50, HRV 38 prie 43–56, miegota 5:41, Body Battery pakilo tik iki 40. Christian Harris šiai savaitei rašo „iki nesėkmės kiekviename pratime“ — šiandien to nedarom. Iš 55 min PUMP lieka 25 min. Trečiadienis yra priedas, ne branduolys, todėl jo galima netekti be pasekmių. Bėgimas lieka, nes Z2 darbas atsigavimui netrukdo. ⚠ Po devynių mėnesių pertraukos blauzdos ir Achilo sausgyslės primins apie save rytoj ir poryt, ne šiandien."},
+  n:"✅ Padaryta. Bėgimas: 33 min, 5,25 km, tempas 6:18/km, pulsas vidutinis 151, maksimalus 162 — tai Z3 viršus, o ne Z2. Taikinys buvo 135–150, lubos 155, tad bėgai pačiame krašte. Palyginimui: 2025-11 bėgdavai 6:03/km prie pulso 144. Dabar 15 s lėčiau prie 7 bpm aukštesnio pulso — tai devynių mėnesių pertraukos kaina, išmatuota. ⚠ Šiandien rodikliai žemiau bazės: pulsas ramybėje 54 prie bazės 48–50, HRV 38 prie 43–56, miegota 5:41, Body Battery pakilo tik iki 40. Christian Harris šiai savaitei rašo „iki nesėkmės kiekviename pratime“ — šiandien to nedarom. Iš 55 min PUMP lieka 25 min. Trečiadienis yra priedas, ne branduolys, todėl jo galima netekti be pasekmių. Bėgimas lieka, nes Z2 darbas atsigavimui netrukdo. ⚠ Po devynių mėnesių pertraukos blauzdos ir Achilo sausgyslės primins apie save rytoj ir poryt, ne šiandien."},
  {d:"Kt",dt:"10-08",wd:"Ketvirtadienis",k:"core",t:"Gimnastika plius MetCon X įvadas",tg:"Gimnastika + ATHX",
   s:"pirmas tikras ATHX judesių prisilietimas",
   b:[{h:"Apšilimas · 10 min",i:MOB.map(x=>({t:x}))},
@@ -951,18 +954,20 @@ let WEEK=null;
     if(poilsis[sel]&&PLAN[sel].k!=="recovery")
       h+='<p class="note" style="color:var(--c5)"><b>Ši diena pakeista į recovery</b> pagal rytinius rodiklius. '+
         'Originalus planas: '+PLAN[sel].t+'. <button class="btn" id="undoreco" style="margin-left:8px">Grąžinti planą</button></p>';
+    let nr=0;
     p.b.forEach(bl=>{
       h+='<h4>'+bl.h+'</h4>';
       bl.i.forEach(it=>{
         if(it.pre){h+='<pre>'+esc(it.pre)+'</pre>';return;}
-        if(!it.log){h+='<div class="plain">'+it.t+'</div>';return;}
+        const N='<span class="nr">'+(++nr)+'.</span>';
+        if(!it.log){h+='<div class="plain">'+N+it.t+'</div>';return;}
         const base=sel+":"+it.log, unit=it.unit||"kg", isKg=unit==="kg";
         const dn=!!w[base+":d"];
         const planTxt=it.plan?' <span style="color:var(--ink-3)">· planas '+it.plan+' '+unit+'</span>':'';
         const warm=isKg?'<div class="wf"><span class="wl">Apšilimas</span><span class="box">'+
           numIn("w-"+base+":a",w[base+":a"],"—","",it.log+" apšilimo svoris")+
           '<span class="unit">'+unit+'</span></span></div>':'';
-        h+='<div class="mv'+(dn?" ok":"")+'"><span class="txt">'+it.t+planTxt+'</span><span class="wsets">'+warm+
+        h+='<div class="mv'+(dn?" ok":"")+'"><span class="txt">'+N+it.t+planTxt+'</span><span class="wsets">'+warm+
            '<div class="wf main"><span class="wl">Darbinis</span><span class="box">'+
            numIn("w-"+base+":w",w[base+":w"],String(it.plan??"—"),"",it.log+" darbinis")+
            '<span class="unit">'+unit+'</span></span></div>'+
