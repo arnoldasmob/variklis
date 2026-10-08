@@ -962,8 +962,8 @@ let WEEK=null;
         const R=(DATA.rekordai||{})[it.log];
         let rek="";
         if(R&&R.sunkiausia){
-          rek='<span class="rek">2026 rekordas: <b>'+R.sunkiausia+' '+unit+'</b>'+
-            (R.data?' · '+R.data:'')+'</span>';
+          rek='<span class="rek">Max 2026 · <b>'+R.sunkiausia+' '+unit+'</b>'+
+            (R.data?' · '+R.data.slice(5):'')+'</span>';
         }
         const prKg=R&&R.sunkiausia?parseFloat(R.sunkiausia):null;
         const nSets=parseInt(w[base+":sets"],10)||it.sets||3;
