@@ -200,8 +200,7 @@ section{margin-top:30px}
 /* --- sesija --- */
 .sess h4{text-transform:uppercase;letter-spacing:.11em;font-size:11.5px;color:var(--ink-3);
   margin:16px 0 7px;font-weight:600}
-.mv{display:grid;grid-template-columns:1fr;gap:9px;padding:11px 0;border-bottom:1px solid var(--edge)}
-@media(min-width:620px){.mv{grid-template-columns:1fr auto;gap:14px;align-items:center}}
+.mv{display:block;padding:13px 0;border-bottom:1px solid var(--edge)}
 .mv:last-child{border-bottom:none}
 .mv .txt{font-size:15.5px;min-width:0;line-height:1.45}
 .nr{display:inline-block;min-width:22px;font-family:"Barlow Condensed",sans-serif;font-weight:700;
@@ -212,38 +211,36 @@ section{margin-top:30px}
 .wf{display:flex;flex-direction:column;gap:4px}
 .wf .wl{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.1em;
   font-size:10.5px;font-weight:600;color:var(--ink-3)}
-.wf.main .wl{color:var(--c2)}
 .wf .box{display:flex;align-items:center;gap:3px}
-.wf .x{color:var(--ink-3);font-size:14px;padding:0 1px}
-.mv input.reps{width:56px;font-size:17px}
-.mv .main input.reps{width:62px;font-size:19px;color:var(--c2)}
-.chk{width:46px;height:46px;flex:none;border-radius:11px;border:1.5px solid var(--edge-2);
-  background:transparent;color:var(--ink-3);font-size:20px;line-height:1;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;align-self:flex-end}
-.chk[aria-pressed="true"]{background:var(--c1);border-color:var(--c1);color:var(--btn-ink)}
-.chk:focus-visible{outline:2px solid var(--c1);outline-offset:2px}
-.mv.ok .txt{opacity:.62}
-.savebar{position:sticky;bottom:0;z-index:20;margin-top:18px;padding:12px 0 calc(12px + env(safe-area-inset-bottom,0px));
-  background:linear-gradient(to top,var(--bg) 62%,transparent);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.savebtn{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.08em;
-  font-size:15px;font-weight:700;padding:13px 26px;min-height:50px;border-radius:11px;border:none;
-  background:var(--c1);color:var(--btn-ink);cursor:pointer;flex:none}
-.savebtn:disabled{opacity:.45;cursor:default}
-.savebtn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-.savemsg{font-size:13.5px;color:var(--ink-3)}
-.mv input{width:88px;min-height:44px;background:var(--glass-2);border:1.5px solid var(--edge-2);
-  border-radius:9px;color:var(--ink-2);font-family:"Barlow Condensed",sans-serif;font-size:19px;
-  font-weight:700;padding:6px 10px;text-align:right;font-variant-numeric:tabular-nums}
-.mv input::placeholder{color:var(--ink-3);font-weight:600}
-.mv input:focus{outline:2px solid var(--ink-2);outline-offset:1px}
-.mv .main input{width:108px;min-height:48px;background:var(--warm-in);border-color:var(--warm-br);
-  color:var(--c2);font-size:23px;padding:7px 11px}
-.mv .main input::placeholder{color:var(--warm-ph)}
-.mv .main input:hover{border-color:var(--edge-2)}
-.mv .main input:focus{outline:2px solid var(--c2);border-color:var(--c2);background:var(--warm-fc)}
 .mv .unit{font-size:13px;color:var(--ink-3);margin-left:5px;font-weight:600;
   font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.06em}
-.mv .main .unit{color:var(--c2);font-size:14px}
+
+/* --- seriju lentele --- */
+.rek{display:block;font-size:12.5px;color:var(--ink-3);margin-top:3px;font-variant-numeric:tabular-nums}
+.rek b{color:var(--c4);font-weight:600}
+.sets{margin-top:10px;width:100%;border-collapse:collapse}
+.sets th{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.1em;
+  font-size:10.5px;color:var(--ink-3);font-weight:600;padding:0 6px 5px;text-align:center}
+.sets th:first-child{text-align:left;width:34px}
+.sets td{padding:4px 6px;text-align:center}
+.sets td:first-child{text-align:left;font-family:"Barlow Condensed",sans-serif;font-weight:700;
+  color:var(--ink-3);font-size:15px}
+.sets input{width:100%;min-width:60px;min-height:44px;background:var(--glass-2);
+  border:1.5px solid var(--edge-2);border-radius:9px;color:var(--ink);
+  font-family:"Barlow Condensed",sans-serif;font-size:19px;font-weight:700;padding:6px 8px;
+  text-align:center;font-variant-numeric:tabular-nums}
+.sets .kgcell input{background:var(--warm-in);border-color:var(--warm-br);color:var(--c2);font-size:21px}
+.sets .kgcell input::placeholder{color:var(--warm-ph)}
+.sets input::placeholder{color:var(--ink-3);font-weight:600}
+.sets input:focus{outline:2px solid var(--c2);outline-offset:1px;border-color:var(--c2)}
+.sets .chk{width:44px;height:44px;border-radius:10px;font-size:18px}
+.sets tr.pr .kgcell input{border-color:var(--c4);box-shadow:0 0 0 1px var(--c4)}
+.prbadge{display:inline-block;font-family:"Barlow Condensed",sans-serif;font-size:10px;
+  font-weight:700;color:var(--c4);letter-spacing:.08em;vertical-align:super}
+.addset{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.07em;
+  font-size:12.5px;font-weight:600;padding:7px 14px;min-height:40px;border-radius:8px;
+  border:1px dashed var(--edge-2);background:transparent;color:var(--ink-3);cursor:pointer;margin-top:8px}
+.addset:hover{border-color:var(--c1);color:var(--c1)}
 .plain{font-size:15px;padding:7px 0;color:var(--ink-2)}
 .sess pre{background:var(--pre-bg);border:1px solid var(--edge);border-radius:10px;
   padding:13px 15px;margin:6px 0 0;font-size:13.5px;line-height:1.6;overflow-x:auto;
@@ -492,7 +489,7 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--edge);font-si
 <div class="tip" id="tip" role="status" aria-live="polite"></div>
 
 <script>
-window.DATA={"atnaujinta":"2026-10-07","dienos":[{"d":"2026-09-24","rhr":53,"hrv":48,"miegas":28440,"miego_balas":85,"stresas":29,"bb":14,"bb_max":65},{"d":"2026-09-25","rhr":52,"hrv":43,"miegas":22860,"miego_balas":61,"stresas":35,"bb":8,"bb_max":50},{"d":"2026-09-26","rhr":48,"hrv":63,"miegas":31980,"miego_balas":81,"stresas":31,"bb":19,"bb_max":100},{"d":"2026-09-27","rhr":50,"hrv":54,"miegas":19980,"miego_balas":64,"stresas":37,"bb":9,"bb_max":58},{"d":"2026-09-28","rhr":49,"hrv":49,"miegas":26100,"miego_balas":80,"stresas":29,"bb":19,"bb_max":81},{"d":"2026-09-29","rhr":49,"hrv":54,"miegas":18360,"miego_balas":60,"stresas":38,"bb":5,"bb_max":62},{"d":"2026-09-30","rhr":51,"hrv":50,"miegas":16380,"miego_balas":59,"stresas":32,"bb":5,"bb_max":47},{"d":"2026-10-01","rhr":49,"hrv":54,"miegas":26460,"miego_balas":80,"stresas":29,"bb":12,"bb_max":88},{"d":"2026-10-02","rhr":52,"hrv":50,"miegas":18300,"miego_balas":62,"stresas":34,"bb":6,"bb_max":59},{"d":"2026-10-03","rhr":49,"hrv":53,"miegas":25860,"miego_balas":82,"stresas":32,"bb":9,"bb_max":89},{"d":"2026-10-04","rhr":54,"stresas":55,"bb":13,"bb_max":50},{"d":"2026-10-05","rhr":52,"hrv":38,"miegas":25620,"miego_balas":56,"stresas":35,"bb":10,"bb_max":65},{"d":"2026-10-06","rhr":51,"hrv":43,"miegas":26400,"miego_balas":85,"stresas":34,"bb":10,"bb_max":73},{"d":"2026-10-07","rhr":54,"hrv":38,"miegas":20460,"miego_balas":59,"stresas":31,"bb":40,"bb_max":40}],"svoris":[{"d":"2026-10-07","kg":90.9,"rieb":25.6,"raum":35.6},{"d":"2026-10-06","kg":89.9,"rieb":25.2,"raum":35.4},{"d":"2026-09-29","kg":90.2,"rieb":25.7,"raum":35.4},{"d":"2026-09-27","kg":90.1,"rieb":25.3,"raum":35.4},{"d":"2026-09-26","kg":91.0,"rieb":25.2,"raum":35.6},{"d":"2026-09-23","kg":91.7,"rieb":25.2,"raum":35.8},{"d":"2026-09-21","kg":91.7,"rieb":22.0,"raum":35.8},{"d":"2026-09-19","kg":91.4,"rieb":25.7,"raum":35.7},{"d":"2026-09-01","kg":89.0,"rieb":null,"raum":null}],"vo2":52.0,"kruvis":{"zemas_aerobinis":1060,"zemas_min":493,"zemas_max":1146,"aukstas_aerobinis":711,"aukstas_min":702,"aukstas_max":1355,"anaerobinis":600,"ana_min":217,"ana_max":652,"balansas":"BALANCED"},"apkrova":{"ukas":542,"letinis":572,"tunelis_min":458,"tunelis_max":858,"acwr":0.9,"acwr_bukle":"OPTIMAL","busena":"MAINTAINING_3"},"apzvalga":[{"tipas":"strength_training","data":"2026-10-06 14:31","min":54,"hr":123,"hr_max":161,"kcal":531,"zona":"Z1","judesiai":[{"nm":"Nepažymėta","serijos":13,"tonazas":4580,"darbinis":110.0,"darb_serijos":"1 × 8","apsilimas":"50×5 / 70×5 / 70×5 / 70×5 / 80×5 / 100×5 / 100×5 / 100×5 / 100×5","kartojimai":75,"e1rm":139,"vs_geriausias":59},{"nm":"Deadlift","serijos":3,"tonazas":2560,"darbinis":110.0,"darb_serijos":"2 × 8 / 8","apsilimas":"80×10","e1rm":139,"vs_geriausias":67}],"tonazas":7140,"seriju":16},{"tipas":"indoor_cardio","data":"2026-10-06 13:57","min":34,"hr":131,"hr_max":167,"kcal":413,"zona":"Z2"},{"tipas":"strength_training","data":"2026-10-05 10:01","min":43,"hr":124,"hr_max":165,"kcal":444,"zona":"Z1","judesiai":[{"nm":"Strict Press","serijos":5,"tonazas":2380,"darbinis":60.0,"darb_serijos":"2 × 10 / 8","apsilimas":"40×10 / 40×10 / 50×10","e1rm":80,"vs_geriausias":88},{"nm":"Front Squat","serijos":3,"tonazas":1680,"apsilimas":"60×8 / 70×8 / 80×8"},{"nm":"BARBELL_BENCH_PRESS","serijos":5,"tonazas":2930,"darbinis":70.0,"darb_serijos":"2 × 10 / 9","apsilimas":"50×10 / 50×10 / 60×10","e1rm":93,"vs_geriausias":92}],"tonazas":6990,"seriju":13},{"tipas":"indoor_cardio","data":"2026-10-05 09:42","min":18,"hr":125,"hr_max":161,"kcal":211,"zona":"Z1"}],"veiklos":[{"id":24626037570,"d":"2026-10-06 14:31","tipas":"strength_training","min":54,"km":0.0,"hr":123.0,"hr_max":161.0,"kcal":531.0},{"id":24625364670,"d":"2026-10-06 13:57","tipas":"indoor_cardio","min":34,"km":0.0,"hr":131.0,"hr_max":167.0,"kcal":413.0},{"id":24610881231,"d":"2026-10-05 10:01","tipas":"strength_training","min":43,"km":0.0,"hr":124.0,"hr_max":165.0,"kcal":444.0},{"id":24610584134,"d":"2026-10-05 09:42","tipas":"indoor_cardio","min":18,"km":0.0,"hr":125.0,"hr_max":161.0,"kcal":211.0},{"id":24589554296,"d":"2026-10-03 12:30","tipas":"gravel_cycling","min":165,"km":58.95,"hr":130.0,"hr_max":164.0,"kcal":1896.0},{"id":24574963068,"d":"2026-10-02 09:08","tipas":"strength_training","min":53,"km":0.0,"hr":123.0,"hr_max":171.0,"kcal":505.0},{"id":24574563679,"d":"2026-10-02 08:37","tipas":"indoor_cardio","min":28,"km":0.0,"hr":117.0,"hr_max":155.0,"kcal":282.0},{"id":24563393492,"d":"2026-10-01 09:38","tipas":"strength_training","min":62,"km":0.0,"hr":125.0,"hr_max":161.0,"kcal":626.0}]};
+window.DATA={"atnaujinta":"2026-10-07","dienos":[{"d":"2026-09-24","rhr":53,"hrv":48,"miegas":28440,"miego_balas":85,"stresas":29,"bb":14,"bb_max":65},{"d":"2026-09-25","rhr":52,"hrv":43,"miegas":22860,"miego_balas":61,"stresas":35,"bb":8,"bb_max":50},{"d":"2026-09-26","rhr":48,"hrv":63,"miegas":31980,"miego_balas":81,"stresas":31,"bb":19,"bb_max":100},{"d":"2026-09-27","rhr":50,"hrv":54,"miegas":19980,"miego_balas":64,"stresas":37,"bb":9,"bb_max":58},{"d":"2026-09-28","rhr":49,"hrv":49,"miegas":26100,"miego_balas":80,"stresas":29,"bb":19,"bb_max":81},{"d":"2026-09-29","rhr":49,"hrv":54,"miegas":18360,"miego_balas":60,"stresas":38,"bb":5,"bb_max":62},{"d":"2026-09-30","rhr":51,"hrv":50,"miegas":16380,"miego_balas":59,"stresas":32,"bb":5,"bb_max":47},{"d":"2026-10-01","rhr":49,"hrv":54,"miegas":26460,"miego_balas":80,"stresas":29,"bb":12,"bb_max":88},{"d":"2026-10-02","rhr":52,"hrv":50,"miegas":18300,"miego_balas":62,"stresas":34,"bb":6,"bb_max":59},{"d":"2026-10-03","rhr":49,"hrv":53,"miegas":25860,"miego_balas":82,"stresas":32,"bb":9,"bb_max":89},{"d":"2026-10-04","rhr":54,"stresas":55,"bb":13,"bb_max":50},{"d":"2026-10-05","rhr":52,"hrv":38,"miegas":25620,"miego_balas":56,"stresas":35,"bb":10,"bb_max":65},{"d":"2026-10-06","rhr":51,"hrv":43,"miegas":26400,"miego_balas":85,"stresas":34,"bb":10,"bb_max":73},{"d":"2026-10-07","rhr":54,"hrv":38,"miegas":20460,"miego_balas":59,"stresas":36,"bb":7,"bb_max":40}],"svoris":[{"d":"2026-10-07","kg":90.9,"rieb":25.6,"raum":35.6},{"d":"2026-10-06","kg":89.9,"rieb":25.2,"raum":35.4},{"d":"2026-09-29","kg":90.2,"rieb":25.7,"raum":35.4},{"d":"2026-09-27","kg":90.1,"rieb":25.3,"raum":35.4},{"d":"2026-09-26","kg":91.0,"rieb":25.2,"raum":35.6},{"d":"2026-09-23","kg":91.7,"rieb":25.2,"raum":35.8},{"d":"2026-09-21","kg":91.7,"rieb":22.0,"raum":35.8},{"d":"2026-09-19","kg":91.4,"rieb":25.7,"raum":35.7},{"d":"2026-09-01","kg":89.0,"rieb":null,"raum":null}],"vo2":52.0,"kruvis":{"zemas_aerobinis":1213,"zemas_min":493,"zemas_max":1146,"aukstas_aerobinis":711,"aukstas_min":702,"aukstas_max":1355,"anaerobinis":628,"ana_min":217,"ana_max":652,"balansas":"AEROBIC_LOW_FOCUS"},"apkrova":{"ukas":772,"letinis":613,"tunelis_min":490,"tunelis_max":920,"acwr":1.2,"acwr_bukle":"OPTIMAL","busena":"MAINTAINING_4"},"rekordai":{"Bench Press":{"sunkiausia":"120 × 4","data":"2024-06-11","e1rm":136,"e1rm_is":"120 × 4","e1rm_data":"2024-06-11"},"Back Squat":{"sunkiausia":"140 × 11","data":"2024-12-18","e1rm":187,"e1rm_is":"140 × 10","e1rm_data":"2024-12-18"},"Front Squat":{"sunkiausia":"130 × 3","data":"2024-04-17","e1rm":143,"e1rm_is":"130 × 3","e1rm_data":"2024-04-17"},"Overhead Squat":{"sunkiausia":"90 × 3","data":"2025-09-03","e1rm":99,"e1rm_is":"90 × 3","e1rm_data":"2022-07-01"},"Strict Press":{"sunkiausia":"80 × 3","data":"2024-12-04","e1rm":91,"e1rm_is":"70 × 9","e1rm_data":"2025-11-17"},"Pullover":{"sunkiausia":"50 × 4","data":"2022-10-29","e1rm":57,"e1rm_is":"50 × 4","e1rm_data":"2022-10-29"},"DB Row":{"sunkiausia":"60 × 12","data":"2026-07-22","e1rm":80,"e1rm_is":"60 × 10","e1rm_data":"2025-05-09"},"Deadlift":{"sunkiausia":"200 × 1","data":"2024-10-30","e1rm":207,"e1rm_is":"200 × 1","e1rm_data":"2024-10-30"},"Push Press":{"sunkiausia":"105 × 1","data":"2023-05-30","e1rm":109,"e1rm_is":"105 × 1","e1rm_data":"2023-05-30"},"Push Jerk":{"sunkiausia":"95 × 3","data":"2024-01-02","e1rm":105,"e1rm_is":"95 × 3","e1rm_data":"2024-01-02"},"Pull-up":{"sunkiausia":"24 × 4","data":"2025-06-10","e1rm":27,"e1rm_is":"24 × 4","e1rm_data":"2025-06-10"},"Clean & Jerk":{"sunkiausia":"100 × 2","data":"2025-10-17","e1rm":117,"e1rm_is":"100 × 5","e1rm_data":"2024-11-08"},"Snatch":{"sunkiausia":"80 × 1","data":"2025-02-25","e1rm":83,"e1rm_is":"80 × 1","e1rm_data":"2025-02-25"},"Power Snatch":{"sunkiausia":"70 × 2","data":"2025-10-30","e1rm":79,"e1rm_is":"70 × 4","e1rm_data":"2024-10-23"},"Power Clean":{"sunkiausia":"100 × 2","data":"2024-10-28","e1rm":107,"e1rm_is":"100 × 2","e1rm_data":"2024-10-28"},"Romanian Deadlift":{"sunkiausia":"110 × 9","data":"2024-10-17","e1rm":143,"e1rm_is":"110 × 9","e1rm_data":"2024-10-17"}},"apzvalga":[{"tipas":"strength_training","data":"2026-10-07 12:59","min":64,"hr":121,"hr_max":164,"kcal":623,"zona":"Z1","judesiai":[{"nm":"Nepažymėta","serijos":14,"tonazas":5920,"darbinis":75.0,"darb_serijos":"2 × 8 / 8","apsilimas":"50×5 / 50×5 / 60×5 / 60×5 / 70×5 / 70×5 / 50×10 / 70×8 / 22.5×24 / 27.5×24 / 27.5×24","kartojimai":1,"e1rm":95,"vs_geriausias":40},{"nm":"EZ_BAR_PULLOVER","serijos":3,"tonazas":875,"darbinis":22.5,"darb_serijos":"2 × 14 / 14","apsilimas":"17.5×14"},{"nm":"BENCH_DIP","serijos":2,"tonazas":0,"kartojimai":2}],"tonazas":6795,"seriju":19},{"tipas":"treadmill_running","data":"2026-10-07 12:09","min":33,"hr":151,"hr_max":162,"kcal":548,"zona":"Z3","km":5.25,"tempas":"6’18”"},{"tipas":"strength_training","data":"2026-10-06 14:31","min":54,"hr":123,"hr_max":161,"kcal":531,"zona":"Z1","judesiai":[{"nm":"Nepažymėta","serijos":13,"tonazas":4580,"darbinis":110.0,"darb_serijos":"1 × 8","apsilimas":"50×5 / 70×5 / 70×5 / 70×5 / 80×5 / 100×5 / 100×5 / 100×5 / 100×5","kartojimai":75,"e1rm":139,"vs_geriausias":59},{"nm":"Deadlift","serijos":3,"tonazas":2560,"darbinis":110.0,"darb_serijos":"2 × 8 / 8","apsilimas":"80×10","e1rm":139,"vs_geriausias":67}],"tonazas":7140,"seriju":16},{"tipas":"indoor_cardio","data":"2026-10-06 13:57","min":34,"hr":131,"hr_max":167,"kcal":413,"zona":"Z2"}],"veiklos":[{"id":24638042258,"d":"2026-10-07 12:59","tipas":"strength_training","min":64,"km":0.0,"hr":121.0,"hr_max":164.0,"kcal":623.0},{"id":24637201842,"d":"2026-10-07 12:09","tipas":"treadmill_running","min":33,"km":5.25,"hr":151.0,"hr_max":162.0,"kcal":548.0},{"id":24626037570,"d":"2026-10-06 14:31","tipas":"strength_training","min":54,"km":0.0,"hr":123.0,"hr_max":161.0,"kcal":531.0},{"id":24625364670,"d":"2026-10-06 13:57","tipas":"indoor_cardio","min":34,"km":0.0,"hr":131.0,"hr_max":167.0,"kcal":413.0},{"id":24610881231,"d":"2026-10-05 10:01","tipas":"strength_training","min":43,"km":0.0,"hr":124.0,"hr_max":165.0,"kcal":444.0},{"id":24610584134,"d":"2026-10-05 09:42","tipas":"indoor_cardio","min":18,"km":0.0,"hr":125.0,"hr_max":161.0,"kcal":211.0},{"id":24589554296,"d":"2026-10-03 12:30","tipas":"gravel_cycling","min":165,"km":58.95,"hr":130.0,"hr_max":164.0,"kcal":1896.0},{"id":24574963068,"d":"2026-10-02 09:08","tipas":"strength_training","min":53,"km":0.0,"hr":123.0,"hr_max":171.0,"kcal":505.0}]};
 const WK_START="2026-10-05";
 let DATA=null;
 const C=["var(--c1)","var(--c2)","var(--c3)","var(--c4)","var(--c5)"];
@@ -513,16 +510,16 @@ const PLAN=[
   s:"rytas jėga · vakaras 20 min 2 zonoje",
   b:[{h:"Apšilimas · 10 min",i:MOB.map(x=>({t:x}))},
      {h:"A · ATHX pozicija (prieš svorį)",i:[
-       {t:"<b>Dual Dumbbell Front Rack Hold</b> — 3 × 30 s · dvi hantelės ant pečių, alkūnės aukštai",log:"DB Front Rack Hold",plan:15},
-       {t:"<b>Overhead Squat</b> — 3 × 5 · praeitą savaitę 60 kg, dabar <b>65</b> · 2 s pauzė apačioje",log:"Overhead Squat",plan:65},
+       {t:"<b>Dual Dumbbell Front Rack Hold</b> — 3 × 30 s · dvi hantelės ant pečių, alkūnės aukštai",log:"DB Front Rack Hold",plan:15,sets:3},
+       {t:"<b>Overhead Squat</b> — 3 × 5 · praeitą savaitę 60 kg, dabar <b>65</b> · 2 s pauzė apačioje",log:"Overhead Squat",plan:65,sets:3},
        {t:"Vienintelė sąlyga: <b>riešas lieka tiesus.</b> Pradeda linkti — tai jau ne jėgos, o pozicijos riba, ir svoris nuimamas"}]},
      {h:"B · pagrindinis",i:[
-       {t:"<b>Back Squat</b> — 4 × 5 · praeitą savaitę buvo 90 × 5 × 4, dabar <b>+5 kg</b> · 3 kart. atsargoje · poilsis 2:30",log:"Back Squat",plan:95}]},
+       {t:"<b>Back Squat</b> — 4 × 5 · praeitą savaitę buvo 90 × 5 × 4, dabar <b>+5 kg</b> · 3 kart. atsargoje · poilsis 2:30",log:"Back Squat",plan:95,sets:4}]},
      {h:"C · priedai",i:[
-       {t:"<b>Romanian Deadlift</b> — 3 × 8 · praeitą kartą 100",log:"Romanian Deadlift",plan:100},
+       {t:"<b>Romanian Deadlift</b> — 3 × 8 · praeitą kartą 100",log:"Romanian Deadlift",plan:100,sets:3},
        {t:"<b>Hanging L-Sit</b> — 4 × 20–30 s"}]},
      {h:"Vakare · pirmas bėgimas",i:[
-       {t:"<b>20 min tolygiai</b> · pulsas 135–150 · lubos 155",log:"Bėgimas",unit:"km"},
+       {t:"<b>20 min tolygiai</b> · pulsas 135–150 · lubos 155",log:"Bėgimas",unit:"km",sets:1},
        {t:"Manieže: laikas, ne kilometrai. Reikia eiti — eini"},
        {t:"Tai pirmas bėgimas per devynis mėnesius. Lėtai yra teisingai"}]}],
   n:"HRV vakar 43, užvakar 38, bazė 43–56. Esi bazės apačioje, todėl Back Squat kyla tik 5 kg. Overhead Squat kyla iki 65, nes riešų skausmas buvo laikinas — bet pozicijos taisyklė lieka. Jei rytas jausis sunkus, bėgimas keliasi į trečiadienį."},
@@ -533,29 +530,29 @@ const PLAN=[
        {t:"Reikia eiti — eini. Tai pirmas bėgimas per devynis mėnesius"},
        {t:"Manieže: laikas, ne kilometrai"}]},
      {h:"2 · Viršus, trumpai ir lengvai",i:[
-       {t:"<b>Bench Press</b> — 3 × 8 · <b>3 kartojimai atsargoje, NE iki nesėkmės</b>",log:"Bench Press",plan:65},
-       {t:"<b>Single Arm Dumbbell Row</b> — 3 × 12",log:"DB Row"},
-       {t:"<b>Single Arm Z Press</b> — 3 × 10, lengvai",log:"Z Press"},
+       {t:"<b>Bench Press</b> — 3 × 8 · <b>3 kartojimai atsargoje, NE iki nesėkmės</b>",log:"Bench Press",plan:65,sets:3},
+       {t:"<b>Single Arm Dumbbell Row</b> — 3 × 12",log:"DB Row",sets:3},
+       {t:"<b>Single Arm Z Press</b> — 3 × 10, lengvai",log:"Z Press",sets:3},
        {t:"Izoliaciją (pullover, hamstring curls) šiandien praleidžiam"}]}],
   n:"✅ Padaryta. Bėgimas: 33 min, takelis rodė 6,00 km, tempas 5:30/km, pulsas vidutinis 151, maksimalus 162. ⚠ Laikrodis užrašė 5,25 km — takelyje riešo atstumas netikslus, todėl skaičiuojam pagal mašiną. Palyginimui su istorija: 2025-10-30 bėgai 5:52/km prie pulso 152, 2026-02-23 — 5:35/km prie 146. Vadinasi po devynių mėnesių pertraukos esi beveik tokios pat formos, kaip pernai rudenį. Vienintelis priekaištas: pulsas 151 yra Z3 apačia, o taikinys buvo 135–150. Kitą kartą taikyk į 140–145. ⚠ Šiandien rodikliai žemiau bazės: pulsas ramybėje 54 prie bazės 48–50, HRV 38 prie 43–56, miegota 5:41, Body Battery pakilo tik iki 40. Christian Harris šiai savaitei rašo „iki nesėkmės kiekviename pratime“ — šiandien to nedarom. Iš 55 min PUMP lieka 25 min. Trečiadienis yra priedas, ne branduolys, todėl jo galima netekti be pasekmių. Bėgimas lieka, nes Z2 darbas atsigavimui netrukdo. ⚠ Po devynių mėnesių pertraukos blauzdos ir Achilo sausgyslės primins apie save rytoj ir poryt, ne šiandien."},
  {d:"Kt",dt:"10-08",wd:"Ketvirtadienis",k:"core",t:"Gimnastika plius MetCon X įvadas",tg:"Gimnastika + ATHX",
   s:"reikia žiedų ir skersinio · Klaipėda",
   b:[{h:"Apšilimas · 10 min",i:MOB.map(x=>({t:x}))},
      {h:"A · gimnastika, šviežia galva",i:[
-       {t:"<b>Strict Pull-up</b> — 4 serijos po pusę maksimumo · praeitą kartą 3 × 8",log:"Pull-up",unit:"kart."},
-       {t:"<b>Handstand Push-up</b> — 4 × 3–5 · praeitą kartą 3 × 6 · skauda riešus → Pike Push-up ant dėžės",log:"HS Push-up",unit:"kart."},
-       {t:"<b>Ring Muscle-up</b>, progresija — 5 × 1–2 · praeitą savaitę nedarei nė karto",log:"Ring Muscle-up",unit:"kart."},
+       {t:"<b>Strict Pull-up</b> — 4 serijos po pusę maksimumo · praeitą kartą 3 × 8",log:"Pull-up",unit:"kart.",sets:4},
+       {t:"<b>Handstand Push-up</b> — 4 × 3–5 · praeitą kartą 3 × 6 · skauda riešus → Pike Push-up ant dėžės",log:"HS Push-up",unit:"kart.",sets:4},
+       {t:"<b>Ring Muscle-up</b>, progresija — 5 × 1–2 · praeitą savaitę nedarei nė karto",log:"Ring Muscle-up",unit:"kart.",sets:5},
        {t:"Poilsis 90 s tarp raundų"}]},
      {h:"B · ATHX judesiai, lengvai",i:[
        {pre:"3 raundai, ne laikui:\n  10 Dual Dumbbell Ground to Overhead\n  20 m Dual Dumbbell Front Rack Lunge\n  10 Box Jump Over · 30\"\n  15 kal SkiErg\n  – 2 min poilsio –"},
-       {t:"<b>Dual Dumbbell Ground to Overhead</b> — koks svoris",log:"Dual DB GTOH",plan:12.5},
-       {t:"<b>Dual Dumbbell Front Rack Lunge</b> — koks svoris",log:"DB Front Rack Lunge",plan:12.5},
+       {t:"<b>Dual Dumbbell Ground to Overhead</b> — koks svoris",log:"Dual DB GTOH",plan:12.5,sets:3},
+       {t:"<b>Dual Dumbbell Front Rack Lunge</b> — koks svoris",log:"DB Front Rack Lunge",plan:12.5,sets:3},
        {t:"⚠ <b>Jei blauzdos po vakarykščio bėgimo kietos</b> — Box Jump Over keičiam į Box Step-up. Pirmas bėgimas po devynių mėnesių skauda antrą ir trečią dieną, ne pirmą"}]}],
   n:"⚠ Strict Press šiandien NĖRA, nors buvo plane: vakar jį padarei papildomai iki 70 kg. Kartoti spaudimą dvi dienas iš eilės prieš gimnastiką nėra prasmės. Šiandienos rodikliai: pulsas ramybėje 52 (vakar 54), HRV 42, miegota 6:49, stresas 20 — atsistatai. Krūvio santykis ūmus prieš lėtinį dabar 1,1 ir Garmin rodo OPTIMAL: per dvi savaites nuo 0,40 atėjai į idealų ruožą. Varžybose bus 22,5 kg hanteliai ir po 60 kartojimų; šiandien pusė svorio ir šeštadalis apimties — ieškom pozicijos, ne nuovargio."},
  {d:"Pn",dt:"10-09",wd:"Penktadienis",k:"core",t:"Bėgimas plius irklavimo įvadas",tg:"Bėgimas 25'",
   s:"vakare · pulsas 135–150",
   b:[{h:"Pagrindinis",i:[
-       {t:"<b>25 min tolygiai</b> · pulsas 135–150",log:"Bėgimas",unit:"km"},
+       {t:"<b>25 min tolygiai</b> · pulsas 135–150",log:"Bėgimas",unit:"km",sets:1},
        {t:"Po bėgimo: <b>3 × 500 m Row</b>, lengvai, 2 min poilsio · pirmas kartas C2 nuo 2025-01"},
        {t:"⚠ Ištvermės zonoje pusė yra irklavimas, o tavo istorijoje C2 ergometro nėra visai"}]}],
   n:"Priedas, bet svarbus: irklavimas yra pusė ATHX ištvermės zonos, o tu jo nedarei niekada. Pradedam nuo trijų lengvų atkarpų."},
@@ -962,19 +959,33 @@ let WEEK=null;
         const N='<span class="nr">'+(++nr)+'.</span>';
         if(!it.log){h+='<div class="plain">'+N+it.t+'</div>';return;}
         const base=sel+":"+it.log, unit=it.unit||"kg", isKg=unit==="kg";
-        // apšilimo laukelis tik kilogramams
-        const dn=!!w[base+":d"];
+        const R=(DATA.rekordai||{})[it.log];
+        let rek="";
+        if(R){
+          rek='<span class="rek">Tavo rekordas: <b>'+(R.sunkiausia||"—")+' '+unit+'</b>'+
+            (R.data?' · '+R.data:'')+(R.e1rm?' · 1RM įvertis '+R.e1rm+' kg':'')+'</span>';
+        }
+        const prKg=R&&R.sunkiausia?parseFloat(R.sunkiausia):null;
+        const nSets=parseInt(w[base+":sets"],10)||it.sets||3;
+        let rows="";
+        for(let si=1;si<=nSets;si++){
+          const kK=base+":s"+si+":kg", rK=base+":s"+si+":r", dK=base+":s"+si+":d";
+          const kv=w[kK], dn2=!!w[dK];
+          const isPR=isKg&&prKg&&kv&&parseFloat(kv)>prKg;
+          rows+='<tr'+(isPR?' class="pr"':'')+'><td>'+si+'</td>'+
+            '<td><input id="w-'+esc(rK)+'" inputmode="numeric" placeholder="kart." value="'+esc(w[rK]??"")+
+            '" aria-label="'+esc(it.log)+' '+si+' serija, kartojimai"></td>'+
+            '<td class="kgcell"><input id="w-'+esc(kK)+'" inputmode="decimal" placeholder="'+
+            (si===1&&it.plan?it.plan:unit)+'" value="'+esc(kv??"")+'" aria-label="'+esc(it.log)+' '+si+' serija, svoris">'+
+            (isPR?'<span class="prbadge">REK</span>':'')+'</td>'+
+            '<td><button class="chk" id="d-'+esc(base+":s"+si)+'" aria-pressed="'+(dn2?"true":"false")+
+            '" aria-label="'+si+' serija padaryta">✓</button></td></tr>';
+        }
         const planTxt=it.plan?' <span style="color:var(--ink-3)">· planas '+it.plan+' '+unit+'</span>':'';
-        const warm=isKg?'<div class="wf"><span class="wl">Apšilimas</span><span class="box">'+
-          numIn("w-"+base+":a",w[base+":a"],"—","",it.log+" apšilimo svoris")+
-          '<span class="unit">'+unit+'</span></span></div>':'';
-        h+='<div class="mv'+(dn?" ok":"")+'"><span class="txt">'+N+it.t+planTxt+'</span><span class="wsets">'+warm+
-           '<div class="wf main"><span class="wl">Darbinis</span><span class="box">'+
-           numIn("w-"+base+":w",w[base+":w"],String(it.plan??"—"),"",it.log+" darbinis")+
-           '<span class="unit">'+unit+'</span></span></div>'+
-           '<button class="chk" id="d-'+esc(base)+'" aria-pressed="'+(dn?"true":"false")+
-           '" aria-label="'+esc(it.log)+' padaryta" title="padaryta">✓</button>'+
-           '</span></div>';
+        h+='<div class="mv"><div class="txt">'+N+it.t+planTxt+rek+'</div>'+
+           '<table class="sets"><tr><th>#</th><th>Kart.</th><th>'+unit.toUpperCase()+'</th><th></th></tr>'+
+           rows+'</table>'+
+           '<button class="addset" data-b="'+esc(base)+'" data-n="'+nSets+'">+ serija</button></div>';
       });
     });
     if(p.k==="recovery"||poilsis[sel]===true){
@@ -1003,6 +1014,9 @@ let WEEK=null;
     if(mk2)mk2.addEventListener("click",()=>{done[sel]=!done[sel];touch();chips();session();});
     sess.querySelectorAll("input[id^=w-]").forEach(inp=>
       inp.addEventListener("input",()=>{w[inp.id.slice(2)]=inp.value;touch();}));
+    sess.querySelectorAll(".addset").forEach(btn=>btn.addEventListener("click",()=>{
+      const b2=btn.dataset.b, n=parseInt(btn.dataset.n,10)+1;
+      w[b2+":sets"]=n; touch(); session();}));
     sess.querySelectorAll("button[id^=d-]").forEach(btn=>
       btn.addEventListener("click",()=>{const k=btn.id.slice(2)+":d";w[k]=!w[k];touch();session();}));
     sess.querySelectorAll("button[id^=r-]").forEach(btn=>
