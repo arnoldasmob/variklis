@@ -218,14 +218,22 @@ section{margin-top:30px}
 /* --- seriju lentele --- */
 .rek{display:block;font-size:12.5px;color:var(--ink-3);margin-top:3px;font-variant-numeric:tabular-nums}
 .rek b{color:var(--c4);font-weight:600}
-.sets{margin-top:10px;width:100%;border-collapse:collapse}
+.sets{margin-top:10px;width:100%;border-collapse:collapse;table-layout:fixed}
+.sets th:nth-child(1),.sets td:nth-child(1){width:24px;padding-left:0}
+.sets th:nth-child(4),.sets td:nth-child(4){width:50px;padding-right:0}
 .sets th{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.1em;
   font-size:10.5px;color:var(--ink-3);font-weight:600;padding:0 6px 5px;text-align:center}
 .sets th:first-child{text-align:left;width:34px}
-.sets td{padding:4px 6px;text-align:center}
+.sets td{padding:4px 5px;text-align:center}
+@media(max-width:420px){
+  .sets td{padding:4px 3px}
+  .sets input{font-size:17px;padding:6px 4px}
+  .sets .kgcell input{font-size:19px}
+  .sets th{font-size:10px;letter-spacing:.06em}
+}
 .sets td:first-child{text-align:left;font-family:"Barlow Condensed",sans-serif;font-weight:700;
   color:var(--ink-3);font-size:15px}
-.sets input{width:100%;min-width:60px;min-height:44px;background:var(--glass-2);
+.sets input{width:100%;min-width:0;max-width:100%;min-height:46px;background:var(--glass-2);
   border:1.5px solid var(--edge-2);border-radius:9px;color:var(--ink);
   font-family:"Barlow Condensed",sans-serif;font-size:19px;font-weight:700;padding:6px 8px;
   text-align:center;font-variant-numeric:tabular-nums}
@@ -233,7 +241,7 @@ section{margin-top:30px}
 .sets .kgcell input::placeholder{color:var(--warm-ph)}
 .sets input::placeholder{color:var(--ink-3);font-weight:600}
 .sets input:focus{outline:2px solid var(--c2);outline-offset:1px;border-color:var(--c2)}
-.sets .chk{width:44px;height:44px;border-radius:10px;font-size:18px}
+.sets .chk{width:46px;height:46px;border-radius:11px;font-size:19px;margin:0}
 .sets tr.pr .kgcell input{border-color:var(--c4);box-shadow:0 0 0 1px var(--c4)}
 .prbadge{display:inline-block;font-family:"Barlow Condensed",sans-serif;font-size:10px;
   font-weight:700;color:var(--c4);letter-spacing:.08em;vertical-align:super}
