@@ -551,23 +551,31 @@ const PLAN=[
      {h:"Vakare · bėgimas",i:[
        {t:"<b>25 min tolygiai</b> · pulsas <b>140–150</b> · praeitą kartą bėgai 151, taikyk žemiau",log:"Bėgimas",unit:"km",sets:1,field:true}]}],
   n:"Testas pirmas, jėga antra. Atvirkščiai gautume ne maksimumą, o nuovargio matą. Po kiekvieno judesio ilsiesi 5 min — tai nėra per daug, centrinė nervų sistema atsistato lėčiau nei raumenys. Rezultatai taps atskaitos tašku visam blokui iki Londono, todėl verta juos padaryti teisingai vieną kartą."},
- {d:"Tr",dt:"10-14",wd:"Trečiadienis",k:"core",t:"ATHX MetCon X",tg:"ATHX MetCon",
-  s:"12:00 · Klaipėda · vienintelė vieta su sandbag'u",
-  b:[{h:"Apšilimas · 10 min",i:MOB.map(x=>({t:x}))},
-     {h:"Apšilimo ratas",i:[
+ {d:"Tr",dt:"10-14",wd:"Trečiadienis",k:"core",t:"Ring Muscle-up testas · ATHX MetCon X",tg:"RMU testas + WOD",
+  s:"12:00 · Klaipėda · testas PIRMAS, šviežias",
+  b:[{h:"Apšilimas · 12 min",i:[
+       {t:"Aparatas iki 40 kal, pulsas iki 120"},
+       {t:"Pečių ir riešų blokas: gumos, T-spine, bar hang 2 × 30 s"},
+       {t:"Žiedų paruošimas: 3 × (3 ring row, 3 ring dip, 2 lengvi perėjimai)"},
+       {t:"⚠ <b>Jokių pull-up'ų prieš testą.</b> Vakar būtent dėl to RMU skaičius buvo per žemas"}]},
+     {h:"TESTAS · vienas priėjimas, maksimumas iš eilės",i:[
+       {t:"<b>Ring Muscle-up</b> — maksimumas iš eilės, vienas priėjimas · vakar po 27 pull-up kartojimų padarei 5",log:"TEST Ring MU",unit:"kart.",sets:1,field:true},
+       {t:"Po testo <b>10 min poilsio</b> prieš WOD. Ne 2, ne 5 — dešimt"}]},
+     {h:"Apšilimo ratas prieš WOD",i:[
        {t:"<b>Vienas raundas pusiau</b>: 8 kal SkiErg, 20 m sandbag <b>45 kg</b>, 10 m burpee broad jump. Tada 2 min poilsio"}]},
-     {h:"Pagrindinis",i:[
-       {pre:"5 raundai, kas 5 min:\n  15 kal SkiErg\n  20 m Sandbag Carry   60 kg\n  10 Box Jump Over       30\"\n  20 m Burpee Broad Jump\n  – likusį laiką iki 5 min ilsiesi –"},
-       {t:"<b>Raundo laikas</b> — sekundėmis (1:47 → rašyk 107)",log:"WOD raundas",unit:"sek",sets:5,field:true},
-       {t:"<b>Sandbag</b> — koks svoris realiai",log:"Sandbag",plan:60,sets:1,field:true}]},
-     {h:"Po WOD · pasirink vieną",i:[
-       {t:"Rope climb 4 × 1–2 arba Strict Pull-up 4 × 6"},
-       {t:"Presas: T2B 3 × 15 · GHD 3 × 20 · Hollow 3 × 30 s"},
-       {t:"10 min lengvas dviratis, pulsas iki 130"}]}],
-  n:"Praeitą savaitę raundai buvo 2:02 → 1:50 → 1:40 → 1:37, vidurkis 1:47, o poilsio santykis 1 : 1,8. Šiandien pridedam penktą raundą ir box jump over 30 colių. Tikslas tas pats: raundai turi būti panašūs, o ne vis greitėjantys — tai reiškia, kad pradedi per lėtai."},
- {d:"Kt",dt:"10-15",wd:"Ketvirtadienis",k:"core",t:"Upper · Vilnius",tg:"Upper + bėgimas",
-  s:"rytas ir vakaras · ⚠ Vilniuje nėra žiedų ir skersinio",
-  b:[{h:"Apšilimas · 10 min",i:MOB.map(x=>({t:x}))},
+     {h:"ATHX MetCon X",i:[
+       {pre:"4 raundai, kas 5 min:\n  15 kal SkiErg\n  20 m Sandbag Carry   60 kg\n  10 Box Jump Over       30\"\n  20 m Burpee Broad Jump\n  – likusį laiką iki 5 min ilsiesi –"},
+       {t:"<b>Raundo laikas</b> — sekundėmis (1:47 → rašyk 107)",log:"WOD raundas",unit:"sek",sets:4,field:true},
+       {t:"<b>Sandbag</b> — koks svoris realiai",log:"Sandbag",plan:60,sets:1,field:true}]}],
+  n:"⚠ Krūvio santykis šiandien 1,3 — viršutinė OPTIMAL riba (ūmus 913, lėtinis 696). Todėl WOD lieka 4 raundai, ne 5, kaip buvo planuota. Rodikliai geri: pulsas ramybėje 50, HRV 49, miegas 6:45. Testas daromas pirmas ir vienas: vakar RMU ėjo po 27 pull-up kartojimų, o tai ta pati traukos grandinė."},
+ {d:"Kt",dt:"10-15",wd:"Ketvirtadienis",k:"core",t:"HSPU testas · Upper · Vilnius",tg:"HSPU testas + Upper",
+  s:"rytas ir vakaras · testas PIRMAS, prieš spaudimą",
+  b:[{h:"Apšilimas · 12 min",i:MOB.map(x=>({t:x}))},
+     {h:"TESTAS · vienas priėjimas",i:[
+       {t:"<b>Handstand Push-up</b> — maksimumas iš eilės · vakar po viso darbo padarei 10",log:"TEST HSPU",unit:"kart.",sets:1,field:true},
+       {t:"<b>Handstand Walk</b> — ilgiausia atkarpa metrais · žinoma riba 15 m",log:"TEST HS Walk",unit:"m",sets:1,field:true},
+       {t:"Po testo <b>10 min poilsio</b> prieš Strict Press"},
+       {t:"HSPU ir Handstand Walk abu reikalauja tik sienos, todėl Vilniuje įmanomi"}]},
      {h:"A · pagrindinis",i:[
        {t:"<b>Strict Press</b> — 4 × 5 · ATHX rungtis",log:"Strict Press",plan:72.5,sets:4}]},
      {h:"B · pora",i:[
@@ -577,8 +585,8 @@ const PLAN=[
        {t:"<b>Single Arm Z Press</b> — 3 × 10",log:"Z Press",sets:3},
        {t:"<b>Dumbbell Pullover</b> — 3 × 12–15",log:"Pullover",sets:3}]},
      {h:"Vakare · bėgimas",i:[
-       {t:"<b>30 min tolygiai</b> · pulsas 140–150 · Vilniuje manieżas yra",log:"Bėgimas",unit:"km",sets:1,field:true}]}],
-  n:"Vilniuje nėra nei žiedų, nei skersinio, todėl gimnastikos šiandien nėra. Visa ji sukelta į pirmadienį, antradienį ir trečiadienį, kai esi Klaipėdoje."},
+       {t:"<b>30 min tolygiai</b> · pulsas 140–150",log:"Bėgimas",unit:"km",sets:1,field:true}]}],
+  n:"HSPU testas daromas pirmas, prieš Strict Press ir Bench — kitaip pečiai ir tricepsai jau nebebus švieži, ir gausim tą pačią klaidą, kaip vakar. Vilniuje nėra žiedų ir skersinio, bet HSPU reikia tik sienos."},
  {d:"Pn",dt:"10-16",wd:"Penktadienis",k:"core",t:"Ištvermės zona",tg:"Row + SkiErg",
   s:"rytas · Vilnius · C2 ir SkiErg yra",
   b:[{h:"Apšilimas · 10 min",i:[{t:"5 min lengvas Row, tada 5 min mobilumo"}]},
