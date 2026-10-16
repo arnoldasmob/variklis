@@ -598,9 +598,14 @@ const PLAN=[
        {t:"<b>Box Jump Over</b> — 5 × 10 · 30\""},
        {t:"Jei liko jėgų: 10 min lengvas dviratis"}]}],
   n:"ATHX ištvermės zonoje keičiamasi kas 1 000 m, tad 750 m atkarpos yra tarpinis žingsnis nuo 500 m. Tavo tempu 1 000 m užtruktų apie 3:26."},
- {d:"Št",dt:"10-17",wd:"Šeštadienis",k:"core",t:"Deadlift · Vilnius",tg:"Deadlift",
-  s:"rytas · Vilnius",
-  b:[{h:"Apšilimas · 10 min",i:MOB.map(x=>({t:x}))},
+ {d:"Št",dt:"10-17",wd:"Šeštadienis",k:"core",t:"HSPU testas · Deadlift · Vilnius",tg:"HSPU testas + DL",
+  s:"rytas · testas PIRMAS, prieš viską",
+  b:[{h:"Apšilimas · 12 min",i:MOB.map(x=>({t:x}))},
+     {h:"TESTAS · paskutinis trūkstamas skaičius",i:[
+       {t:"<b>Handstand Push-up</b> — maksimumas iš eilės, vienas priėjimas · reikia tik sienos",log:"TEST HSPU",unit:"kart.",sets:1,field:true},
+       {t:"⚠ Prieš testą jokio spaudimo ir jokių pull-up'ų. Antradienį 10 kartojimų buvo po 27 pull-up ir 13 muscle-up kartojimų"},
+       {t:"Pagal Ring Muscle-up precedentą (5 → 9 vien pakeitus eilę) tikėtina, kad tikras skaičius yra <b>13 iki 16</b>"},
+       {t:"Po testo <b>10 min poilsio</b>"}]},
      {h:"A · pagrindinis",i:[
        {t:"<b>Deadlift</b> — 4 × 5 · praeitą savaitę 150 × 5 × 4",log:"Deadlift",plan:155,sets:4}]},
      {h:"B · priedai",i:[
@@ -609,7 +614,7 @@ const PLAN=[
        {t:"<b>Hamstring Curl</b> — 3 × 12"}]},
      {h:"C · finišas",i:[
        {pre:"12 min, maksimaliai kartojimų:\n  90 s Echo Bike kalorijos\n  60 s Power Clean   60 kg\n  30 s Shoulder to Overhead   60 kg"}]}],
-  n:"Finišas paimtas iš tavo Christian Harris programos penktadienio sesijos — jis tinka ir ATHX, nes Power Clean ir Shoulder to Overhead yra tos pačios traukos ir spaudimo grandinės, kaip dual DB ground to overhead."},
+  n:"Paskutinis Testo B skaičius. Po jo turėsim pilną gimnastikos bazę: Pull-up 15, Ring Muscle-up 9, Handstand Walk 13 m ir HSPU. Deadlift po testo nukenčia nedaug, nes tai skirtingos grandinės: HSPU yra pečiai ir tricepsai, deadlift — nugara ir kojos."},
  {d:"Sk",dt:"10-18",wd:"Sekmadienis",k:"recovery",t:"Recovery",tg:"Recovery",
   s:"pažymėk, ką darei",
   b:[{h:"Kvėpavimas · 10 min",i:[
@@ -634,9 +639,9 @@ const GOALS=[
  {nm:"Dviratis staklėse",unit:"min/sav.",max:140,c:"var(--c3)",cur:0,cur_l:"Garmin: nė vienos",
   tgt:60,tgt_l:"1 × 60 min",hist:null,hist_l:null,
   why:"Žiemos variklis. Z2 rėžis 200–250 W, 128–142 bpm.",st:["q","nauja"]},
- {nm:"Gimnastika · HSPU ir MU",unit:"kart.",max:20,c:"var(--c5)",cur:null,cur_l:"neišmatuota",
-  tgt:null,tgt_l:null,hist:null,hist_l:null,
-  why:"Keturi iš septynių silpnųjų judesių yra gimnastika.",st:["q","testuojam"]}
+ {nm:"Gimnastika · Ring Muscle-up",unit:"kart.",max:20,c:"var(--c5)",cur:9,cur_l:"10-14, šviežias",
+  tgt:14,tgt_l:"sausiui",hist:5,hist_l:"10-13 · po pull-up'ų · 5",
+  why:"Pull-up 15 · Ring MU 9 · Handstand Walk 13 m. HSPU dar laukia švaraus testo.",st:["ok","išmatuota"]}
 ];
 const BLOK=[
  ["0","09-28 → 10-04","grįžimas","60 %","20 min","padaryta","ok"],
