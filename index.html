@@ -424,16 +424,11 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--edge);font-si
      ryte organizmas geriau kelia sunkius svorius, vakare geriau toleruoja ilgą aerobinį darbą.
      Jei diena turi ir rytą, ir vakarą — jėga ryte, bėgimas ar dviratis vakare.
      Pagal tai sudėliosiu kitą savaitę, o tu iš anksto matysi, kur sportas įsiterpia tarp darbų.</p>
-  <p class="note"><b>Vieta svarbi ne mažiau už laiką.</b> Vilniuje nėra nei sandbag'ų, nei žiedų
-     muscle-up'ams, todėl ten suplanuota ATHX sesija būtų negyva. Pažymėk vietą, ir tos dienos
-     programa bus sudėliota iš to, kas ten realiai yra.</p>
-</section>
-
-<section>
-  <div class="sechead"><h2>Vietos ir inventorius</h2><span class="eyebrow">ką kur turi</span></div>
-  <div class="gear" id="gear"></div>
-  <p class="note">Pažymėk, kas kurioje vietoje yra. Tai vienkartinis darbas: paskui kiekvienos
-     dienos programa automatiškai apsiribos tuo, kas toje vietoje prieinama.</p>
+  <p class="note"><b>Vieta svarbi ne mažiau už laiką.</b> Klaipėdoje yra viskas. <b>Vilniuje nėra
+     sandbag'o, žiedų ir skersinio</b>, tad ten ATHX MetCon X ir muscle-up'ai neįmanomi — užtat yra
+     štanga, C2, SkiErg, Echo bike, 30" dėžė, sled ir manieżas. Namuose tik hanteliai, skersinis,
+     gumos ir kettlebell.</p>
+  <p class="savemsg" id="plan-state" style="margin-top:10px"></p>
 </section>
 
 <section>
@@ -558,9 +553,10 @@ const PLAN=[
   n:"Recovery žymos vis dar nepildomos. Be jų negaliu pasakyti, kas tavo HRV kelia labiausiai, o tai buvo vienas iš tavo pačio klausimų."}
 ];
 const VIETOS=["Klaipėda","Vilnius","Namai","Lauke","Kita"];
-const INVENTORIUS=["Štanga ir blynai","Stovai / rack","Hanteliai iki 25 kg","Sandbag",
- "SkiErg","C2 Row","Echo / Air bike","Dviračio staklės","Dėžė 24\"","Dėžė 30\"",
- "Žiedai (RMU)","Skersinis (BMU)","Guma / bandai","Sled","Kettlebell","Manieżas / takelis"];
+const INVENTORIUS={
+  "Klaipėda":"viskas: štanga, stovai, hanteliai, sandbag 45/60/68, SkiErg, C2, Echo bike, staklės, dėžė 24 ir 30\", žiedai, skersinis, gumos, sled, kettlebell, manieżas",
+  "Vilnius":"štanga, stovai, hanteliai, SkiErg, C2, Echo bike, staklės, dėžė 24 ir 30\", gumos, sled, kettlebell, manieżas. NĖRA: sandbag, žiedai, skersinis",
+  "Namai":"hanteliai iki 25, skersinis, gumos, kettlebell"};
 const RECOVERY=["Sauna","Pasivaikščiojimas","Kvėpavimas","GOWOD mobilumas",
  "Tempimai su gumomis","Šalta vonia","Masažas","Volas / foam roll","Plaukimas","Ilgas miegas"];
 const GOALS=[
@@ -1034,27 +1030,22 @@ let WEEK=null;
     const payload={week:WK_START,done,notes,extra,svoriai:w,recovery:rec,planas:plan,poilsis,inventorius:inv,ts:Date.now()};
     try{localStorage.setItem("vs-"+WK_START,JSON.stringify(payload));}catch(e){}
     try{
-      if(STORE.mode==="db"&&dbRef){await dbRef.set(payload);if(!loud)syncState("Įrašyta",1);return true;}
-      if(STORE.mode==="gh"){await ghPut("zurnalas/"+WK_START+".json",payload);if(!loud)syncState("Įrašyta į GitHub",1);return true;}
+      const laikas=new Date().toTimeString().slice(0,5);
+      if(STORE.mode==="db"&&dbRef){await dbRef.set(payload);if(!loud)syncState("Įrašyta",1);
+        planState("Išsaugota "+laikas+" · claude.ai",1);return true;}
+      if(STORE.mode==="gh"){await ghPut("zurnalas/"+WK_START+".json",payload);if(!loud)syncState("Įrašyta į GitHub",1);
+        planState("Išsaugota "+laikas+" · GitHub",1);return true;}
       if(!loud)syncState("Įrašyta tik šiame įrenginyje");
+      planState("⚠ Įrašyta TIK šitame įrenginyje — manęs tai nepasieks. Apačioje, „GitHub prieiga“, įklijuok raktą.");
       return false;
-    }catch(e){syncState("Neįrašyta: "+e.message);return false;}
+    }catch(e){syncState("Neįrašyta: "+e.message);
+      planState("⚠ Nepavyko išsaugoti: "+e.message);return false;}
   }
-  /* --- vietos ir inventorius --- */
-  function gearUI(){
-    const g=$("gear"); if(!g)return;
-    g.innerHTML=VIETOS.slice(0,3).map(v=>
-      '<div class="gearrow"><span class="gn">'+v+'</span><div class="gi">'+
-      INVENTORIUS.map((it,ii)=>'<button class="opt" data-v="'+v+'" data-i="'+ii+
-        '" aria-pressed="'+((inv[v]||{})[ii]?"true":"false")+'">'+it+'</button>').join("")+
-      '</div></div>').join("");
-    g.querySelectorAll(".opt").forEach(b2=>b2.addEventListener("click",()=>{
-      const v=b2.dataset.v, i=b2.dataset.i;
-      inv[v]=inv[v]||{}; inv[v][i]=!inv[v][i]; touch();
-      b2.setAttribute("aria-pressed",inv[v][i]?"true":"false");}));
-  }
-
   /* --- kitos savaitės laikas --- */
+  function planState(txt,ok){
+    const e=$("plan-state"); if(!e)return;
+    e.innerHTML=ok?'<span class="saved">✓ '+txt+"</span>":txt;
+  }
   function slotUI(){
     if(!slots)return;
     const DAYS=["Pr","An","Tr","Kt","Pn","Št","Sk"];
@@ -1073,22 +1064,22 @@ let WEEK=null;
       const i=b.dataset.d; plan[i]=plan[i]||{}; plan[i].kada=(plan[i].kada===b.dataset.o)?null:b.dataset.o;
       touch(); slotUI();}));
     slots.querySelectorAll("input[type=time]").forEach(inp=>inp.addEventListener("input",()=>{
-      const i=inp.dataset.d; plan[i]=plan[i]||{}; plan[i].val=inp.value; touch();}));
+      const i=inp.dataset.d; plan[i]=plan[i]||{}; plan[i].val=inp.value; planState("Saugau…"); touch();}));
     slots.querySelectorAll(".opt.v").forEach(b2=>b2.addEventListener("click",()=>{
       const i=b2.dataset.d; plan[i]=plan[i]||{};
-      plan[i].vieta=(plan[i].vieta===b2.dataset.v)?null:b2.dataset.v; touch(); slotUI();}));
+      plan[i].vieta=(plan[i].vieta===b2.dataset.v)?null:b2.dataset.v; planState("Saugau…"); touch(); slotUI();}));
   }
   try{const raw=localStorage.getItem("vs-"+WK_START);
     if(raw){const o=JSON.parse(raw)||{};done=o.done||{};notes=o.notes||{};extra=o.extra||{};
       w=o.svoriai||o.w||{};rec=o.recovery||{};plan=o.planas||{};poilsis=o.poilsis||{};inv=o.inventorius||{};}}catch(e){}
-  chips();session();slotUI();gearUI();
+  chips();session();slotUI();
   (async()=>{
     const db=await window.claude?.use?.("db");
     if(db){STORE.mode="db";dbRef=db.doc("savaites/"+WK_START);
       try{const s=await dbRef.get();
         if(s){done=s.done||done;notes=s.notes||notes;extra=s.extra||extra;
           w=s.svoriai||w;rec=s.recovery||rec;plan=s.planas||plan;poilsis=s.poilsis||poilsis;inv=s.inventorius||inv;}}catch(e){}
-      syncState("claude.ai saugykla",1);chips();session();slotUI();gearUI();return;}
+      syncState("claude.ai saugykla",1);chips();session();slotUI();return;}
     if(ghTok()){STORE.mode="gh";
       const had=Object.keys(done).length||Object.keys(notes).length||Object.keys(w).length;
       try{const s=await ghGet("zurnalas/"+WK_START+".json");
@@ -1099,7 +1090,7 @@ let WEEK=null;
             "ir ką tik nusiunčiau juos.</b> Dabar viskas sinchronizuota.",1);}}
       }catch(e){syncState("GitHub klaida: "+e.message);
         banner("<b>Raktas neveikia:</b> "+e.message+". Įrašai kol kas lieka tik šitame įrenginyje.");}
-      chips();session();slotUI();gearUI();return;}
+      chips();session();slotUI();return;}
     syncState("Tik šis įrenginys");
     banner("<b>Šitame įrenginyje raktas neįrašytas.</b> Ką įrašysi — svoriai ir komentarai — "+
       "liks tik šitos naršyklės atmintyje ir manęs nepasieks. Raktas galioja vienam įrenginiui, "+
