@@ -1120,7 +1120,7 @@ let WEEK=null;
       const ok=await save(true);
       sv.disabled=false;
       msg(ok?'<span class="saved">✓ Išsaugota '+new Date().toTimeString().slice(0,5)+
-        (STORE.mode==="gh"?" · GitHub":STORE.mode==="db"?" · claude.ai":" · tik šis įrenginys")+"</span>":
+        (STORE.mode==="api"?" · sava saugykla":STORE.mode==="gh"?" · GitHub":STORE.mode==="db"?" · claude.ai":" · tik šis įrenginys")+"</span>":
         "Nepavyko išsaugoti. Bandyk dar kartą.");
       dirty=false; updBtn();
     });
@@ -1215,10 +1215,9 @@ let WEEK=null;
         banner("<b>Raktas neveikia:</b> "+e.message+". Įrašai kol kas lieka tik šitame įrenginyje.");}
       chips();session();slotUI();return;}
     syncState("Tik šis įrenginys");
-    banner("<b>Šitame įrenginyje raktas neįrašytas.</b> Ką įrašysi — svoriai ir komentarai — "+
-      "liks tik šitos naršyklės atmintyje ir manęs nepasieks. Raktas galioja vienam įrenginiui, "+
-      "tad telefone jį reikia įvesti atskirai: slinkis į patį apačią, skiltis "+
-      "<b>„GitHub prieiga · nustatymai“</b>.");
+    banner("<b>Čia atsarginė laida be saugyklos.</b> Ką įrašysi liks tik šitos naršyklės "+
+      "atmintyje ir manęs nepasieks. Pagrindinis adresas, kuris saugo normaliai: "+
+      "<b>www.arnoldas.space</b>.");
   })();
 })();
 
@@ -1434,7 +1433,7 @@ function gate(msg){
 </script>
 
 <script>
-(function(){var e=document.createElement('div');e.id='build';e.style.cssText='text-align:center;padding:14px 0 26px;font:11px/1.4 system-ui,sans-serif;color:#77827C;letter-spacing:.04em';e.textContent='laida 2026-10-20 13:20';document.body.appendChild(e);})();
+(function(){var e=document.createElement('div');e.id='build';e.style.cssText='text-align:center;padding:14px 0 26px;font:11px/1.4 system-ui,sans-serif;color:#77827C;letter-spacing:.04em';e.textContent='laida 2026-10-20 13:27';document.body.appendChild(e);})();
 </script>
 </body>
 </html>
