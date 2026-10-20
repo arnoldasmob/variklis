@@ -721,6 +721,19 @@ const STORE={mode:"local",db:null,shas:{}};
 function ghTok(){try{return localStorage.getItem("vs-gh")||"";}catch(e){return "";}}
 function b64d(s){return decodeURIComponent(escape(atob(s.replace(/\n/g,""))));}
 function b64e(s){return btoa(unescape(encodeURIComponent(s)));}
+const API=(typeof window!=="undefined"&&window.API)?window.API:null;
+async function apiGet(path){
+  const r=await fetch(API.url+"?kelias="+encodeURIComponent(path),{headers:{"X-Raktas":API.raktas}});
+  if(r.status===404)return {missing:true};
+  if(!r.ok)throw new Error("Serveris "+r.status);
+  const j=await r.json(); return j.turinys;
+}
+async function apiPut(path,obj){
+  const r=await fetch(API.url+"?kelias="+encodeURIComponent(path),
+    {method:"PUT",headers:{"X-Raktas":API.raktas,"Content-Type":"application/json"},
+     body:JSON.stringify(obj)});
+  if(!r.ok)throw new Error("Serveris "+r.status);
+}
 async function ghGet(path){
   const t=ghTok(); if(!t)return null;
   const r=await fetch("https://api.github.com/repos/"+GH.owner+"/"+GH.repo+"/contents/"+path+"?ref="+GH.branch,
@@ -1130,6 +1143,8 @@ let WEEK=null;
       const laikas=new Date().toTimeString().slice(0,5);
       if(STORE.mode==="db"&&dbRef){await dbRef.set(payload);if(!loud)syncState("Įrašyta",1);
         planState("Išsaugota "+laikas+" · claude.ai",1);return true;}
+      if(STORE.mode==="api"){await apiPut("zurnalas/"+WK_START+".json",payload);if(!loud)syncState("Įrašyta",1);
+        planState("Išsaugota "+laikas,1);return true;}
       if(STORE.mode==="gh"){await ghPut("zurnalas/"+WK_START+".json",payload);if(!loud)syncState("Įrašyta į GitHub",1);
         planState("Išsaugota "+laikas+" · GitHub",1);return true;}
       if(!loud)syncState("Įrašyta tik šiame įrenginyje");
@@ -1171,6 +1186,17 @@ let WEEK=null;
       w=o.svoriai||o.w||{};rec=o.recovery||{};plan=o.planas||{};poilsis=o.poilsis||{};inv=o.inventorius||{};}}catch(e){}
   chips();session();slotUI();
   (async()=>{
+    if(API){STORE.mode="api";
+      const had=Object.keys(done).length||Object.keys(notes).length||Object.keys(w).length;
+      try{const s2=await apiGet("zurnalas/"+WK_START+".json");
+        if(s2&&!s2.missing){done=s2.done||done;notes=s2.notes||notes;extra=s2.extra||extra;
+          w=s2.svoriai||w;rec=s2.recovery||rec;plan=s2.planas||plan;poilsis=s2.poilsis||poilsis;inv=s2.inventorius||inv;}
+        syncState("Sava saugykla",1);
+        if((!s2||s2.missing)&&had){await save(false);
+          banner("<b>Radau įrašų, likusių tik šitame įrenginyje, ir ką tik nusiunčiau juos.</b>",1);}
+      }catch(e){syncState("Saugyklos klaida: "+e.message);
+        banner("<b>Serveris neatsako:</b> "+e.message+". Įrašai kol kas lieka tik šitame įrenginyje.");}
+      chips();session();slotUI();return;}
     const db=await window.claude?.use?.("db");
     if(db){STORE.mode="db";dbRef=db.doc("savaites/"+WK_START);
       try{const s=await dbRef.get();
@@ -1408,7 +1434,7 @@ function gate(msg){
 </script>
 
 <script>
-(function(){var e=document.createElement('div');e.id='build';e.style.cssText='text-align:center;padding:14px 0 26px;font:11px/1.4 system-ui,sans-serif;color:#77827C;letter-spacing:.04em';e.textContent='laida 2026-10-20 12:15';document.body.appendChild(e);})();
+(function(){var e=document.createElement('div');e.id='build';e.style.cssText='text-align:center;padding:14px 0 26px;font:11px/1.4 system-ui,sans-serif;color:#77827C;letter-spacing:.04em';e.textContent='laida 2026-10-20 13:20';document.body.appendChild(e);})();
 </script>
 </body>
 </html>
